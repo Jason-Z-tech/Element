@@ -47,7 +47,13 @@ export const REACTIONS = {
     projectile: { symbol: 'Ti', z: 22, a: 50 },
     target: { symbol: 'Pu', z: 94, a: 244 },
     compound: { symbol: 'Lv', z: 116, a: 294 },
-    qValue: q(-179.0, 'MeV', 'schaetzung', 'projectSpec', 'Aus Massentabellen; Quelle noch zu benennen.'),
+    qValue: q(
+      -179.0,
+      'MeV',
+      'schaetzung',
+      'gates2024',
+      'Aus E_cm = 220(3) MeV und E* = 41(2) MeV bei Gates et al. (Thomas-Fermi-Massentabelle von Myers und Swiatecki).',
+    ),
     basis: 'gemessen',
     note: 'Testlauf: echtes Berkeley-Experiment 2024. Gemessen wurde nur bei einer Energie; die Form der Kurve (Gauß, Breite 4 MeV) ist eine Annahme.',
     channels: [
@@ -67,7 +73,7 @@ export const REACTIONS = {
     projectile: { symbol: 'Ti', z: 22, a: 50 },
     target: { symbol: 'Cf', z: 98, a: 249 },
     compound: { symbol: '120', z: 120, a: 299 },
-    qValue: q(-197.7, 'MeV', 'schaetzung', 'projectSpec', 'Abschätzung, ±3 MeV.'),
+    qValue: q(-197.7, 'MeV', 'schaetzung', 'projectSpec', 'Abschätzung, ±3 MeV. Zhang et al. nennen keinen Q-Wert; Massentabelle noch offen.'),
     basis: 'vorhersage',
     note: 'Hauptreaktion. Element 120 wurde noch nie gemessen; alle Trefferquoten sind Vorhersagen.',
     channels: [

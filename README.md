@@ -103,29 +103,45 @@ um bis zu ±5 MeV verschoben. Nur Messreihen verraten sie.
 
 ## Zahlen und ihre Herkunft
 
-| Größe | Wert | Art | Quelle |
-|---|---|---|---|
-| σ(⁵⁰Ti+²⁴⁴Pu, 4n) | 440 fb bei E* 41 MeV | gemessen | Gates et al., PRL 133, 172502 (2024), arXiv:2407.16079 |
-| σ(⁵⁰Ti+²⁴⁹Cf) 3n / 4n / 5n | 12,87 / 48,2 / 9,9 fb bei E* 34 / 41 / 52 MeV | Vorhersage | arXiv:2604.09287 |
-| Q(Ti+Pu), Q(Ti+Cf) | −179,0 MeV; −197,7 MeV (±3 MeV) | Abschätzung | Projektvorgabe |
-| Bass-Barriere | Formel | berechnet | R. Bass, PRL 39, 265 (1977) |
-| Eichfaktor | 0,556 | Eichung | an Gates et al. (2 Ketten in 22,1 Tagen) |
-| Strahl, Target, Separator | 6·10¹² /s; 0,44 mg/cm²; 70 % | Standardwerte | Projektvorgabe |
-| ²⁹⁰Lv, ²⁸⁶Fl, ²⁸²Cn, ²⁸⁸Lv, ²⁸⁴Fl, ²⁷⁵Ds, ²⁷¹Hs | siehe `decays.ts` | gemessen | Projektvorgabe, Originalarbeiten noch zu benennen |
-| ²⁹⁵120, ²⁹¹Og, ²⁸⁷Lv, ²⁸³Fl, ²⁷⁹Cn, ²⁹⁶120, ²⁹²Og | siehe `decays.ts` | Schätzung | Viola-Seaborg-Systematik, Projektvorgabe |
-| Poisson-Grenzen | 68 %, 1,84 bei 0 Ereignissen | Formel | N. Gehrels, ApJ 303, 336 (1986) |
-| N_A, e² | 6,02214076·10²³ /mol; 1,43996448 MeV fm | Konstante | CODATA 2018 / SI 2019 |
+| Größe | Wert | Art | Quelle | am Original geprüft |
+|---|---|---|---|---|
+| σ(⁵⁰Ti+²⁴⁴Pu, 4n) | 440 (+580 −280) fb bei E* 41(2) MeV, 2 Ketten, 22,1 Tage | gemessen | Gates et al., arXiv:2407.16079 | ja |
+| Strahl, Target, Separator | ≈ 6·10¹² /s; 0,435(40) mg/cm²; 70(7) % | gemessen / Simulation | Gates et al. | ja |
+| ²⁹⁰Lv, ²⁸⁶Fl, ²⁸²Cn | T½ 8,2 ms / 106 ms / 0,88 ms; α 10,84 / 10,18 MeV | gemessen | Gates et al., Tabelle II | ja |
+| Q(Ti+Pu) | −179,0 MeV | Abschätzung | aus E_cm 220(3) und E* 41(2) MeV bei Gates et al. | ja |
+| σ(⁵⁰Ti+²⁴⁹Cf) 3n / 4n / 5n | 12,87 / 48,20 / 9,90 fb bei E* 34 / 41 / 52 MeV | Vorhersage | Zhang, Zhang, Chen, arXiv:2604.09287, Tabelle II | ja |
+| Eichfaktor | 0,556 | Eichung | an Gates et al. (2 Ketten in 22,1 Tagen) | nachgerechnet |
+| Q(Ti+Cf) | −197,7 MeV (±3 MeV) | Abschätzung | Projektvorgabe | nein |
+| Breite der Kurven | 4 MeV | Annahme | Projektvorgabe | – |
+| Anteil voll gemessener Alphas | 90 % | Annahme | Projektvorgabe | siehe unten |
+| ²⁸⁸Lv, ²⁸⁴Fl, ²⁷⁵Ds, ²⁷¹Hs | siehe `decays.ts` | gemessen | Projektvorgabe, Originalarbeiten noch zu benennen | nein |
+| ²⁹⁵120, ²⁹¹Og, ²⁸⁷Lv, ²⁸³Fl, ²⁷⁹Cn, ²⁹⁶120, ²⁹²Og | siehe `decays.ts` | Schätzung | Viola-Seaborg-Systematik, Projektvorgabe | nein |
+| Bass-Barriere | Formel | berechnet | R. Bass, Phys. Rev. Lett. 39, 265 (1977) | nein (trifft die Vorgabe) |
+| Poisson-Grenzen | 68 %, 1,84 bei 0 Ereignissen | Formel | N. Gehrels, ApJ 303, 336 (1986); Gates et al. zitieren Schmidt et al., Z. Phys. A 316, 19 (1984) | nein (trifft die veröffentlichten Fehler) |
+| N_A, e² | 6,02214076·10²³ /mol; 1,43996448 MeV fm | Konstante | CODATA 2018 / SI 2019 | nein |
 
-**Noch nicht am Original geprüft.** Alle Quellen tragen im Code `checked: false`:
-Die Zahlen stammen aus der Projektvorgabe, die Originalarbeiten waren beim
-Erstellen nicht abrufbar. Das wird nachgeholt, bevor Ergebnisse veröffentlicht
-werden.
+Im Code trägt jede Quelle `checked: true/false` (`packages/core/src/data/sources.ts`).
+
+Was die Prüfung am Original ergeben hat:
+
+- Die Zeiten bei Gates et al. sind ausdrücklich Halbwertszeiten (T½).
+- Deren Zählregel (mindestens 1 volles Alpha, dann Spaltung, innerhalb 1 s) weist
+  ≈ 95 % der ²⁹⁰Lv-Ketten nach. Unsere exakte Rechnung ergibt 94,8 %.
+- **Abweichung 1:** Für ²⁸⁶Fl stehen dort Alpha 32/56 = 57 % und Spaltung 43 %;
+  die Projektvorgabe nennt 55 / 45. Der Code folgt der Vorgabe (Wirkung auf die
+  Ketten-Effizienz: 0,2 Prozentpunkte).
+- **Abweichung 2:** Der Detektor misst dort 75–80 % der Alphas mit voller
+  Energie; die Projektvorgabe nennt 90 %. Mit 90 % ergibt sich aber gerade der
+  veröffentlichte Ketten-Nachweis von 95 %.
+- Ohne den Eichfaktor ergäben die veröffentlichten Werte 3,6 statt 2 Ketten.
+  Die Strahlstärke gilt am Ausgang des Zyklotrons, nicht am Target.
+- Zhang et al. nennen weder Unsicherheiten noch eine Kurvenbreite noch einen Q-Wert.
 
 ## Annahmen und offene Punkte
 
 Annahmen (nicht belegt, im Code markiert):
 
-- Die Zeiten der Zerfallsdaten sind **Halbwertszeiten**; mittlere Lebensdauer = T½ / ln 2.
+- Die Zeiten der Zerfallsdaten sind **Halbwertszeiten** (für ²⁹⁰Lv, ²⁸⁶Fl, ²⁸²Cn am Original bestätigt; für die übrigen angenommen); mittlere Lebensdauer = T½ / ln 2.
 - „Breite 4 MeV“ ist die **Standardabweichung** der Gauß-Kurve.
 - Für ⁵⁰Ti + ²⁴⁴Pu ist nur ein Punkt gemessen. Dass er das Maximum ist und die
   Kurve ebenfalls 4 MeV breit ist, ist eine Annahme.

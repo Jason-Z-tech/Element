@@ -46,8 +46,9 @@ const TABLE: readonly NuclideDecay[] = [
     a: 290,
     halfLife_s: 8.2 * ms,
     kind: 'gemessen',
-    source: 'projectSpec',
+    source: 'gates2024',
     modes: [{ type: 'alpha', probability: 1, energy_MeV: 10.84, daughter: '286Fl' }],
+    note: 'Gates et al., Tabelle II (Zusatzmaterial): T½ = 8,2 (+3,2 −1,8) ms, E_alpha = 10,84(7) MeV.',
   },
   {
     id: '286Fl',
@@ -55,11 +56,12 @@ const TABLE: readonly NuclideDecay[] = [
     a: 286,
     halfLife_s: 106 * ms,
     kind: 'gemessen',
-    source: 'projectSpec',
+    source: 'gates2024',
     modes: [
       { type: 'alpha', probability: 0.55, energy_MeV: 10.18, daughter: '282Cn' },
       { type: 'sf', probability: 0.45 },
     ],
+    note: 'Gates et al., Tabelle II: T½ = 106 (+17 −13) ms, E_alpha = 10,18(2) MeV. Dort: Alpha 31/56 (10,18 MeV) plus 1/56 (9,57 MeV), Spaltung 24/56 = 43 %; die Projektvorgabe rundet auf 55 / 45.',
   },
   {
     id: '282Cn',
@@ -67,8 +69,9 @@ const TABLE: readonly NuclideDecay[] = [
     a: 282,
     halfLife_s: 0.88 * ms,
     kind: 'gemessen',
-    source: 'projectSpec',
+    source: 'gates2024',
     modes: [{ type: 'sf', probability: 1 }],
+    note: 'Gates et al., Tabelle II: T½ = 0,88 (+0,19 −0,13) ms, Spaltung.',
   },
   {
     id: '288Lv',

@@ -2,9 +2,9 @@
  * Quellenverzeichnis. Grundsatz 2: Jede Zahl im Code ist ein Messwert mit Quelle,
  * eine veröffentlichte Vorhersage mit Quelle oder als Annahme markiert.
  *
- * `checked` sagt, ob der Wert in diesem Projekt schon gegen die Originalarbeit
- * geprüft wurde. `false` heißt: Der Wert stammt aus der Projektvorgabe und die
- * Prüfung am Original steht noch aus.
+ * `checked` sagt, ob die Werte in diesem Projekt schon gegen die Originalarbeit
+ * geprüft wurden. `false` heißt: Der Wert stammt aus der Projektvorgabe oder aus
+ * dem Gedächtnis der Literatur, die Prüfung am Original steht noch aus.
  */
 export type Provenance =
   /** im Experiment gemessen */
@@ -29,14 +29,19 @@ export interface Source {
 
 export const SOURCES = {
   gates2024: {
-    ref: 'J. M. Gates et al., „Toward the Discovery of New Elements: Production of Livermorium (Z = 116) with 50Ti“, Phys. Rev. Lett. 133, 172502 (2024); arXiv:2407.16079',
-    checked: false,
-    note: 'Berkeley (LBNL, 88-Zoll-Zyklotron, BGS). Werte aus der Projektvorgabe; Original war beim Erstellen nicht abrufbar.',
+    ref: 'J. M. Gates, R. Orford, D. Rudolph et al., „Towards the Discovery of New Elements: Production of Livermorium (Z=116) with 50Ti“, arXiv:2407.16079 (2024); erschienen in Phys. Rev. Lett. 133, 172502 (2024)',
+    checked: true,
+    note: 'Am arXiv-Volltext geprüft (10.11.2026): 2 Ketten 290Lv, 0,44 (+0,58 −0,28) pb, E_cm 220(3) MeV, E* 41(2) MeV, 22,1 Tage, ≈ 6e12 Ionen/s, Target 0,435(40) mg/cm², Separator 70(7) %, Ketten-Nachweis ≈ 95 %. Die Zeitschriftenangabe steht nicht auf der arXiv-Seite und ist ungeprüft.',
   },
   prediction120: {
-    ref: 'arXiv:2604.09287 (Vorhersage der Anregungsfunktionen für 50Ti + 249Cf → Element 120)',
+    ref: 'W. Zhang, S.-J. Zhang, P.-H. Chen, „Synthesis mechanism of superheavy element 120: a dinuclear system model approach with microscopic inputs“, arXiv:2604.09287 (2026), Tabelle II',
+    checked: true,
+    note: 'Am arXiv-Volltext geprüft (10.11.2026): 50Ti + 249Cf 3n 12,87 fb bei 34 MeV; 4n 48,20 fb bei 41 MeV; 5n 9,90 fb bei 52 MeV. Zweikern-Modell (DNS). Die Arbeit nennt keine Unsicherheiten und keine Kurvenbreite.',
+  },
+  schmidt1984: {
+    ref: 'K.-H. Schmidt, C.-C. Sahm, K. Pielenz, H.-G. Clerc, „Some remarks on the error analysis in the case of poor statistics“, Z. Phys. A 316, 19 (1984)',
     checked: false,
-    note: 'Werte aus der Projektvorgabe; Titel, Autoren und Zahlen noch am Original zu prüfen.',
+    note: 'Von Gates et al. für die 68-%-Fehler zitiert. Original nicht abrufbar; unsere Grenzen (nach Gehrels) reproduzieren die veröffentlichten +0,58 −0,28 pb.',
   },
   bass1977: {
     ref: 'R. Bass, „Nucleus-Nucleus Potential Deduced from Experimental Fusion Cross Sections“, Phys. Rev. Lett. 39, 265 (1977)',
