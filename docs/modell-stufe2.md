@@ -1,6 +1,7 @@
 # Modell-Vorschlag für Stufe 2: Die Physik selbst rechnen
 
-Stand: Vorschlag, noch nicht umgesetzt. Umsetzung erst nach Freigabe.
+Stand: freigegeben und umgesetzt als Modellversion `stufe2-v1`. Was bei der Umsetzung
+vom Vorschlag abweicht, steht in Abschnitt 15; die Ergebnisse in Abschnitt 16.
 Geprüft an den Quellen am 10.11.2026.
 
 > **Das ist eine Simulation.** Sie kann vorhersagen, wo man suchen sollte.
@@ -421,7 +422,147 @@ Jedes Ergebnis trägt zwei getrennte Angaben:
    ⁵⁴Cr + ²⁴⁸Cm und ⁵¹V + ²⁴⁹Bk; Element 119 über ⁵⁰Ti + ²⁴⁹Bk, ⁵¹V + ²⁴⁸Cm
    und ⁵⁴Cr + ²⁴³Am?
 
-## 14. Quellen
+## 15. Umsetzung: Abweichungen und eigene Anpassungen
+
+Alles in diesem Abschnitt gehört auf die Methoden-Seite.
+
+### Abweichungen vom ursprünglichen Auftrag
+
+| Auftrag | Umsetzung | Grund |
+|---|---|---|
+| Langevin-Bahnen als teurer Hauptteil, rund 1e8 Bahnen je Energie | Bahnen nur als Kontrolle der Formel (`langevin.ts`), Rechenleistung in Unsicherheits-Ensembles | Im veröffentlichten Modell ist die Verschmelzungs-Wahrscheinlichkeit eine geschlossene Formel; für mehr Freiheitsgrade fehlen belegte Parameter. Keine künstliche Rechenlast. |
+| Barrierenverteilung um die Bass-Barriere | Barrierenverteilung aus der Form des Targetkerns (Winkel-Integral), Bass-Potential mit winkelabhängigem Radius | So bei Hagino (2018); braucht keine angepasste Breite. |
+| Jeden Stoß per Monte Carlo | Winkel und Drehimpuls werden exakt summiert (24 Gauß-Legendre-Stützstellen, alle ℓ); gewürfelt werden nur die Neutronenenergien | Genauer und schneller als Würfeln. |
+| Q-Wert ⁵⁰Ti + ²⁴⁹Cf: Standard −197,7 MeV | Stufe 2 rechnet mit −198,58 MeV | Q-Wert, Neutronen-Bindungsenergien und Spaltbarrieren müssen aus derselben Massentabelle stammen. Der Wert liegt innerhalb von ±3 MeV; im Ensemble wird der Q-Wert mit 2,1 MeV Breite gezogen. Stufe 1 bleibt bei −197,7 MeV. |
+| Eichung an einem Teil von drei genannten Reaktionen | Eichung an 48 Messpunkten mit ⁴⁸Ca auf fünf Targets; alle drei genannten Reaktionen sind Prüf-Reaktionen | So vereinbart: schwereres Projektil und schwerstes Target bleiben für die Prüfung. |
+
+### Eigene Anpassungen und Lesarten
+
+1. **Einfang mit Bass-Potential** (A1): `R_T(θ) = R_T·(1 + Σ β_λ Y_λ0(θ))` im
+   Bass-Potential von 1977. Nicht in dieser Form veröffentlicht. Vergleich mit
+   Hagino siehe unten.
+2. **Projektil als Kugel** (A2).
+3. **Winkelabhängiger Einschuss-Abstand mit R_T = 1,2·A^(1/3) fm.** Hagino nennt
+   den Radius an dieser Stelle nicht; seine Abb. 3(b) passt nur zu diesem Wert
+   (Unterschied Spitze gegen Flanke 1,92 fm für ⁴⁸Ca + ²⁴⁸Cm).
+4. **Sattelenergie aus der Massentabelle:** `V_sd = E_tot(Grundzustand) + B_f`,
+   beides aus Jachimowicz et al. relativ zur makroskopischen Kugel; so beschreiben
+   es Siwek-Wilczyńska et al. (2012). Hagino nimmt die Sattelenergie aus der
+   algebraischen Formel. Für ²⁹⁶Lv: −0,61 MeV (Tabelle) gegen −1,06 MeV (Hagino,
+   aus seiner Abb. 3c abgelesen).
+5. **Energien relativ zum Grundzustand:** Die makroskopische Energie am
+   Einschuss-Punkt wird um die Grundzustandsenergie `E_tot` (rund −6 MeV)
+   verschoben, bevor die Temperatur gerechnet wird. Die Quellen sagen dazu nichts
+   Eindeutiges.
+6. **Einschuss-Abstand nie negativ:** `s₀ = max(0, a − b·(E − B₀))`, nach Cap et
+   al. (2022).
+7. **Ende der Kaskade:** Sie endet, wenn weder Neutron noch Spaltung möglich ist,
+   jeweils mit Paar- und Rotationsenergie gerechnet. Haginos Schwellen (Gl. 21–22)
+   enthalten die Paarenergie nicht; der Unterschied ist höchstens 1,2 MeV.
+8. **Neutronenspektrum:** gewürfelt aus der Niveaudichte `ρ(ε_max − ε)·ε`. Cap et
+   al. (2022) nehmen die Maxwell-Näherung `ε·e^(−ε/T)` dieses Spektrums.
+9. **Schalenkorrektur am Sattel** aus der Tabelle (−0,3 bis −1,2 MeV), am
+   Einschuss-Punkt null (wie Hagino).
+10. **Energie-Mittelung:** Über den angegebenen E*-Bereich einer Messung
+    (Energieverlust im Target) wird mit fünf Energien gemittelt.
+11. **Energie der Messung:** aus der Strahlenergie in der Mitte des Targets. Für
+    TASCA (⁴⁸Ca + ²⁴⁴Pu) aus E* mit dem Q-Wert, der aus der Dubna-Messung folgt
+    (−162,1 MeV); für ⁵⁰Ti + ²⁴²Pu und ⁵⁴Cr + ²³⁸U aus E* mit dem Q-Wert unserer
+    Tabelle, weil die Strahlenergie nicht vorliegt.
+12. **Deformationen der Targets** aus FRDM(2012) (β₂ = 0,24 bis 0,25). Gemessene
+    Werte liegen höher (Hagino nimmt für ²⁴⁸Cm β₂ = 0,297); die Quelle dafür war
+    nicht abrufbar.
+13. **Unsicherheits-Ensemble:** Die Eichung wird nicht für jede Ziehung
+    wiederholt; die Ziehungen der Spaltbarrieren sind zwischen Kernen unabhängig;
+    Neutronen-Bindungsenergien werden nicht gezogen.
+
+### Druckfehler in Haginos Anhang (Ergänzung 4)
+
+Hagino druckt in Gl. A10 `β₁ = −0,06080 + 1,137825·D − 10,7077·D²`. Richtig ist
+**1,37825**. Belege:
+
+| Beleg | b für ⁴⁸Ca + ²⁴⁸Cm |
+|---|---|
+| Haginos Abb. 3(c) gegen 3(b), aus den Kurvendaten der Abbildung (exakte Parabel) | −0,01372 |
+| Formel mit 1,37825 | −0,01369 |
+| Formel mit 1,137825 (wie gedruckt) | −0,03084 |
+| Satz von 2003 (Świątecki et al., im Druck geprüft) | −0,0114 |
+
+Eine Abbildung der Warschauer Gruppe (⁵⁰Ti + ²⁰⁸Pb, arXiv:2210.17214) passt
+ebenfalls nur zu 1,378 ± 0,001. In keiner zugänglichen Arbeit steht der
+Koeffizient ein zweites Mal gedruckt. Hagino druckt außerdem `erf(ΔV/T)` ohne
+Wurzel; seine Abbildungen folgen der Form mit Wurzel.
+
+Einen Preprint von PRC 83, 054602 (Cap, Siwek-Wilczyńska, Wilczyński 2011) gibt es
+nicht. arXiv:1203.2252 derselben Gruppe druckt keinen dieser Koeffizienten; es
+verweist auf PRC 83, 054602. Frei zugänglich ist die Ursprungsarbeit, W. J.
+Świątecki, K. Siwek-Wilczyńska, J. Wilczyński, Acta Phys. Pol. B 34, 2049 (2003).
+Sie druckt einen früheren Satz:
+
+| Größe | 2003 (im Druck geprüft) | 2011 nach Hagino (verwendet) |
+|---|---|---|
+| E_surf, Spaltbarkeit x, R | 17,9439·(1 − 1,7826 I²)·A^(2/3) MeV; 50,883; 1,155 fm | identisch |
+| a | −0,00557 − 0,01929·e^(−D/0,02283) + (0,048 + 0,12151·e^(−D/0,04053))·t + (−0,073 + 0,94 D)·t² | −0,00564 − 0,01936·e^(−D/0,02240) + (0,05122 + 0,11931·e^(−D/0,03800))·t + (−0,07424 + 0,95959 D)·t² |
+| b | −0,00858 − 0,05303·e^(−D/0,03205) + (0,019 + 0,25663·e^(−D/0,07331))·t | −0,06080 + 1,37825 D − 10,7077 D² + (0,27691 − 2,93119 D + 12,60944 D²)·t + (−0,02398 − 1,14854 D)·t² |
+| c | −0,0256 + 0,1944 D + (0,0214 + 0,6158 D)·t | −0,02722 + 0,2231 D + (0,02050 + 0,32122 D)·t + (0,03843 + 1,03731 D)·t² |
+| Formfunktionen der Niveaudichte | 1 + (0,6416 α − 0,1421 α²)²; 1 + (0,6542 α − 0,0483 α²)² | identisch |
+| Niveaudichte-Parameter | 0,076·A + 0,180·A^(2/3)·F + 0,157·A^(1/3)·G | 0,0696·A + 0,1801·A^(2/3)·B_S + 0,1644·A^(1/3)·B_K |
+| Paarenergie | 12/√A (ungerade), 24/√A (gerade-gerade) | 10,5/√A, 21/√A |
+| Dämpfung der Schalenkorrektur | A^(1/3)/0,47 MeV (14 MeV bei A = 290) | 18,5 MeV |
+
+(t = 1 − x, D = ((R_T − R_P)/(R_T + R_P))².) Für ⁴⁸Ca + ²⁴⁸Cm ergeben beide Sätze
+a = −0,00468 und c = −0,0101; b ist −0,0114 (2003) gegen −0,0137 (2011). Der Satz
+von 2003 ist für |Δ| < 0,25 geprüft; unsere Reaktionen liegen bei 0,26 bis 0,27.
+Verwendet wird der Satz von 2011; der von 2003 ist als Variante eingebaut
+(`barrierCoefficients: 'fbd2003'`). An den Eich-Reaktionen ändert er die Güte
+kaum (Streuung Faktor 8,5 statt 8,9).
+
+### Einfang: Vergleich mit Hagino für ⁴⁸Ca + ²⁴⁸Cm (Ergänzung 3)
+
+| | Barriere an der Spitze | an der Flanke | σ_Einfang bei 195 / 205 / 215 MeV |
+|---|---|---|---|
+| Hagino, Abb. 3(a) (abgelesen) | 190,5 MeV | 208,9 MeV | – |
+| Nachbau seines Woods-Saxon-Potentials | 190,2 MeV | 208,9 MeV | 17 / 91 / 260 mb |
+| Bass mit winkelabhängigem Radius, seine Deformation | 187,9 MeV | 205,3 MeV | 33 / 128 / 346 mb |
+| Bass mit winkelabhängigem Radius, FRDM-Deformation (verwendet) | 189,9 MeV | 204,3 MeV | 23 / 117 / 341 mb |
+
+Der Nachbau trifft Haginos Abbildung. Die eigene Anpassung gibt sein Ergebnis
+**nicht** genau wieder: Die Barrieren liegen 2 bis 4 MeV tiefer, der Einfang ist
+unterhalb der Barriere bis zu doppelt so groß. Haginos Potential ist an eine
+gemessene Barrierenverteilung dieses einen Systems angepasst. Mit seinem Potential
+statt Bass eicht sich das Modell auf a = 3,70 fm, b = 0,006 fm/MeV bei praktisch
+gleicher Güte (Streuung Faktor 8,3). Im Ensemble wird die Einfang-Barriere deshalb
+mit 2 MeV Breite gezogen.
+
+### Unsicherheits-Ensemble: gezogene Größen
+
+| Größe | Breite (1 σ, Normalverteilung) | Begründung |
+|---|---|---|
+| Spaltbarriere je Kern | 0,5 MeV | Siwek-Wilczyńska et al. (2012): kaum besser als ±0,5 MeV; Kowal et al. (arXiv:1607.08462): mittlere Abweichung 0,5 MeV. Unabhängigkeit zwischen Kernen ist eine Annahme. |
+| Q-Wert | 2,1 MeV | Standardabweichung von vier Massenmodellen für ⁵⁰Ti + ²⁴⁹Cf. Dass sie für alle Reaktionen gilt, ist eine Annahme. |
+| Einfang-Barriere | 2,0 MeV | Annahme. Anhaltspunkte: Cap et al. (2022) bis 2 MeV; Bass gegen Hagino 2 bis 4 MeV. |
+| Einschuss-Abstand | 0,6 fm | Rest-Streuung der eigenen Eichung (siehe unten). |
+
+An den Eich-Punkten streut Rechnung gegen Messung um 0,95 Dekaden. Spaltbarrieren,
+Q-Wert und Einfang-Barriere erklären zusammen etwa 0,72 Dekaden (Spaltbarrieren
+allein 0,5 bis 0,7). Der Rest, 0,62 Dekaden, entspricht 0,6 fm im
+Einschuss-Abstand. Die volle Streuung des Einschuss-Abstands (1,02 fm; Cap et al.
+nennen ±1 fm) enthält die anderen Beiträge schon und würde sie doppelt zählen.
+
+### Rechenzeit
+
+Gemessen auf einem Kern (Node, TypeScript):
+
+- eine Ziehung (ganze Kette, eine Energie, 500 Kaskaden): 12 ms
+- ein Ensemble (eine Reaktion, eine Energie, 1000 Ziehungen): 12 s
+- die Quantile sind mit 1000 Ziehungen auf etwa 10 % stabil
+
+Eine volle Vorhersage: 6 Reaktionen × 16 Energien (30 MeV in Schritten von 2 MeV)
+= 96 Ensembles, also rund 20 Minuten auf einem Kern, 3 bis 5 Minuten auf einem
+Rechner mit vier bis acht Kernen. Mit 10 000 Ziehungen je Ensemble (Quantile auf
+etwa 3 %) sind es gut 3 Stunden auf einem Kern.
+
+## 17. Quellen
 
 Am Volltext geprüft (arXiv):
 
@@ -443,6 +584,10 @@ Am Volltext geprüft (arXiv):
   109–110, 1 (2016); arXiv:1508.06294.
 - I. Dutt, R. K. Puri, arXiv:1005.5213 (druckt die Bass-Parameter von 1977).
 - W. Loveland, Eur. Phys. J. A 51, 120 (2015); arXiv:1411.4929 (Unsicherheiten).
+- W. J. Świątecki, K. Siwek-Wilczyńska, J. Wilczyński, „Fusion by diffusion“,
+  Acta Phys. Pol. B 34, 2049 (2003) (frei zugänglich; Anhänge B und C am Druckbild geprüft).
+- T. Cap, K. Siwek-Wilczyńska, I. Skwira-Chalot, Acta Phys. Pol. B 43, 297 (2012)
+  (frei zugänglich; bestätigt s_inj = 2,30 fm − 0,062·(E − B₀) fm/MeV für kalte Fusion).
 
 Messwerte:
 
@@ -457,8 +602,7 @@ Messwerte:
 Nur als Zitat, Volltext nicht abrufbar:
 
 - T. Cap, K. Siwek-Wilczyńska, J. Wilczyński, Phys. Rev. C 83, 054602 (2011).
-- W. J. Świątecki, K. Siwek-Wilczyńska, J. Wilczyński, Phys. Rev. C 71, 014602
-  (2005); Acta Phys. Pol. B 34, 2049 (2003).
+- W. J. Świątecki, K. Siwek-Wilczyńska, J. Wilczyński, Phys. Rev. C 71, 014602 (2005).
 - R. Bass, Phys. Rev. Lett. 39, 265 (1977).
 - D. L. Hill, J. A. Wheeler, Phys. Rev. 89, 1102 (1953).
 - W. Reisdorf, Z. Phys. A 300, 227 (1981).
