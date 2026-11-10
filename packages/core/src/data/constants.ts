@@ -47,7 +47,7 @@ export const DEFAULTS = {
     'MeV',
     'annahme',
     'projectSpec',
-    '„Breite 4 MeV“ wird als Standardabweichung gelesen (Halbwertsbreite 9,4 MeV).',
+    'Annahme für Stufe 1: Gauß-Form, Breite 4 MeV als Standardabweichung (Halbwertsbreite 9,4 MeV). Belegt sind nur die Maxima. Stufe 2 ersetzt die Kurve durch die eigene Rechnung.',
   ),
 } as const;
 

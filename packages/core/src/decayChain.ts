@@ -1,5 +1,5 @@
 import { DEFAULTS } from './data/constants';
-import { getDecay } from './data/decays';
+import { DECAYS, getDecay, type DecayTable } from './data/decays';
 import { sampleExponential, type Rng } from './rng';
 
 export interface ChainOptions {
@@ -7,6 +7,8 @@ export interface ChainOptions {
   readonly alphaFullEnergyFraction?: number;
   /** Zeitfenster ab dem Einschlag des Kerns in Sekunden (Standard 1 s). */
   readonly window_s?: number;
+  /** Zerfallstabelle (Standard: 282Fl spaltet), siehe `decayTable()`. */
+  readonly decays?: DecayTable;
 }
 
 export type ChainStep =
@@ -47,11 +49,12 @@ const LN2 = Math.LN2;
  */
 export function simulateChain(start: string, rng: Rng, options: ChainOptions = {}): SimulatedChain {
   const pFull = options.alphaFullEnergyFraction ?? DEFAULTS.alphaFullEnergyFraction.value;
+  const table = options.decays ?? DECAYS;
   const steps: ChainStep[] = [];
   let id = start;
   let t = 0;
   for (;;) {
-    const n = getDecay(id);
+    const n = getDecay(id, table);
     if (n.modes.length === 0) return { start, steps, endsAt: id };
     const dt = sampleExponential(rng, n.halfLife_s / LN2);
     const uBranch = rng.next();
@@ -147,9 +150,10 @@ export function hypoexponentialCdf(rates: readonly number[], t: number): number 
 export function chainEfficiency(start: string, options: ChainOptions = {}): number {
   const pFull = options.alphaFullEnergyFraction ?? DEFAULTS.alphaFullEnergyFraction.value;
   const window = options.window_s ?? DEFAULTS.chainWindow.value;
+  const table = options.decays ?? DECAYS;
 
   const walk = (id: string, prob: number, fullAlphas: number, rates: readonly number[]): number => {
-    const n = getDecay(id);
+    const n = getDecay(id, table);
     if (n.modes.length === 0) return 0;
     const nextRates = [...rates, LN2 / n.halfLife_s];
     let total = 0;

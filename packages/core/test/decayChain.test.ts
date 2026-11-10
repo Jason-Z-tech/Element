@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   chainEfficiency,
+  decayTable,
   DECAYS,
   getDecay,
   hypoexponentialCdf,
@@ -36,9 +37,12 @@ describe('Zerfallsdaten', () => {
     for (const id of ['290Lv', '286Fl', '282Cn', '288Lv', '284Fl', '280Cn', '275Ds', '271Hs']) {
       expect(getDecay(id).kind).toBe('gemessen');
     }
-    for (const id of ['294-120', '290Og', '286Lv', '282Fl']) {
+    for (const id of ['294-120', '290Og', '286Lv']) {
       expect(getDecay(id).kind).toBe('vorhersage');
     }
+    // 282Fl: Spaltung ist eine Annahme; die Alpha-Variante ist eine Vorhersage.
+    expect(getDecay('282Fl').kind).toBe('annahme');
+    expect(getDecay('282Fl', decayTable('alpha')).kind).toBe('vorhersage');
     for (const id of ['295-120', '291Og', '287Lv', '283Fl', '279Cn', '296-120', '292Og']) {
       expect(getDecay(id).kind).toBe('schaetzung');
     }
@@ -153,11 +157,34 @@ describe('Zerfallskette', () => {
     expect(viaCn / n).toBeCloseTo(0.24, 2);
   });
 
-  it('294-120 (5n) läuft über drei Alphas bis 282Fl', () => {
+  it('294-120 (5n): drei Alphas, dann spaltet 282Fl (Annahme)', () => {
     const c = simulateChain('294-120', mulberry32(5));
-    expect(c.steps.map((s) => s.nuclide)).toEqual(['294-120', '290Og', '286Lv']);
-    expect(c.steps.every((s) => s.type === 'alpha' && s.estimated)).toBe(true);
-    expect(c.endsAt).toBe('282Fl');
+    expect(c.steps.map((s) => s.nuclide)).toEqual(['294-120', '290Og', '286Lv', '282Fl']);
+    expect(c.steps.map((s) => s.type)).toEqual(['alpha', 'alpha', 'alpha', 'sf']);
+    expect(c.steps.every((s) => s.estimated)).toBe(true);
+    expect(c.endsAt).toBeNull();
+  });
+
+  it('294-120 (5n) mit Parameter „Alpha“: weiter über 278Cn und 274Ds bis 270Hs', () => {
+    const c = simulateChain('294-120', mulberry32(5), { decays: decayTable('alpha') });
+    expect(c.steps.map((s) => s.nuclide)).toEqual(['294-120', '290Og', '286Lv', '282Fl', '278Cn', '274Ds']);
+    expect(c.steps.every((s) => s.type === 'alpha')).toBe(true);
+    expect(c.endsAt).toBe('270Hs');
+  });
+
+  it('beide Zerfallstabellen sind in sich schlüssig', () => {
+    for (const table of [decayTable('sf'), decayTable('alpha')]) {
+      for (const n of table.values()) {
+        if (n.modes.length > 0) expect(n.modes.reduce((s, m) => s + m.probability, 0)).toBeCloseTo(1, 12);
+        for (const m of n.modes) {
+          if (m.type !== 'alpha') continue;
+          const d = getDecay(m.daughter, table);
+          expect(d.z).toBe(n.z - 2);
+          expect(d.a).toBe(n.a - 4);
+        }
+      }
+    }
+    expect(decayTable()).toBe(DECAYS);
   });
 
   it('ist mit gleichem Seed reproduzierbar', () => {
@@ -210,8 +237,12 @@ describe('Ketten-Effizienz (exakt gerechnet)', () => {
     expect(e).toBeCloseTo(0.95, 2);
   });
 
-  it('294-120 (5n): mindestens 2 von 3 Alphas voll gemessen = 97,2 %', () => {
-    expect(chainEfficiency('294-120')).toBeCloseTo(0.9 ** 3 + 3 * 0.9 ** 2 * 0.1, 9);
+  it('294-120 (5n): 99,9 % mit Spaltung von 282Fl, nur verloren wenn alle drei Alphas entwischen', () => {
+    expect(chainEfficiency('294-120')).toBeCloseTo(1 - 0.1 ** 3, 9);
+  });
+
+  it('294-120 (5n) mit Parameter „Alpha“: mindestens 2 von 6 Alphas voll gemessen', () => {
+    expect(chainEfficiency('294-120', { decays: decayTable('alpha') })).toBeCloseTo(1 - 0.1 ** 6 - 6 * 0.9 * 0.1 ** 5, 9);
   });
 
   it.each(['290Lv', '295-120', '296-120', '294-120'])('%s: Simulation stimmt mit exakter Rechnung überein', (start) => {

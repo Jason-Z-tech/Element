@@ -25,7 +25,7 @@ export interface NuclideDecay {
   readonly z: number;
   readonly a: number;
   readonly halfLife_s: number;
-  readonly kind: Extract<Provenance, 'gemessen' | 'schaetzung' | 'vorhersage'>;
+  readonly kind: Extract<Provenance, 'gemessen' | 'schaetzung' | 'vorhersage' | 'annahme'>;
   readonly source: SourceId;
   /**
    * Zerfallszweige. Leer = die Kette wird hier abgeschnitten (Kern lebt viel
@@ -223,6 +223,34 @@ const TABLE: readonly NuclideDecay[] = [
     modes: [{ type: 'alpha', probability: 1, energy_MeV: 11.15, daughter: '282Fl' }],
     note: 'Q_alpha = 11,31 MeV (WS4), log10 T½ = −2,45: T½ = 3,5 ms.',
   },
+];
+
+/** Wie zerfällt 282Fl, das Ende der 5n-Kette von Element 120? */
+export type Fl282Decay = 'sf' | 'alpha';
+
+/**
+ * Festlegung (Annahme): 282Fl beendet die Kette mit Spontanspaltung.
+ * Begründung: Die gemessenen Nachbarn 284Fl und 282Cn spalten überwiegend.
+ * Die Halbwertszeit ist nicht bekannt; als Platzhalter dient die für den
+ * Alpha-Zerfall vorhergesagte (Saxena et al.). Für den Nachweis ist sie
+ * unerheblich, solange sie weit unter dem Zeitfenster von 1 s liegt.
+ */
+const FL282_SF: NuclideDecay = {
+  id: '282Fl',
+  z: 114,
+  a: 282,
+  halfLife_s: Math.pow(10, -3.17),
+  kind: 'annahme',
+  source: 'assumption',
+  modes: [{ type: 'sf', probability: 1 }],
+  note: 'Annahme: Spontanspaltung, weil die gemessenen Nachbarn 284Fl und 282Cn überwiegend spalten. Halbwertszeit 0,7 ms als Platzhalter aus der Alpha-Vorhersage von Saxena et al. Umstellbar auf Alpha (Parameter fl282Decay).',
+};
+
+/**
+ * Alternative: Alpha-Zerfall wie von Saxena et al. (Tabelle 6) vorhergesagt,
+ * weiter über 278Cn und 274Ds bis zum gemessenen, langlebigen 270Hs.
+ */
+const FL282_ALPHA: readonly NuclideDecay[] = [
   {
     id: '282Fl',
     z: 114,
@@ -230,15 +258,58 @@ const TABLE: readonly NuclideDecay[] = [
     halfLife_s: Math.pow(10, -3.17),
     kind: 'vorhersage',
     source: 'saxena2021',
+    modes: [{ type: 'alpha', probability: 1, energy_MeV: 11.22, daughter: '278Cn' }],
+    note: 'Q_alpha = 11,38 MeV (WS4), log10 T½ = −3,17: T½ = 0,7 ms.',
+  },
+  {
+    id: '278Cn',
+    z: 112,
+    a: 278,
+    halfLife_s: Math.pow(10, -3.58),
+    kind: 'vorhersage',
+    source: 'saxena2021',
+    modes: [{ type: 'alpha', probability: 1, energy_MeV: 11.15, daughter: '274Ds' }],
+    note: 'Q_alpha = 11,31 MeV, log10 T½ = −3,58: T½ = 0,26 ms.',
+  },
+  {
+    id: '274Ds',
+    z: 110,
+    a: 274,
+    halfLife_s: Math.pow(10, -5.04),
+    kind: 'vorhersage',
+    source: 'saxena2021',
+    modes: [{ type: 'alpha', probability: 1, energy_MeV: 11.53, daughter: '270Hs' }],
+    note: 'Q_alpha = 11,70 MeV, log10 T½ = −5,04: T½ = 9 µs.',
+  },
+  {
+    id: '270Hs',
+    z: 108,
+    a: 270,
+    halfLife_s: 7.6,
+    kind: 'gemessen',
+    source: 'ackermann2025',
     modes: [],
-    note: 'Zerfallsart offen: Saxena et al. sagen Alpha vorher (T½ = 0,7 ms), die gemessenen Nachbarn 284Fl und 282Cn spalten aber überwiegend. Die Kette wird hier abgeschnitten.',
+    note: 'Ackermann (2025), Tabelle 5.1: T½ = 7,6 (+4,9 −2,2) s. Lebt viel länger als das Zeitfenster von 1 s: Die Kette wird hier abgeschnitten.',
   },
 ];
 
-export const DECAYS: ReadonlyMap<string, NuclideDecay> = new Map(TABLE.map((n) => [n.id, n]));
+export type DecayTable = ReadonlyMap<string, NuclideDecay>;
 
-export function getDecay(id: string): NuclideDecay {
-  const n = DECAYS.get(id);
+const TABLES: Record<Fl282Decay, DecayTable> = {
+  sf: new Map([...TABLE, FL282_SF].map((n) => [n.id, n])),
+  alpha: new Map([...TABLE, ...FL282_ALPHA].map((n) => [n.id, n])),
+};
+
+/** Zerfallstabelle zur gewählten Zerfallsart von 282Fl (Standard: Spaltung). */
+export function decayTable(fl282Decay: Fl282Decay = 'sf'): DecayTable {
+  return TABLES[fl282Decay];
+}
+
+/** Standard-Zerfallstabelle. */
+export const DECAYS: DecayTable = TABLES.sf;
+
+export function getDecay(id: string, table: DecayTable = DECAYS): NuclideDecay {
+  const n = table.get(id);
   if (!n) throw new Error(`Keine Zerfallsdaten für ${id}`);
   return n;
 }

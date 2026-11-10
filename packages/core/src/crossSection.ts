@@ -33,8 +33,12 @@ export function totalCrossSection_fb(nature: Nature, eStar_MeV: number): number 
   return sum;
 }
 
-/** Natur nach den veröffentlichten Werten (Messung bzw. Vorhersage). */
-export function publishedNature(reaction: Reaction): Nature {
+/**
+ * Natur nach den veröffentlichten Werten (Messung bzw. Vorhersage).
+ * `width_MeV` überschreibt die angenommene Breite der Gauß-Kurven.
+ */
+export function publishedNature(reaction: Reaction, width_MeV?: number): Nature {
+  if (width_MeV !== undefined && !(width_MeV > 0)) throw new RangeError(`Breite muss positiv sein (ist ${width_MeV})`);
   return {
     reactionId: reaction.id,
     hidden: false,
@@ -42,7 +46,7 @@ export function publishedNature(reaction: Reaction): Nature {
       neutrons: c.neutrons,
       sigmaMax_fb: c.sigmaMax.value,
       eStarPeak_MeV: c.eStarPeak.value,
-      width_MeV: c.width.value,
+      width_MeV: width_MeV ?? c.width.value,
       residue: c.residue,
     })),
   };
@@ -82,8 +86,8 @@ export const HIDDEN_NATURE = {
  * gezogen (jede Größenordnung gleich wahrscheinlich), die Verschiebung
  * gleichverteilt.
  */
-export function hiddenNature(reaction: Reaction, seed: number): Nature {
-  const base = publishedNature(reaction);
+export function hiddenNature(reaction: Reaction, seed: number, width_MeV?: number): Nature {
+  const base = publishedNature(reaction, width_MeV);
   const rng = mulberry32(seed);
   const { sigmaMaxMin_fb: a, sigmaMaxMax_fb: b, maxShift_MeV } = HIDDEN_NATURE;
   const sigmaMax = a * Math.pow(b / a, rng.next());

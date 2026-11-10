@@ -63,6 +63,26 @@ export const SOURCES = {
     checked: true,
     note: 'Am arXiv-Volltext geprüft (10.11.2026). Vorhersage: Q_alpha aus dem Massenmodell WS4, Halbwertszeit aus der Formel „QF“ der Arbeit. Die dort vorhergesagten Spaltungs-Halbwertszeiten verfehlen die gemessenen Nachbarn 284Fl und 282Cn um viele Größenordnungen und werden nicht verwendet.',
   },
+  ame2020: {
+    ref: 'M. Wang, W. J. Huang, F. G. Kondev, G. Audi, S. Naimi, „The AME 2020 atomic mass evaluation (II)“, Chin. Phys. C 45, 030003 (2021); Datei mass_1.mas20 (IAEA, www-nds.iaea.org/amdc)',
+    checked: true,
+    note: 'An der Originaldatei geprüft (10.11.2026).',
+  },
+  frdm2012: {
+    ref: 'P. Möller, A. J. Sierk, T. Ichikawa, H. Sagawa, „Nuclear ground-state masses and deformations: FRDM(2012)“, arXiv:1508.06294 (2015); At. Data Nucl. Data Tables 109–110, 1 (2016)',
+    checked: true,
+    note: 'Massentabelle am arXiv-Volltext geprüft (10.11.2026). Spalten M_th (FRDM) und M_th^FL (FRLDM).',
+  },
+  jks2021: {
+    ref: 'P. Jachimowicz, M. Kowal, J. Skalski, „Properties of heaviest nuclei with 98 ≤ Z ≤ 126 and 134 ≤ N ≤ 192“, arXiv:2010.10018 (2020); At. Data Nucl. Data Tables 138, 101393 (2021)',
+    checked: true,
+    note: 'Warschauer mikroskopisch-makroskopisches Modell. Tabelle 1 am arXiv-Volltext geprüft (10.11.2026).',
+  },
+  ws4: {
+    ref: 'N. Wang, M. Liu, X. Wu, J. Meng, „Surface diffuseness correction in global mass formula“, Phys. Lett. B 734, 215 (2014) (WS4)',
+    checked: false,
+    note: 'Die WS4-Tabelle selbst war nicht abrufbar. Verwendet werden die WS4-Werte für Q_alpha, wie sie Saxena et al. (arXiv:2107.12976), Tabelle 7, abdrucken.',
+  },
   bass1977: {
     ref: 'R. Bass, „Nucleus-Nucleus Potential Deduced from Experimental Fusion Cross Sections“, Phys. Rev. Lett. 39, 265 (1977)',
     checked: false,

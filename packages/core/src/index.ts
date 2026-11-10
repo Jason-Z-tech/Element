@@ -10,3 +10,5 @@ export * from './data/sources';
 export * from './data/constants';
 export * from './data/decays';
 export * from './data/reactions';
+export * from './assumptions';
+export * from './data/qValues';

@@ -1,4 +1,5 @@
 import { DEFAULTS } from './data/constants';
+import { decayTable, type Fl282Decay } from './data/decays';
 import { getReaction } from './data/reactions';
 import { channelCrossSection_fb, type Nature } from './crossSection';
 import { chainEfficiency, judgeChain, simulateChain, type ChainStep, type ChainVerdict } from './decayChain';
@@ -21,6 +22,10 @@ export interface RunSettings {
   readonly beamTime_s: number;
   /** Transmission des Separators (Standard 0,70). */
   readonly separatorEfficiency?: number;
+  /** Q-Wert in MeV (Standard: Wert der Reaktion). */
+  readonly qValue_MeV?: number;
+  /** Zerfallsart von 282Fl (Standard: Spontanspaltung; Annahme). */
+  readonly fl282Decay?: Fl282Decay;
   /** Seed: gleicher Seed, gleiche Einstellungen, gleiche Version -> gleiches Ergebnis. */
   readonly seed: number;
 }
@@ -94,15 +99,15 @@ export interface RunOptions {
 }
 
 /** Strahlenergie im Labor, die zu einer Anregungsenergie E* gehört. */
-export function eLabForExcitation(reactionId: string, eStar_MeV: number): number {
+export function eLabForExcitation(reactionId: string, eStar_MeV: number, qValue_MeV?: number): number {
   const r = getReaction(reactionId);
-  return eLabFromCm(eStar_MeV - r.qValue.value, r.projectile.a, r.target.a);
+  return eLabFromCm(eStar_MeV - (qValue_MeV ?? r.qValue.value), r.projectile.a, r.target.a);
 }
 
 /** Anregungsenergie E* zu einer Strahlenergie im Labor. */
-export function excitationForELab(reactionId: string, eLab_MeV: number): number {
+export function excitationForELab(reactionId: string, eLab_MeV: number, qValue_MeV?: number): number {
   const r = getReaction(reactionId);
-  return excitationEnergy(eCmFromLab(eLab_MeV, r.projectile.a, r.target.a), r.qValue.value);
+  return excitationEnergy(eCmFromLab(eLab_MeV, r.projectile.a, r.target.a), qValue_MeV ?? r.qValue.value);
 }
 
 function validate(s: RunSettings): void {
@@ -118,6 +123,9 @@ function validate(s: RunSettings): void {
   const sep = s.separatorEfficiency;
   if (sep !== undefined && !(sep > 0 && sep <= 1)) {
     throw new RangeError(`separatorEfficiency muss in (0, 1] liegen (ist ${sep})`);
+  }
+  if (s.qValue_MeV !== undefined && !Number.isFinite(s.qValue_MeV)) {
+    throw new RangeError(`qValue_MeV muss eine Zahl sein (ist ${s.qValue_MeV})`);
   }
   if (!Number.isInteger(s.seed)) throw new RangeError(`seed muss eine ganze Zahl sein (ist ${s.seed})`);
 }
@@ -145,11 +153,14 @@ export function runExperiment(
   const full: Required<RunSettings> = {
     ...settings,
     separatorEfficiency: settings.separatorEfficiency ?? DEFAULTS.separatorEfficiency.value,
+    qValue_MeV: settings.qValue_MeV ?? reaction.qValue.value,
+    fl282Decay: settings.fl282Decay ?? 'sf',
   };
+  const chainOptions = { decays: decayTable(full.fl282Decay) };
   const maxStored = options.maxStoredEvents ?? 500;
 
   const eCm = eCmFromLab(full.eLab_MeV, reaction.projectile.a, reaction.target.a);
-  const eStar = excitationEnergy(eCm, reaction.qValue.value);
+  const eStar = excitationEnergy(eCm, full.qValue_MeV);
   const sensitivityPerSecond = sensitivityPerSecondPerFb({
     beamPerSecond: full.beamPerSecond,
     thickness_mg_cm2: full.thickness_mg_cm2,
@@ -181,7 +192,7 @@ export function runExperiment(
     let identified = 0;
     for (let i = 0; i < implanted; i++) {
       const time = rng.next() * full.beamTime_s;
-      const chain = simulateChain(ch.residue, rng);
+      const chain = simulateChain(ch.residue, rng, chainOptions);
       const verdict = judgeChain(chain);
       if (verdict.identified) identified++;
       if (events.length < maxStored) {
@@ -197,7 +208,7 @@ export function runExperiment(
         truncated = true;
       }
     }
-    const eff = chainEfficiency(ch.residue);
+    const eff = chainEfficiency(ch.residue, chainOptions);
     channels.push({
       neutrons: ch.neutrons,
       residue: ch.residue,

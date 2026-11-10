@@ -1,6 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import {
   analyse,
+  ASSUMPTIONS,
+  DEFAULT_PARAMETERS,
+  excitationForELab,
+  qValuesFromMassTables,
   channelCrossSection_fb,
   combineRuns,
   CORE_VERSION,
@@ -105,10 +109,11 @@ describe('Messung', () => {
     expect(n5.residue).toBe('294-120');
     expect(n5.implanted).toBeGreaterThan(0);
     expect(n5.identified).toBeGreaterThan(0);
-    expect(n5.chainEfficiency).toBeCloseTo(0.972, 3);
+    expect(n5.chainEfficiency).toBeCloseTo(0.999, 6);
     expect(r.analysis.channelsOpen).toEqual([]);
     expect(r.analysis.channelsIncluded).toEqual([3, 4, 5]);
-    expect(r.events.some((e) => e.neutrons === 5 && e.endsAt === '282Fl')).toBe(true);
+    const last = (e: (typeof r.events)[number]) => e.steps[e.steps.length - 1]!;
+    expect(r.events.some((e) => e.neutrons === 5 && last(e).nuclide === '282Fl' && last(e).type === 'sf')).toBe(true);
   });
 
   it('gemessene Trefferquote trifft die wahre Kurve im Mittel', () => {
@@ -171,6 +176,76 @@ describe('Messung', () => {
     );
     expect(a.upperLimit_fb).toBeNull();
     expect(a.channelsOpen).toEqual([5]);
+  });
+});
+
+describe('Einstellbare Annahmen', () => {
+  it('Standardwerte', () => {
+    expect(DEFAULT_PARAMETERS).toEqual({ fl282Decay: 'sf', excitationWidth_MeV: 4, qValue_MeV: null });
+    expect(ASSUMPTIONS.map((a) => a.id).sort()).toEqual(['excitationWidth_MeV', 'fl282Decay', 'qValue_MeV']);
+    const r = runExperiment(settings(41, 1), published);
+    expect(r.settings.qValue_MeV).toBe(-197.7);
+    expect(r.settings.fl282Decay).toBe('sf');
+  });
+
+  it('Q-Wert: verschiebt nur die Umrechnung zwischen Strahlenergie und E*', () => {
+    const base = settings(41, 1);
+    const r = runExperiment({ ...base, qValue_MeV: -194.7 }, published);
+    expect(r.eCm_MeV).toBeCloseTo(238.7, 9);
+    expect(r.eStar_MeV).toBeCloseTo(44, 9);
+    expect(r.settings.qValue_MeV).toBe(-194.7);
+    // 3 MeV im Q-Wert sind 3,6 MeV in der Strahlenergie
+    const shift = eLabForExcitation('Ti50+Cf249', 41, -194.7) - eLabForExcitation('Ti50+Cf249', 41);
+    expect(shift).toBeCloseTo((-3 * 299) / 249, 9);
+    expect(excitationForELab('Ti50+Cf249', base.eLab_MeV, -200.7)).toBeCloseTo(38, 9);
+    expect(() => runExperiment({ ...base, qValue_MeV: Number.NaN }, published)).toThrow();
+  });
+
+  it('Kurvenbreite: Parameter der Natur', () => {
+    const wide = publishedNature(r120, 6);
+    expect(wide.channels.every((c) => c.width_MeV === 6)).toBe(true);
+    expect(channelCrossSection_fb(wide.channels[1]!, 47) / 48.2).toBeCloseTo(Math.exp(-0.5), 12);
+    expect(published.channels.every((c) => c.width_MeV === 4)).toBe(true);
+    expect(hiddenNature(r120, 3, 6).channels.every((c) => c.width_MeV === 6)).toBe(true);
+    expect(() => publishedNature(r120, 0)).toThrow();
+  });
+
+  it('282Fl: Alpha statt Spaltung ändert die Kette, kaum den Nachweis', () => {
+    const sf = runExperiment(settings(52, 5, 20_000), published);
+    const alpha = runExperiment({ ...settings(52, 5, 20_000), fl282Decay: 'alpha' }, published);
+    expect(alpha.settings.fl282Decay).toBe('alpha');
+    expect(alpha.events.some((e) => e.neutrons === 5 && e.endsAt === '270Hs')).toBe(true);
+    expect(sf.events.every((e) => e.endsAt !== '270Hs')).toBe(true);
+    const eff = (r: typeof sf) => r.channels.find((c) => c.neutrons === 5)!.chainEfficiency!;
+    expect(eff(sf)).toBeCloseTo(0.999, 6);
+    expect(eff(alpha)).toBeGreaterThan(0.9999);
+  });
+});
+
+describe('Q-Werte aus Massentabellen', () => {
+  it('50Ti + 249Cf: AME2020 plus vier Massenmodelle', () => {
+    const q = Object.fromEntries(qValuesFromMassTables('Ti50+Cf249').map((x) => [x.modelId, x.qValue_MeV]));
+    // M(50Ti) + M(249Cf) = −51,432 + 69,723 = 18,291 MeV (AME2020)
+    expect(q['frdm2012']).toBeCloseTo(18.291 - 213.11, 2);
+    expect(q['frldm2012']).toBeCloseTo(18.291 - 217.56, 2);
+    expect(q['jks2021']).toBeCloseTo(18.291 - 216.87, 2);
+    expect(q['ws4-ame']).toBeCloseTo(-198.96, 2);
+  });
+
+  it('der Standardwert −197,7 ± 3 MeV deckt alle Massenmodelle ab', () => {
+    const r = getReaction('Ti50+Cf249');
+    const values = qValuesFromMassTables('Ti50+Cf249');
+    expect(values.length).toBe(4);
+    for (const v of values) {
+      expect(Math.abs(v.qValue_MeV - r.qValue.value)).toBeLessThanOrEqual(r.qUncertainty_MeV);
+    }
+  });
+
+  it('50Ti + 244Pu: Massenmodelle liegen um den Wert von Gates et al. (−179 MeV)', () => {
+    const q = Object.fromEntries(qValuesFromMassTables('Ti50+Pu244').map((x) => [x.modelId, x.qValue_MeV]));
+    expect(q['frdm2012']).toBeCloseTo(-177.63, 2);
+    expect(q['frldm2012']).toBeCloseTo(-181.19, 2);
+    expect(q['jks2021']).toBeCloseTo(-182.04, 2);
   });
 });
 
