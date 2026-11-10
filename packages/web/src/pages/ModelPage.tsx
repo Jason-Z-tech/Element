@@ -71,6 +71,7 @@ function reactionLabel(id: string): string {
 }
 /** Wirkungsquerschnitt in pb mit passender Stellenzahl. */
 function pb(x: number): string {
+  if (x === 0) return '0';
   if (x >= 100) return num(x, 0);
   if (x >= 10) return num(x, 1);
   if (x >= 0.1) return num(x, 2);
@@ -271,6 +272,20 @@ function Recompute({ row, file, index }: { row: Row; file: ResultFile; index: nu
   );
 }
 
+/** Zusammenfassung je Reaktion: kleinste und größte Abweichung. */
+function byReaction(rows: Row[]): { reaction: string; points: number; min: number; max: number; inBand: number }[] {
+  const map = new Map<string, { reaction: string; points: number; min: number; max: number; inBand: number }>();
+  for (const r of rows) {
+    const e = map.get(r.reaction) ?? { reaction: r.reaction, points: 0, min: Infinity, max: 0, inBand: 0 };
+    e.points++;
+    e.min = Math.min(e.min, r.ratio);
+    e.max = Math.max(e.max, r.ratio);
+    if (r.inBand) e.inBand++;
+    map.set(r.reaction, e);
+  }
+  return [...map.values()];
+}
+
 export function ModelPage() {
   const [picked, setPicked] = useState<Row | null>(null);
   const groups = test.summary.groups;
@@ -318,6 +333,41 @@ export function ModelPage() {
         </p>
       </section>
 
+      <section class="panel verdict">
+        <h2>Befund</h2>
+        <p class="lead">
+          <strong>Das Modell besteht die Prüfung in dieser Fassung nicht.</strong> Es trifft die Eich-Reaktionen auf etwa eine Größenordnung
+          und von den Prüf-Reaktionen nur ⁴⁸Ca + ²⁴⁴Pu. Die übrigen rechnet es um Faktoren von 3 bis über 100 000 zu tief. Für Vorhersagen
+          für die Elemente 119 und 120 ist es so nicht gut genug; es gibt deshalb noch keine.
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Prüf-Reaktion</th>
+                <th scope="col" class="n">Messungen</th>
+                <th scope="col" class="n">Rechnung gegen Messung</th>
+                <th scope="col" class="n">im 68-%-Band</th>
+              </tr>
+            </thead>
+            <tbody>
+              {byReaction(test.results).map((g) => (
+                <tr key={g.reaction}>
+                  <td>{reactionLabel(g.reaction)}</td>
+                  <td class="n">{g.points}</td>
+                  <td class="n">{g.points === 1 ? factor(g.min) : `${factor(g.min)} bis ${factor(g.max)}`}</td>
+                  <td class="n">{g.inBand} von {g.points}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">
+          Nach dem ersten Blick auf die Prüf-Reaktionen wurde nichts nachgestellt. Die wahrscheinlichen Ursachen stehen im Modell-Dokument
+          (docs/modell-stufe2.md, Abschnitt 16).
+        </p>
+      </section>
+
       <section class="panel chart-panel">
         <h2>Messwert gegen Rechnung</h2>
         <ul class="legend" aria-label="Legende">
@@ -360,9 +410,9 @@ export function ModelPage() {
                 <tr key={l.label}>
                   <td>{l.label}</td>
                   <td class="n">&lt; {fb(l.limit_pb * 1000)}</td>
-                  <td class="n"><strong>{fb(l.modelMax_pb * 1000)}</strong></td>
+                  <td class="n"><strong>{pb(l.modelMax_pb * 1000)}</strong></td>
                   <td class="n">{num(l.eStarAtMax, 0)}</td>
-                  <td class="n">{fb(l.bandLow_pb * 1000)} … {fb(l.bandHigh_pb * 1000)}</td>
+                  <td class="n">{pb(l.bandLow_pb * 1000)} … {pb(l.bandHigh_pb * 1000)}</td>
                   <td class="n">{num(100 * l.fractionAboveLimit, 0)} %</td>
                   <td>{l.lab}</td>
                 </tr>

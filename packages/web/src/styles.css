@@ -869,3 +869,6 @@ tfoot td {
   gap: 8px;
   justify-items: start;
 }
+.verdict {
+  border-left: 4px solid var(--series-2);
+}

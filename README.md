@@ -19,7 +19,7 @@ Open-Source-Browserspiel mit echten Monte-Carlo-Simulationen.
 |---|---|---|
 | 1 | `packages/core`: Stufe 1 (Experiment nachspielen) mit Tests | fertig |
 | 2 | `packages/web`: Oberfläche für Einzelspieler, GitHub Pages | fertig |
-| 3 | Stufe 2: Physik selbst rechnen (Einfang, Verschmelzen, Überleben) | Modell-Vorschlag liegt vor: [docs/modell-stufe2.md](docs/modell-stufe2.md); Umsetzung nach Freigabe |
+| 3 | Stufe 2: Physik selbst rechnen (Einfang, Verschmelzen, Überleben) | Modell `stufe2-v1` umgesetzt, geeicht und geprüft: [docs/modell-stufe2.md](docs/modell-stufe2.md). **Die Prüfung ist nicht bestanden**; noch keine Vorhersagen für 119 und 120 |
 | 4 | `packages/server`: Team-Funktion | offen |
 | 5 | Ergebnis- und Methoden-Seite | offen |
 
@@ -86,7 +86,11 @@ packages/core     Physik. Keine DOM-Zugriffe; läuft in Browser, Web Worker und 
   src/statistics.ts Poisson-Vertrauensgrenzen
   src/experiment.ts eine Messung nachspielen und auswerten
   test/             Vitest, darunter der Pflicht-Test berkeley.test.ts
+  src/stage2/       Stufe 2: Einfang, Verschmelzen, Überleben, Eichung, Ensemble
+  scripts/          Demo, Eichung (stage2-eichung.ts), Messwert gegen Rechnung (stage2-pruefung.ts)
 packages/web      Oberfläche (Vite, Preact). Statisch, läuft auf GitHub Pages.
+  src/pages/        Seite „Wie gut ist das Modell?“
+  src/stage2/       Web Worker je CPU-Kern für die Ensembles von Stufe 2
   src/app.tsx       Seite: Steuerpult, Kurve, Detektor-Protokoll, Messreihen
   src/components/   die einzelnen Teile
   src/state.ts      Zustand, Speichern im Browser, Messpunkte zusammenfassen
@@ -94,6 +98,8 @@ packages/web      Oberfläche (Vite, Preact). Statisch, läuft auf GitHub Pages.
   src/chartMath.ts  Maßstäbe der Kurve
   test/             Vitest
 packages/server   (Schritt 4)
+tools/            Auslesen der Eingangstabellen aus den Volltexten
+docs/             Modell-Dokument und Daten (Messwerte, Ergebnisse von Eichung und Prüfung)
 ```
 
 ## Stufe 1: Das Experiment nachspielen

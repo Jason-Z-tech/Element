@@ -1,0 +1,80 @@
+{
+ "modelVersion": "stufe2-v1",
+ "seed": 20261110,
+ "members": 300,
+ "cascades": 300,
+ "results": [
+  {
+   "label": "50Ti + 249Cf → 120",
+   "reaction": "Ti50+Cf249",
+   "limit_pb": 0.2,
+   "lab": "TASCA, GSI (PRC 102, 064602)",
+   "eStarAtMax": 34,
+   "eCmAtMax": 232.579134,
+   "modelMax_pb": 0.00003658920783271593,
+   "bandLow_pb": 0.000002030646107766565,
+   "bandHigh_pb": 0.000189736472937342,
+   "fractionAboveLimit": 0
+  },
+  {
+   "label": "50Ti + 249Bk → 119",
+   "reaction": "Ti50+Bk249",
+   "limit_pb": 0.065,
+   "lab": "TASCA, GSI (PRC 102, 064602)",
+   "eStarAtMax": 36,
+   "eCmAtMax": 229.575534,
+   "modelMax_pb": 0.0008558068846105118,
+   "bandLow_pb": 0.00005353572405114116,
+   "bandHigh_pb": 0.009866548625598085,
+   "fractionAboveLimit": 0.02
+  },
+  {
+   "label": "54Cr + 248Cm → 120",
+   "reaction": "Cr54+Cm248",
+   "limit_pb": 0.58,
+   "lab": "SHIP, GSI",
+   "eStarAtMax": 38,
+   "eCmAtMax": 247.992631,
+   "modelMax_pb": 0.000007226479310378624,
+   "bandLow_pb": 5.471746713413945e-7,
+   "bandHigh_pb": 0.000054305547453051935,
+   "fractionAboveLimit": 0
+  },
+  {
+   "label": "58Fe + 244Pu → 120",
+   "reaction": "Fe58+Pu244",
+   "limit_pb": 0.4,
+   "lab": "Dubna 2009",
+   "eStarAtMax": 38,
+   "eCmAtMax": 260.79925,
+   "modelMax_pb": 0.000002588150195769146,
+   "bandLow_pb": 1.5860572927305376e-7,
+   "bandHigh_pb": 0.000017312088398209227,
+   "fractionAboveLimit": 0
+  },
+  {
+   "label": "64Ni + 238U → 120",
+   "reaction": "Ni64+U238",
+   "limit_pb": 0.09,
+   "lab": "SHIP, GSI",
+   "eStarAtMax": 34.00000000000003,
+   "eCmAtMax": 274.241302,
+   "modelMax_pb": 9.559411041894197e-7,
+   "bandLow_pb": 5.807882384584071e-8,
+   "bandHigh_pb": 0.000007489189385529965,
+   "fractionAboveLimit": 0
+  },
+  {
+   "label": "50Ti + 248Cm → Og",
+   "reaction": "Ti50+Cm248",
+   "limit_pb": 0.5,
+   "lab": "RIKEN 2025",
+   "eStarAtMax": 40,
+   "eCmAtMax": 228.949119,
+   "modelMax_pb": 0.0036112287316399224,
+   "bandLow_pb": 0.00033602451157984064,
+   "bandHigh_pb": 0.021066760785363726,
+   "fractionAboveLimit": 0.006666666666666667
+  }
+ ]
+}

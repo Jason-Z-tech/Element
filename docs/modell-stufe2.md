@@ -18,6 +18,8 @@ Geprüft an den Quellen am 10.11.2026.
   Spaltung, Schritt für Schritt).
 - **Zu eichen sind genau zwei Zahlen:** Achsenabschnitt und Steigung des
   „Einschuss-Abstands“ `s_inj`. Alles andere kommt aus Tabellen und Formeln.
+- **Ergebnis (Abschnitt 16):** Die Fassung `stufe2-v1` besteht die Prüfung nicht.
+  Es gibt deshalb noch keine Vorhersagen für die Elemente 119 und 120.
 - **Erwartbare Genauigkeit laut Literatur:** etwa eine Größenordnung nach oben
   und unten. Dominant ist die Unsicherheit der Spaltbarrieren (±0,5 MeV
   entsprechen etwa einem Faktor 10). Der statistische Fehler der Rechnung ist
@@ -404,23 +406,19 @@ Jedes Ergebnis trägt zwei getrennte Angaben:
 - Eingangstabellen: Stichproben gegen die Quelle.
 - Reproduzierbarkeit: gleiches Paket, gleiches Ergebnis.
 
-## 13. Entscheidungen, die ich von dir brauche
+## 13. Entscheidungen (getroffen)
 
-1. **Rechenleistung:** Bahnen-Rechnung als geprüfte Kontrolle der Formel und
-   die Team-Rechenleistung für Unsicherheits-Ensembles (Empfehlung)? Oder
-   sollen die Bahnen der Hauptteil bleiben? Dann bräuchte ich ein
-   mehrdimensionales Modell mit Parametern, die ich nicht belegen kann.
-2. **Aufteilung:** Eichung nur an ⁴⁸Ca mit fünf Targets, Prüfung an ²⁴⁴Pu,
-   ²⁴⁵Cm, ²⁴⁹Cf, ²³²Th und allen Reaktionen mit ⁵⁰Ti und ⁵⁴Cr (Empfehlung)?
-   Damit sind alle drei von dir genannten Reaktionen Prüf-Reaktionen.
-3. **Einfang:** Bass-Potential mit winkelabhängigem Targetradius (Annahme A1)
-   statt Haginos Woods-Saxon-Potential?
-4. **Zahlen aus zweiter Hand:** Die Koeffizienten von `V_fiss` und der
-   Niveaudichte stehen nur in Haginos Anhang, der sie der nicht zugänglichen
-   Arbeit PRC 83, 054602 zuschreibt. Als „über Hagino belegt“ verwenden?
-5. **Reaktionen für die Vorhersage:** Element 120 über ⁵⁰Ti + ²⁴⁹Cf,
-   ⁵⁴Cr + ²⁴⁸Cm und ⁵¹V + ²⁴⁹Bk; Element 119 über ⁵⁰Ti + ²⁴⁹Bk, ⁵¹V + ²⁴⁸Cm
-   und ⁵⁴Cr + ²⁴³Am?
+1. **Rechenleistung:** Bahnen nur als Kontrolle, Rechenleistung in
+   Unsicherheits-Ensembles. Keine künstliche Rechenlast.
+2. **Aufteilung:** Eichung nur an ⁴⁸Ca mit fünf Targets; nach dem ersten Blick auf
+   die Prüf-Reaktionen wird nichts nachjustiert.
+3. **Einfang:** Bass-Potential mit winkelabhängigem Radius, als eigene Anpassung
+   markiert und mit Hagino verglichen (Abschnitt 15).
+4. **Zahlen aus zweiter Hand:** als „über Hagino belegt“ verwendet und gegen die
+   zugänglichen Arbeiten der Gruppe geprüft (Abschnitt 15).
+5. **Reaktionen für die Vorhersage:** Element 120 über ⁵⁰Ti + ²⁴⁹Cf, ⁵⁴Cr + ²⁴⁸Cm,
+   ⁵¹V + ²⁴⁹Bk; Element 119 über ⁵⁰Ti + ²⁴⁹Bk, ⁵¹V + ²⁴⁸Cm, ⁵⁴Cr + ²⁴³Am. Noch nicht
+   gerechnet (Abschnitt 16).
 
 ## 15. Umsetzung: Abweichungen und eigene Anpassungen
 
@@ -561,6 +559,94 @@ Eine volle Vorhersage: 6 Reaktionen × 16 Energien (30 MeV in Schritten von 2 Me
 = 96 Ensembles, also rund 20 Minuten auf einem Kern, 3 bis 5 Minuten auf einem
 Rechner mit vier bis acht Kernen. Mit 10 000 Ziehungen je Ensemble (Quantile auf
 etwa 3 %) sind es gut 3 Stunden auf einem Kern.
+
+## 16. Ergebnisse: Eichung und Prüfung (Modell `stufe2-v1`)
+
+Dateien: [`daten/stufe2-eichung.json`](daten/stufe2-eichung.json),
+[`daten/stufe2-pruefung.json`](daten/stufe2-pruefung.json),
+[`daten/stufe2-grenzen.json`](daten/stufe2-grenzen.json). Im Spiel auf der Seite
+„Wie gut ist das Modell?“; jede Zeile lässt sich dort im Browser nachrechnen und
+ergibt bitgleich dieselben Zahlen.
+
+### Eichung
+
+Geeicht an 48 Messpunkten (⁴⁸Ca + ²³⁸U, ²⁴²Pu, ²⁴³Am, ²⁴⁸Cm, ²⁴⁹Bk):
+**a = 4,28 fm, b = 0,011 fm/MeV.** Die Energieabhängigkeit des Einschuss-Abstands,
+die die Literatur findet (b = 0,16 bis 0,196), stützen die Daten in unserer Fassung
+nicht; mit den veröffentlichten Wertepaaren ist die Anpassung zwei- bis neunmal
+schlechter.
+
+- Streuung Rechnung gegen Messung: Faktor 9,5; im Mittel liegt die Rechnung um
+  einen Faktor 1,8 zu tief.
+- 39 von 48 Messungen liegen im 68-%-Band des Ensembles.
+- Die Abweichungen hängen an der Reaktion: Bei ²⁴³Am werden der 3n- und der
+  4n-Kanal um Faktoren von 1 bis 40 überschätzt; ²³⁸U wird um Faktoren von 4 bis
+  17 unterschätzt, ²⁴⁹Bk um Faktoren von 5 bis über 100. 2n-Kanäle werden
+  durchweg unterschätzt, teils um mehr als einen Faktor 1000.
+
+### Prüfung (ein Blick, nichts nachgestellt)
+
+| Prüf-Reaktion | Messungen | Rechnung gegen Messung | im 68-%-Band |
+|---|---|---|---|
+| ⁴⁸Ca + ²⁴⁴Pu (3n, 4n, 5n) | 9 | ÷ 1,7 bis × 4,1 | 9 von 9 |
+| ⁴⁸Ca + ²⁴⁹Cf (3n) | 2 | ÷ 39 und ÷ 405 | 0 von 2 |
+| ⁴⁸Ca + ²⁴⁵Cm (2n, 3n) | 5 | ÷ 29 bis ÷ 1700 | 0 von 5 |
+| ⁴⁸Ca + ²³²Th (4n, 5n) | 4 | ÷ 3300 bis ÷ 650 000 | 0 von 4 |
+| ⁵⁰Ti + ²⁴⁴Pu (4n) | 1 | ÷ 30 | 0 von 1 |
+| ⁵⁰Ti + ²⁴²Pu (3n, 4n) | 2 | ÷ 76 und ÷ 8,5 | 1 von 2 |
+| ⁵⁴Cr + ²³⁸U (4n) | 1 | ÷ 2,7 | 1 von 1 |
+
+Die drei ursprünglich genannten Reaktionen im Einzelnen:
+
+- ⁵⁰Ti + ²⁴⁴Pu (4n): gemessen 0,44 pb, gerechnet 0,015 pb (÷ 30).
+- ⁴⁸Ca + ²⁴⁹Cf (3n): gemessen 0,5 pb, gerechnet 0,013 pb (÷ 39).
+- ⁴⁸Ca + ²⁴⁴Pu (4n): gemessen 5,3 bis 9,8 pb, gerechnet 22 bis 23 pb (× 2,4 bis × 4,1).
+
+Zusammen: Streuung Faktor 200 über alle 24 Prüf-Messungen (Faktor 290 für ⁴⁸Ca,
+Faktor 20 für ⁵⁰Ti und ⁵⁴Cr); 11 von 24 liegen im 68-%-Band, erwartet wären etwa
+16. Ohne ⁴⁸Ca + ²³²Th bleibt eine Streuung von etwa Faktor 30.
+
+**Befund: Das Modell besteht die Prüfung in dieser Fassung nicht.** Es beschreibt
+die Eich-Reaktionen auf etwa eine Größenordnung und überträgt sich auf ein
+Nachbar-Isotop (²⁴⁴Pu), aber nicht auf andere Targets und nur schlecht auf
+schwerere Projektile. Die Abweichung ist einseitig: fast immer zu tief.
+Vorhersagen für die Elemente 119 und 120 wurden deshalb nicht gerechnet.
+
+### Obergrenzen
+
+Alle gerechneten Werte liegen weit unter den Obergrenzen der erfolglosen Suchen
+(zum Beispiel ⁵⁰Ti + ²⁴⁹Bk: 0,9 fb gegen < 65 fb). Das ist verträglich mit den
+Experimenten, sagt aber wenig: Ein Modell, das generell zu tief rechnet, besteht
+diese Prüfung von selbst. Die Zahlen in dieser Tabelle sind keine Vorhersagen.
+
+### Wahrscheinliche Ursachen (Diagnose, ohne etwas zu ändern)
+
+Zwischengrößen bei E* = 38 MeV:
+
+| Reaktion | Compoundkern | ⟨P_CN⟩ | Überleben 4n | S_n / B_f der ersten Kerne (MeV) |
+|---|---|---|---|---|
+| ⁴⁸Ca + ²⁴⁸Cm (Eichung) | ²⁹⁶Lv | 2,2·10⁻⁶ | 2,1·10⁻⁶ | 6,7/6,3; 5,9/6,6; 6,8/6,4 |
+| ⁴⁸Ca + ²⁴⁴Pu (trifft) | ²⁹²Fl | 9,0·10⁻⁶ | 1,8·10⁻⁵ | 6,8/6,6; 6,1/6,7; 6,6/6,0 |
+| ⁴⁸Ca + ²⁴⁵Cm | ²⁹³Lv | 1,2·10⁻⁶ | 2,8·10⁻⁷ | 6,5/6,8; 7,1/6,3; 6,6/6,7 |
+| ⁴⁸Ca + ²⁴⁹Cf | ²⁹⁷Og | 2,6·10⁻⁷ | 3,9·10⁻⁸ | 6,1/6,2; 7,1/6,1; 6,8/6,6 |
+| ⁴⁸Ca + ²³²Th | ²⁸⁰Ds | 1,3·10⁻³ | 5,5·10⁻¹³ | 6,8/3,3; 5,4/3,4; 6,8/3,7 |
+| ⁵⁰Ti + ²⁴⁴Pu | ²⁹⁴Lv | 3,0·10⁻⁷ | 4,3·10⁻⁷ | 6,8/6,4; 6,5/6,8; 7,1/6,3 |
+
+1. **Überleben hängt extrem an B_f − S_n.** Für die Ds-Isotope nennt die Tabelle
+   Spaltbarrieren von 3,3 bis 4,5 MeV; das drückt das Überleben um sechs
+   Größenordnungen, die Messung liegt aber nur eine Größenordnung unter den
+   Nachbarn. Entweder sind diese Barrieren zu niedrig, oder die einfache
+   Konkurrenz Neutron gegen Spaltung ist dort zu streng.
+2. **Die Verschmelzungs-Wahrscheinlichkeit fällt mit der Ladung zu schnell.** Die
+   Eichung verlangt einen großen Einschuss-Abstand (4,3 fm). Damit ist P_CN
+   winzig und reagiert stark auf jede Änderung der inneren Barriere: von ²⁹²Fl zu
+   ²⁹⁷Og ein Faktor 35, von ⁴⁸Ca zu ⁵⁰Ti ein Faktor 7.
+3. **Sattelenergie aus der Tabelle** (Anpassung 4) trägt die Schwankungen der
+   Schalenkorrektur von Kern zu Kern in die Verschmelzung. Cap et al. (2022)
+   nehmen dort die glatte makroskopische Energie.
+4. **Vergleich bei der gemessenen Energie** statt am Maximum der Kurve ist
+   strenger als das Vorgehen der Warschauer Gruppe; die gerechneten
+   Anregungsfunktionen sind schmaler als die gemessenen.
 
 ## 17. Quellen
 
