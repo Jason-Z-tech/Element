@@ -18,7 +18,7 @@ Open-Source-Browserspiel mit echten Monte-Carlo-Simulationen.
 | Schritt | Inhalt | Stand |
 |---|---|---|
 | 1 | `packages/core`: Stufe 1 (Experiment nachspielen) mit Tests | fertig |
-| 2 | `packages/web`: Oberfläche für Einzelspieler, GitHub Pages | offen |
+| 2 | `packages/web`: Oberfläche für Einzelspieler, GitHub Pages | fertig |
 | 3 | Stufe 2: Physik selbst rechnen (Einfang, Verschmelzen, Überleben) | offen, erst Modell-Vorschlag |
 | 4 | `packages/server`: Team-Funktion | offen |
 | 5 | Ergebnis- und Methoden-Seite | offen |
@@ -31,16 +31,47 @@ Voraussetzung: Node.js ab Version 20.
 npm install
 ```
 
+Das Spiel im Browser (Entwicklungsserver, Adresse steht in der Ausgabe):
+
+```bash
+npm run dev
+```
+
+Tests und Typprüfung:
+
 ```bash
 npm test
 ```
 
 ```bash
+npm run typecheck
+```
+
+Fertige Seite bauen (liegt danach in `packages/web/dist`) und lokal ansehen:
+
+```bash
+npm run build
+```
+
+```bash
+npm run preview
+```
+
+Stufe 1 auf der Konsole (Berkeley-Experiment, Element 120, verdeckte Natur):
+
+```bash
 npm run demo
 ```
 
-`npm run demo` spielt das Berkeley-Experiment, eine Messung für Element 120 und
-eine Messreihe gegen die „verdeckte Natur“ auf der Konsole durch.
+### Auf GitHub Pages veröffentlichen
+
+Die Seite braucht keinen Server. Der Workflow `.github/workflows/seite.yml` prüft,
+baut und veröffentlicht sie bei jedem Push auf `main`. Einmalig in den
+Repository-Einstellungen unter „Pages“ als Quelle „GitHub Actions“ wählen.
+Die Seite verwendet nur relative Pfade und läuft unter jeder Adresse.
+
+Zwischenstände (Messreihen, Einstellungen, verdeckte Natur) liegen im
+`localStorage` des Browsers und überstehen das Schließen des Tabs.
 
 ## Aufbau
 
@@ -55,7 +86,13 @@ packages/core     Physik. Keine DOM-Zugriffe; läuft in Browser, Web Worker und 
   src/statistics.ts Poisson-Vertrauensgrenzen
   src/experiment.ts eine Messung nachspielen und auswerten
   test/             Vitest, darunter der Pflicht-Test berkeley.test.ts
-packages/web      (Schritt 2)
+packages/web      Oberfläche (Vite, Preact). Statisch, läuft auf GitHub Pages.
+  src/app.tsx       Seite: Steuerpult, Kurve, Detektor-Protokoll, Messreihen
+  src/components/   die einzelnen Teile
+  src/state.ts      Zustand, Speichern im Browser, Messpunkte zusammenfassen
+  src/worker.ts     Web Worker: rechnet die Messungen
+  src/chartMath.ts  Maßstäbe der Kurve
+  test/             Vitest
 packages/server   (Schritt 4)
 ```
 
@@ -113,11 +150,12 @@ um bis zu ±5 MeV verschoben. Nur Messreihen verraten sie.
 | ²⁸⁸Lv | T½ 2,0 ms, α 11,08 MeV | gemessen | Oganessian et al., PRC 112, 014603 (2025) | über Ackermann, arXiv:2501.04053, Tab. 5.1 |
 | ²⁸⁴Fl, ²⁸⁰Cn | T½ 2,5 ms, α 10,57 MeV 24 %, Spaltung 76 %; ²⁸⁰Cn Spaltung 10 µs | gemessen | Oganessian et al. (2025) | über Ackermann |
 | ²⁷⁵Ds, ²⁷¹Hs | T½ 0,43 ms, α 11,20 MeV; ²⁷¹Hs 7,1 s und 46 s | gemessen | Oganessian et al., PRC 109, 054307 (2024) | über Ackermann |
-| ²⁹⁴120, ²⁹⁰Og, ²⁸⁶Lv, ²⁸²Fl (5n-Kette) | T½ 3,5 µs / 19 µs / 3,5 ms / 0,7 ms; α 13,06 / 12,43 / 11,15 MeV | Vorhersage | Saxena, Jain, Sharma, arXiv:2107.12976, Tabelle 6 | am Original |
+| ²⁹⁴120, ²⁹⁰Og, ²⁸⁶Lv (5n-Kette) | T½ 3,5 µs / 19 µs / 3,5 ms; α 13,06 / 12,43 / 11,15 MeV | Vorhersage | Saxena, Jain, Sharma, arXiv:2107.12976, Tabelle 6 | am Original |
 | ²⁹⁵120, ²⁹¹Og, ²⁸⁷Lv, ²⁸³Fl, ²⁷⁹Cn, ²⁹⁶120, ²⁹²Og | siehe `decays.ts` | Schätzung | Viola-Seaborg-Systematik, Projektvorgabe | nein |
 | Eichfaktor | 0,556 | Eichung | an Gates et al. (2 Ketten in 22,1 Tagen) | nachgerechnet |
 | Anteil voll gemessener Alphas | 90 % | Eichung | an den Ketten-Nachweis ≈ 95 % bei Gates et al. | nachgerechnet |
-| Q(Ti+Cf) | −197,7 MeV (±3 MeV) | Abschätzung | Projektvorgabe | nein |
+| Q(Ti+Cf) | −197,7 MeV (±3 MeV) | Abschätzung | Projektvorgabe | mit vier Massenmodellen verglichen |
+| Massen von ⁵⁰Ti, ²⁴⁹Cf, ²⁴⁴Pu | siehe unten | gemessen | AME2020, Chin. Phys. C 45, 030003 (2021) | an der Originaldatei |
 | Breite der Kurven | 4 MeV | Annahme | Projektvorgabe | – |
 | Bass-Barriere | Formel | berechnet | R. Bass, Phys. Rev. Lett. 39, 265 (1977) | nein (trifft die Vorgabe) |
 | Poisson-Grenzen | 68 %, 1,84 bei 0 Ereignissen | Formel | N. Gehrels, ApJ 303, 336 (1986); Gates et al. zitieren Schmidt et al., Z. Phys. A 316, 19 (1984) | nein (trifft die veröffentlichten Fehler) |
@@ -125,7 +163,7 @@ um bis zu ±5 MeV verschoben. Nur Messreihen verraten sie.
 
 Im Code trägt jede Quelle `checked: true/false` (`packages/core/src/data/sources.ts`).
 
-Was die Prüfung an den Quellen ergeben hat (Modellversion `stufe1-v2`):
+Was die Prüfung an den Quellen ergeben hat (seit Modellversion `stufe1-v2`):
 
 - Die Zeiten sind Halbwertszeiten (T½), bei Gates et al. ausdrücklich so genannt.
 - **²⁸⁶Fl:** Gemessen sind Alpha 32/56 = 57 % und Spaltung 43 %. Die Projektvorgabe
@@ -134,7 +172,7 @@ Was die Prüfung an den Quellen ergeben hat (Modellversion `stufe1-v2`):
   Projektvorgabe nannte nur Spaltung; der Code nimmt jetzt die Messung.
 - **²⁸⁸Lv:** Die fehlende Alpha-Energie ist ergänzt (11,08 MeV aus Q_alpha).
 - **5n-Kanal von Element 120:** Die Kette ²⁹⁴120 → ²⁹⁰Og → ²⁸⁶Lv → ²⁸²Fl stammt
-  jetzt aus einer veröffentlichten Vorhersage und ist nachweisbar.
+  aus einer veröffentlichten Vorhersage und ist nachweisbar.
 - **Voll gemessene Alphas:** Gates et al. nennen 75–80 % für das einzelne Alpha,
   aber ≈ 95 % Ketten-Nachweis. Unsere einfache Zählregel ergibt die 95 % nur mit
   90 %; mit 75–80 % wären es 86–89 %. Maßgeblich für die Trefferquote ist der
@@ -148,12 +186,51 @@ Was die Prüfung an den Quellen ergeben hat (Modellversion `stufe1-v2`):
 
 ## Annahmen und offene Punkte
 
-Annahmen (nicht belegt, im Code markiert):
+### Drei Festlegungen (einstellbar, kommen auf die Methoden-Seite)
 
-- Die geschätzten Zeiten der Projektvorgabe werden wie die gemessenen als **Halbwertszeiten** gelesen; mittlere Lebensdauer = T½ / ln 2.
-- „Breite 4 MeV“ ist die **Standardabweichung** der Gauß-Kurve.
-- Für ⁵⁰Ti + ²⁴⁴Pu ist nur ein Punkt gemessen. Dass er das Maximum ist und die
-  Kurve ebenfalls 4 MeV breit ist, ist eine Annahme.
+Diese drei Stellen sind nicht durch Messungen belegt. Die Standardwerte sind
+Festlegungen; im Spiel lassen sie sich unter „Annahmen“ ändern, im Kern über
+`fl282Decay`, `qValue_MeV` und die Breite der Natur (`assumptions.ts`).
+
+1. **Zerfall von ²⁸²Fl:** Die 5n-Kette von Element 120 endet dort mit
+   Spontanspaltung, weil die gemessenen Nachbarn ²⁸⁴Fl und ²⁸²Cn überwiegend
+   spalten. Umstellbar auf Alpha-Zerfall nach der Vorhersage von Saxena et al.
+   (weiter über ²⁷⁸Cn und ²⁷⁴Ds bis ²⁷⁰Hs). Die Halbwertszeit (0,7 ms) ist ein
+   Platzhalter aus dieser Vorhersage. Nachweis der Kette: 99,9 % (Spaltung) oder
+   99,99 % (Alpha).
+2. **Q-Wert von ⁵⁰Ti + ²⁴⁹Cf:** Standard −197,7 MeV ± 3 MeV. Er legt fest, welche
+   Strahlenergie zu welcher Anregungsenergie gehört; 3 MeV verschieben die beste
+   Strahlenergie um 3,6 MeV. Vergleich mit Massentabellen siehe unten.
+3. **Form der Anregungsfunktion:** Gauß-Kurve mit 4 MeV Breite
+   (Standardabweichung). Belegt sind nur die Maxima. Stufe 2 ersetzt die Kurve
+   durch die eigene Rechnung.
+
+### Q-Werte aus Massentabellen
+
+`Q = M(Projektil) + M(Target) − M(Compoundkern)`. Projektil und Target aus
+AME2020 (⁵⁰Ti −51,432 MeV, ²⁴⁹Cf +69,723 MeV, ²⁴⁴Pu +59,806 MeV Massenexzess),
+Compoundkern aus Massenmodellen (`packages/core/src/data/qValues.ts`).
+
+| Massenmodell für den Compoundkern | M(²⁹⁹120) | Q(Ti+Cf) | M(²⁹⁴Lv) | Q(Ti+Pu) |
+|---|---|---|---|---|
+| FRDM(2012), Möller et al., arXiv:1508.06294 | 213,11 MeV | −194,82 MeV | 186,00 MeV | −177,63 MeV |
+| Jachimowicz, Kowal, Skalski (2021), arXiv:2010.10018 | 216,87 MeV | −198,58 MeV | 190,41 MeV | −182,04 MeV |
+| WS4-Alpha-Kette an AME2020 angehängt | 217,25 MeV | −198,96 MeV | – | – |
+| FRLDM(2012), Möller et al. | 217,56 MeV | −199,27 MeV | 189,56 MeV | −181,19 MeV |
+| **Standardwert im Spiel** | | **−197,7 ± 3 MeV** | | **−179,0 MeV** |
+
+Der Standardwert für Ti+Cf liegt innerhalb der Massenmodelle, und ±3 MeV decken
+alle vier ab. Die WS4-Zeile ist keine reine WS4-Masse: Die WS4-Tabelle selbst war
+nicht abrufbar, deshalb ist ²⁹⁹120 über die bei Saxena et al. abgedruckten
+WS4-Alpha-Energien (13,26 und 11,90 MeV) an die AME2020-Masse von ²⁹¹Lv
+(extrapoliert, ±0,62 MeV) angehängt. Der Wert für Ti+Pu stammt aus Gates et al.
+(Thomas-Fermi-Massen).
+
+### Weitere Annahmen (im Code markiert)
+
+- Die geschätzten Zeiten der Projektvorgabe werden wie die gemessenen als
+  **Halbwertszeiten** gelesen; mittlere Lebensdauer = T½ / ln 2.
+- Für ⁵⁰Ti + ²⁴⁴Pu ist nur ein Punkt gemessen. Dass er das Maximum ist, ist eine Annahme.
 - Geschätzte und vorhergesagte Kerne zerfallen nur per Alpha (keine Spaltungskonkurrenz).
 - Eine Spaltung wird immer nachgewiesen. Das 1-s-Fenster zählt ab dem Einschlag.
 - Kein Untergrund, keine Totzeit, kein Energieverlust und keine Energiebreite im Target.
@@ -162,15 +239,9 @@ Annahmen (nicht belegt, im Code markiert):
 - Verdeckte Natur: Maximum logarithmisch gleichverteilt, Verschiebung
   gleichverteilt; alle Kanäle werden gemeinsam skaliert und verschoben.
 - Molare Masse = Massenzahl in g/mol; die Targetdicke meint das reine Isotop.
-
-Offen (keine Daten, deshalb nichts erfunden):
-
-- **Zerfallsart von ²⁸²Fl** (Ende der 5n-Kette): Vorhergesagt ist Alpha, die
-  gemessenen Nachbarn spalten aber überwiegend. Die Kette endet dort; der
-  Nachweis über die drei Alphas davor liegt bei 97,2 %.
-- **Q-Wert von ⁵⁰Ti + ²⁴⁹Cf:** Abschätzung der Projektvorgabe, Massentabelle noch
-  nicht benannt. Er verschiebt nur die Umrechnung zwischen Strahlenergie und E*.
-- **Kurvenform:** Nur die Maxima sind belegt; Gauß-Form und Breite sind Annahmen.
+- Regler im Spiel: Strahlstärke 1 bis 30·10¹² /s, Targetdicke 0,1 bis 1 mg/cm²,
+  Strahlzeit 1 bis 365 Tage je Messung. Die Grenzen sind Spielgrenzen, keine
+  Aussage über einen bestimmten Beschleuniger.
 
 ## Mitmachen
 
