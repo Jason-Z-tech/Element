@@ -1,0 +1,20 @@
+{
+  "name": "elementjaeger",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Elementjäger – gemeinsam nach neuen superschweren Elementen rechnen (Simulation)",
+  "license": "MIT",
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "test": "npm run test --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "build": "npm run build --workspaces --if-present",
+    "demo": "npm run demo -w @elementjaeger/core"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
