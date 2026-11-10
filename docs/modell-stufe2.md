@@ -1,0 +1,338 @@
+# Modell-Vorschlag für Stufe 2: Die Physik selbst rechnen
+
+Stand: Vorschlag, noch nicht umgesetzt. Umsetzung erst nach Freigabe.
+
+> **Das ist eine Simulation.** Sie kann vorhersagen, wo man suchen sollte.
+> Eine Entdeckung ist erst das im Beschleuniger gemessene Atom.
+
+## 1. Kurzfassung
+
+- **Modell:** Fusion-by-Diffusion (FBD) in der Fassung für deformierte
+  Aktiniden-Targets nach Hagino (2018), mit den Eingangstabellen und der
+  Monte-Carlo-Kaskade der Warschauer Gruppe (Cap, Kowal, Siwek-Wilczyńska 2022).
+  Alle Formeln stehen in frei zugänglichen Arbeiten und sind unten zitiert.
+- **Drei Stufen**, wie vorgegeben: Einfang (Hill-Wheeler, Barrierenverteilung),
+  Verschmelzen (Diffusion über die innere Barriere), Überleben (Neutron gegen
+  Spaltung, Schritt für Schritt).
+- **Zu eichen sind genau zwei Zahlen:** Achsenabschnitt und Steigung des
+  „Einschuss-Abstands“ `s_inj`. Alles andere kommt aus Tabellen und Formeln.
+- **Erwartbare Genauigkeit laut Literatur:** etwa eine Größenordnung nach oben
+  und unten. Dominant ist die Unsicherheit der Spaltbarrieren (±0,5 MeV
+  entsprechen etwa einem Faktor 10). Der statistische Fehler der Rechnung ist
+  dagegen klein. Beides wird getrennt ausgewiesen.
+- **Ehrliche Einordnung der Rechenleistung:** Im veröffentlichten Modell ist die
+  Verschmelzungs-Wahrscheinlichkeit eine geschlossene Formel; Langevin-Bahnen
+  können sie nur bestätigen. Wirklich gebraucht wird Rechenleistung für die
+  Unsicherheits-Ensembles (Abschnitt 9). Das ist eine Abweichung von der
+  Vorgabe „1e8 Bahnen pro Energie“ und braucht deine Entscheidung (Abschnitt 12).
+
+## 2. Was gerechnet wird
+
+Wirkungsquerschnitt für den Verdampfungsrest nach Abdampfen von x Neutronen
+(Hagino 2018, Gl. 24–25; Cap et al. 2022, Gl. 1):
+
+```
+σ_xn(E) = ∫₀¹ d(cos θ) · (π ħ² / 2μE) · Σ_ℓ (2ℓ+1) · T_ℓ(E,θ) · P_CN(E,ℓ,θ) · W_xn(E*,ℓ)
+```
+
+- `E` Schwerpunktsenergie, `μ` reduzierte Masse, `ℓ` Bahndrehimpuls
+- `θ` Winkel zwischen Strahl und Symmetrieachse des deformierten Targetkerns
+- `T_ℓ` Einfang, `P_CN` Verschmelzen, `W_xn` Überleben
+- `E* = E + Q` Anregungsenergie des Compoundkerns
+
+Monte Carlo: `cos θ` gleichverteilt, `ℓ` mit Gewicht `2ℓ+1`, Neutronenenergien
+aus dem Verdampfungsspektrum. Jeder Wurf trägt ein Gewicht; summiert werden
+Gewichte und Gewichtsquadrate (daraus der statistische Fehler).
+
+## 3. Stufe A: Einfang
+
+Potential zwischen Projektil und Target für festen Winkel θ (Hagino 2018,
+Gl. 26–28):
+
+```
+V(r,θ) = V_N(r,θ) + V_C(r,θ) + ℓ(ℓ+1) ħ² / (2μ r²)
+
+V_C(r,θ) = Z_P Z_T e²/r
+         + (3 Z_P Z_T e²/5)  · R_T²/r³ · (β₂ + (2/7)·√(5/π)·β₂²) · Y₂₀(θ)
+         + (3 Z_P Z_T e²/9)  · R_T⁴/r⁵ · (β₄ + 9/(7√π)·β₂²)     · Y₄₀(θ)
+         + (3 Z_P Z_T e²/13) · R_T⁶/r⁷ · β₆ · Y₆₀(θ)
+```
+
+Kernpotential nach Bass (1977), wie in Stufe 1, mit winkelabhängigem
+Targetradius:
+
+```
+V_N(r,θ) = − R_P R_T(θ) / (R_P + R_T(θ)) · g(s),      s = r − R_P − R_T(θ)
+g(s) = 1 / (0,0300·e^(s/3,30 fm) + 0,0061·e^(s/0,65 fm))  MeV/fm
+R_i = 1,16·A_i^(1/3) − 1,39·A_i^(−1/3) fm
+R_T(θ) = R_T · (1 + β₂ Y₂₀(θ) + β₄ Y₄₀(θ) + β₆ Y₆₀(θ))
+```
+
+Aus `V(r,θ)` werden numerisch Barrierenhöhe `V_b`, Barrierenradius `R_b` und
+Krümmung `ħΩ` bestimmt. Durchdringung nach Hill-Wheeler (Hagino 2018, Gl. 30):
+
+```
+T_ℓ(E,θ) = 1 / (1 + exp[ (2π/ħΩ(ℓ,θ)) · (V_b(ℓ,θ) − E) ])
+```
+
+Die **Barrierenverteilung** entsteht hier nicht aus einer angepassten Breite,
+sondern aus der Kernform: Stößt das Projektil auf die Spitze des gestreckten
+Targetkerns, ist die Barriere niedrig, an der Flanke hoch. Für ⁵⁰Ti + ²⁴⁹Cf
+liegt die Bass-Barriere des kugelförmigen Systems bei 226,2 MeV.
+
+- Deformationen β₂, β₄, β₆ der Targetkerne: FRDM(2012), Möller et al.
+  (Tabelle am arXiv-Volltext geprüft).
+- **Annahme A1:** Bass-Potential mit winkelabhängigem Radius. Hagino verwendet
+  ein Woods-Saxon-Potential, dessen Parameter er nur für ⁴⁸Ca + ²⁴⁸Cm angibt.
+  Bass hat keine reaktionsabhängigen Parameter und ist deine Vorgabe.
+- **Annahme A2:** Das Projektil wird als Kugel behandelt (wie bei Hagino).
+- **Nicht verwendet:** die empirische Einfang-Formel der Warschauer Gruppe
+  („diffused barrier“). Die Koeffizienten ihrer Barrierenbreite und ihr
+  Normierungsradius stehen nur in Phys. Rev. C 83, 054602 (2011), das nicht
+  frei zugänglich ist. Die Formel für die mittlere Barriere `B₀` ist belegt
+  und wird als Bezugsenergie gebraucht (Abschnitt 4).
+
+## 4. Stufe B: Verschmelzen
+
+Nach dem Einfang berühren sich die Kerne, sind aber noch kein Compoundkern.
+Das System sitzt an einem „Einschuss-Punkt“ außerhalb des Sattels und muss
+durch thermische Schwankungen über die innere Barriere diffundieren; sonst
+reißt es wieder ab (Quasispaltung).
+
+Lösung der Smoluchowski-Gleichung für eine parabelförmige Barriere
+(Świątecki et al.; Siwek-Wilczyńska et al. 2012, Gl. 2; Cap et al. 2022, Gl. 4):
+
+```
+P_CN(E,ℓ,θ) = ½ · [1 − erf( √(ΔV_ℓ / T) )]
+
+ΔV_ℓ = V_ℓ(s_sd) − V_ℓ(s_inj(θ))            Höhe der Barriere über dem Einschuss-Punkt
+V_ℓ(s) = V_fiss(s) + ℓ(ℓ+1) ħ² / (2 J(s))    mit Rotationsenergie
+```
+
+- `s` ist der Abstand der Kernoberflächen (Gesamtlänge `L = 2(R_P+R_T) + s`).
+- `V_fiss(s)`: algebraische Näherung des Tröpfchenmodells (zwei Kugeln mit
+  Hals), Koeffizienten in Hagino 2018, Anhang A, Gl. A1–A18.
+- Am Sattel: `V(s_sd)` = Spaltbarriere `B_f` aus der Massentabelle; Lage des
+  Sattels aus dessen tabellierter Deformation (Hagino 2018, Gl. A22–A24).
+- Trägheitsmomente `J(s)` starrer Körper (Hagino 2018, Gl. A19–A22).
+- Temperatur: `T = √(T_sd · T_inj)` mit
+  `T(ℓ,s) = √((E* − V_ℓ(s) − E_pair) / a(s))`,
+  `E_pair = 21/√A` MeV (gerade-gerade), `10,5/√A` MeV (ungerades A), 0 sonst.
+- Reibung und Masse fallen im überdämpften Grenzfall heraus.
+
+**Einschuss-Abstand** (Hagino 2018, Gl. 34, 36, 37):
+
+```
+s_inj(θ) = s₀ + R_T · (β₂ Y₂₀(θ) + β₄ Y₄₀(θ) + β₆ Y₆₀(θ))
+s₀ = a − b · (E − B₀)
+B₀ = 0,853315·z + 0,0011695·z² − 0,000001544·z³ MeV,   z = Z_P Z_T / (A_P^(1/3) + A_T^(1/3))
+```
+
+`a` und `b` sind die **einzigen Eichgrößen** des Modells. Veröffentlichte Werte
+(sie hängen von den Eingangstabellen und vom Einfang-Modell ab und sind nicht
+übertragbar):
+
+| Quelle | a (fm) | b (fm/MeV) | geeicht an |
+|---|---|---|---|
+| Siwek-Wilczyńska et al. 2012, Gl. 3 | 4,09 | 0,192 | ⁴⁸Ca + ²⁴²,²⁴⁴Pu, ²⁴³Am, ²⁴⁵,²⁴⁸Cm, ²⁴⁹Bk, ²⁴⁹Cf |
+| Cap et al. 2022, Gl. 7 | 3,291 | 0,196 | 24 Wirkungsquerschnitte (2n–5n), ⁴⁸Ca + Aktiniden |
+| Hagino 2018, Gl. 37 (mit Winkelabhängigkeit) | 4,698 | 0,16 | ⁴⁸Ca + ²⁴⁸Cm (3n, 4n) |
+
+Cap et al. geben einen Fehlerkorridor von ±1 fm an und warnen vor
+Extrapolation: Negative `s_inj` sind unphysikalisch; ab etwa 15 MeV über `B₀`
+wird `s_inj = 0` gesetzt.
+
+**Langevin-Bahnen.** Dieselbe Physik als Zufallsbahn:
+`ds = −(1/γ)·V'(s)·dt + √(2T/γ)·dW`. Für die Parabel mit fester Temperatur
+ergibt das exakt die Formel oben; das ist der Pflicht-Test der Bahnen-Rechnung.
+Ein Prototyp mit Splitting für seltene Bahnen trifft die Formel bis hinunter zu
+P = 2·10⁻⁸ innerhalb des statistischen Fehlers (rund 30 Mio. Schritte pro
+Sekunde und Kern in JavaScript). Mehr dazu in Abschnitt 9.
+
+## 5. Stufe C: Überleben
+
+Der heiße Compoundkern kühlt ab, indem er Neutronen abdampft. Bei jedem
+Schritt konkurriert die Spaltung.
+
+Zerfallsbreiten (Cap et al. 2022, Gl. 10–11; ausgeschrieben bei Hagino 2018,
+Gl. 13–16):
+
+```
+Γ_n = 2 m_n σ_n / (π² ħ² ρ_A(E*)) · ∫₀^ε_max ρ_(A−1)(ε_max − ε) · ε dε        (Weisskopf)
+Γ_f = 1 / (2π ρ_A(E*)) · ∫₀^K_max ρ_A^Sattel(K_max − K) dK                    (Übergangszustand)
+
+ε_max = E* − S_n(A) − E_rot(A−1) − E_pair(A−1)
+K_max = E* − B_f(A) − E_rot^Sattel(A) − E_pair(A)
+σ_n = π r₀² A^(2/3),  r₀ = 1,45 fm
+```
+
+Niveaudichte (Fermi-Gas) mit Schalendämpfung nach Ignatyuk und
+formabhängigem Parameter nach Reisdorf (Hagino 2018, Gl. A25–A29):
+
+```
+ρ ∝ exp(2 √(a U))
+a = ã · [1 + (E_Schale / U) · (1 − e^(−U/E_D))],   E_D = 18,5 MeV
+ã = 0,0696·A + 0,1801·A^(2/3)·B_S + 0,1644·A^(1/3)·B_K   (MeV⁻¹)
+B_S = 1 + (0,6416 α − 0,1421 α²)²,   B_K = 1 + (0,6542 α − 0,0483 α²)²
+```
+
+**Kaskade als Monte Carlo** (so auch Cap et al. 2022): Bei jedem Schritt wird
+
+1. das Gewicht mit `Γ_n / (Γ_n + Γ_f)` multipliziert („jeden Schritt einzeln
+   bestimmen und multiplizieren“),
+2. die Bewegungsenergie des Neutrons aus dem Spektrum `ε · e^(−ε/T)` gewürfelt,
+3. die Anregungsenergie um `S_n + ε` gesenkt.
+
+Die Kaskade endet, sobald weder ein weiteres Neutron noch Spaltung möglich
+ist. Die Zahl der bis dahin abgedampften Neutronen legt den Kanal (3n, 4n, 5n)
+fest. Nur Neutronen gegen Spaltung; Gamma-, Protonen- und Alpha-Abdampfung
+werden vernachlässigt (wie im FBD-Modell).
+
+## 6. Eingangsdaten
+
+| Größe | Quelle | geprüft |
+|---|---|---|
+| Massen von Projektil und Target | AME2020 (Wang et al., Chin. Phys. C 45, 030003) | Originaldatei |
+| Compoundkern und Töchter: Massen, S_n, Spaltbarrieren B_f, Schalenkorrekturen, Deformationen an Grundzustand und Sattel | Jachimowicz, Kowal, Skalski, At. Data Nucl. Data Tables 138, 101393 (2021); arXiv:2010.10018, Tabellen 1 und 2 (Z = 98–126) | arXiv-Volltext |
+| Deformationen der Targetkerne β₂, β₄, β₆ | FRDM(2012), Möller et al., arXiv:1508.06294 | arXiv-Volltext |
+| Q-Wert ⁵⁰Ti + ²⁴⁹Cf | Standard −197,7 ± 3 MeV (Festlegung aus Stufe 1) | mit vier Massenmodellen verglichen |
+
+Beispiel aus der Tabelle für die Kette von Element 120: ²⁹⁹120 hat
+S_n = 6,38 MeV und B_f = 5,57 MeV; ²⁹⁵120 hat S_n = 7,40 MeV und B_f = 6,28 MeV.
+
+Für die Vergleichsreaktionen mit Compoundkernen unter Z = 98 gibt es in dieser
+Tabelle keine Werte; solche Reaktionen entfallen (betrifft keine der unten
+genannten).
+
+## 7. Parameter und ihr Status
+
+| Parameter | Wert | Status |
+|---|---|---|
+| Bass-Potential (0,0300; 0,0061; 3,30; 0,65; 1,16; 1,39) | fest | belegt über Dutt und Puri, arXiv:1005.5213; Original (Bass 1977) nicht abrufbar |
+| Hill-Wheeler-Formel | fest | belegt (Hagino 2018, Gl. 30) |
+| Coulomb-Potential des deformierten Kerns | fest | belegt (Hagino 2018, Gl. 27) |
+| `B₀`-Formel | fest | belegt über Hagino 2018; trifft drei von der Warschauer Gruppe gedruckte Werte |
+| `P_CN`-Formel | fest | belegt (Primärquellen) |
+| `V_fiss(s)`, Koeffizienten A1–A18 | fest | nur über Hagino 2018, Anhang; Original (PRC 83, 054602) nicht abrufbar |
+| Niveaudichte: 0,0696; 0,1801; 0,1644; E_D = 18,5 MeV | fest | nur über Hagino 2018, Anhang |
+| r₀ = 1,45 fm, Paarenergie 21/√A, b_f = 1 fm | fest | nur über Hagino 2018 |
+| `a`, `b` in `s₀ = a − b·(E − B₀)` | **zu eichen** | veröffentlichte Werte als Startwerte und Vergleich |
+| Reibung, Trägheit | nicht gebraucht | fällt im überdämpften Grenzfall heraus; kein belegter Zahlenwert gefunden |
+
+Bekannte Unstimmigkeiten in den Quellen, die die Umsetzung berücksichtigt:
+
+- Hagino (arXiv-Fassung, Gl. 10 und 35) druckt `erf(ΔV/T)` ohne Wurzel; alle
+  Arbeiten der Warschauer Gruppe drucken `erf √(H/T)`. Verwendet wird die Wurzel.
+- arXiv:2107.00579 druckt `(2ℓ_max+1)²` statt `(ℓ_max+1)²` (Druckfehler; hier
+  ohne Belang, weil nicht mit scharfem Abschneiden gerechnet wird).
+- Hagino multipliziert Zwischenschritte der Kaskade mit `(1 − P_<)`, die
+  Warschauer Formel druckt `P_<` nur für den letzten Schritt. Die
+  Monte-Carlo-Kaskade braucht den Faktor nicht: Sie verfolgt die
+  Anregungsenergie Schritt für Schritt.
+- Die Sattelenergie nehmen Siwek-Wilczyńska et al. (2012) und Hagino aus der
+  Tabelle (mit Schalenkorrektur), Cap et al. (2022) aus dem Tröpfchenmodell.
+  Vorgeschlagen ist die Tabelle.
+
+## 8. Eichung und Prüfung
+
+(Tabelle der Messwerte folgt, sobald die Quellenprüfung abgeschlossen ist.)
+
+## 9. Wo die Rechenleistung hingeht
+
+Ehrlich eingeordnet:
+
+1. **Verschmelzen im veröffentlichten Modell braucht keine Bahnen.** Für eine
+   Parabel mit fester Temperatur ist `P_CN` die Formel aus Abschnitt 4. Auch
+   Verallgemeinerungen in einer Dimension (andere Barrierenform, ortsabhängige
+   Temperatur) lassen sich als gewöhnliches Integral lösen. Bahnen werden erst
+   zwingend, wenn man mehrere Formfreiheitsgrade oder Trägheit mitnimmt. Dafür
+   habe ich keine vollständig belegten Parameter gefunden (Potentialfläche:
+   unveröffentlichter Bericht von Błocki und Świątecki; Reibung: kein
+   Zahlenwert). Nichts davon wird erfunden.
+2. **Die Kaskade ist echtes Monte Carlo** (Neutronenenergien), aber billig:
+   Sekunden bis Minuten je Energie.
+3. **Wirklich teuer und wirklich nützlich: Unsicherheits-Ensembles.** Die
+   Vorhersage hängt stark von Eingangsgrößen ab, deren Unsicherheit bekannt ist:
+   Spaltbarrieren ±0,5 MeV, `s_inj` ±1 fm, Q-Wert ±3 MeV, `B₀` ±2 MeV. Für eine
+   belastbare Vorhersage zieht man diese Größen viele tausend Mal zufällig und
+   rechnet jedes Mal die ganze Kette. Das Ergebnis ist ein Band mit
+   Wahrscheinlichkeiten statt einer einzelnen Zahl. Das lässt sich in Pakete
+   teilen und im Team rechnen, und jedes Paket verkleinert den Fehler des Bandes.
+
+Vorschlag: Bahnen-Rechnung umsetzen (mit Splitting, exakten Gewichten und
+frühem Abbruch, geprüft gegen die Formel), aber die Vorhersage nicht davon
+abhängig machen. Die Team-Rechenleistung fließt in die Ensembles.
+
+## 10. Fehlerangaben
+
+Jedes Ergebnis trägt zwei getrennte Angaben:
+
+- **Statistischer Fehler** der Monte-Carlo-Rechnung (68 %): schrumpft mit
+  jedem Paket wie 1/√N.
+- **Modellunsicherheit:** aus dem Ensemble (16-%- und 84-%-Quantil) und aus der
+  Streuung Rechnung gegen Messung bei den Prüf-Reaktionen. Sie schrumpft nicht
+  durch mehr Rechnen. Literaturwert: etwa eine Größenordnung.
+
+## 11. Rechenpakete und Reproduzierbarkeit
+
+- Paket: Reaktion, Energie, Stufe, Modellversion, Parametersatz, Seed, Zahl der
+  Würfe. Ergebnis: Summe der Gewichte, Summe der Gewichtsquadrate, Zahl der Würfe.
+- Gleicher Seed und gleiche Version ergeben bitgleich dasselbe Ergebnis; so
+  lassen sich in Stufe 3 zwei Spieler vergleichen.
+- Innere Schleifen arbeiten auf Zahlenfeldern (`Float64Array`) ohne Objekte und
+  ohne Speicheranforderung, damit sie nach WebAssembly wandern können.
+- Zwischenstände in IndexedDB; eine lange Rechnung läuft nach dem Schließen des
+  Tabs beim nächsten Öffnen weiter.
+
+## 12. Pflicht-Tests
+
+- Hill-Wheeler: `T = ½` bei `E = V_b`; weit über der Barriere nähert sich die
+  Summe über ℓ dem klassischen Wert `π R_b² (1 − V_b/E)`.
+- Barriere ohne Deformation = Bass-Barriere aus Stufe 1 (226,2 und 217,2 MeV).
+- Bahnen gegen Formel: `P_CN` für die Parabel, mit und ohne Splitting.
+- Splitting und Gewichte: erwartungstreu (Vergleich mit direkter Rechnung bei
+  großen Wahrscheinlichkeiten).
+- Kaskade: Grenzfall ohne Spaltung ergibt Überleben 1; Summe über alle Kanäle
+  plus Spaltung ergibt 1.
+- `B₀`-Formel: 173,0 / 191,2 / 208,3 MeV für ⁴⁸Ca, ⁵⁰Ti, ⁵⁴Cr + ²⁰⁸Pb
+  (gedruckte Werte der Warschauer Gruppe).
+- Eingangstabellen: Stichproben gegen die Quelle.
+- Reproduzierbarkeit: gleiches Paket, gleiches Ergebnis.
+
+## 13. Entscheidungen, die ich von dir brauche
+
+(folgt mit der Tabelle der Messwerte)
+
+## 14. Quellen
+
+Am Volltext geprüft (arXiv):
+
+- K. Hagino, „Hot fusion reactions with deformed nuclei for synthesis of
+  superheavy nuclei: An extension of the fusion-by-diffusion model“,
+  Phys. Rev. C 98, 014607 (2018); arXiv:1803.02036.
+- T. Cap, M. Kowal, K. Siwek-Wilczyńska, „The Fusion-by-Diffusion model as a
+  tool to calculate cross sections for the production of superheavy nuclei“,
+  Eur. Phys. J. A 58, 231 (2022); arXiv:2210.17214.
+- T. Cap, M. Kowal, K. Siwek-Wilczyńska, Phys. Rev. C 105, L051601 (2022);
+  arXiv:2107.00579.
+- K. Siwek-Wilczyńska, T. Cap, M. Kowal, Phys. Rev. C 99, 054603 (2019);
+  arXiv:1812.09522.
+- K. Siwek-Wilczyńska, T. Cap, M. Kowal, A. Sobiczewski, J. Wilczyński,
+  Phys. Rev. C 86, 014611 (2012); arXiv:1203.2252.
+- P. Jachimowicz, M. Kowal, J. Skalski, At. Data Nucl. Data Tables 138, 101393
+  (2021); arXiv:2010.10018.
+- P. Möller, A. J. Sierk, T. Ichikawa, H. Sagawa, At. Data Nucl. Data Tables
+  109–110, 1 (2016); arXiv:1508.06294.
+- I. Dutt, R. K. Puri, arXiv:1005.5213 (druckt die Bass-Parameter von 1977).
+- W. Loveland, Eur. Phys. J. A 51, 120 (2015); arXiv:1411.4929 (Unsicherheiten).
+
+Nur als Zitat, Volltext nicht abrufbar:
+
+- T. Cap, K. Siwek-Wilczyńska, J. Wilczyński, Phys. Rev. C 83, 054602 (2011).
+- W. J. Świątecki, K. Siwek-Wilczyńska, J. Wilczyński, Phys. Rev. C 71, 014602
+  (2005); Acta Phys. Pol. B 34, 2049 (2003).
+- R. Bass, Phys. Rev. Lett. 39, 265 (1977).
+- D. L. Hill, J. A. Wheeler, Phys. Rev. 89, 1102 (1953).
+- W. Reisdorf, Z. Phys. A 300, 227 (1981).
+- A. V. Ignatyuk, G. N. Smirenkin, A. S. Tishin, Sov. J. Nucl. Phys. 21, 255 (1975).
+- J. Błocki, W. J. Świątecki, LBL-12811 (1982, unveröffentlicht).
