@@ -43,6 +43,26 @@ export const SOURCES = {
     checked: false,
     note: 'Von Gates et al. für die 68-%-Fehler zitiert. Original nicht abrufbar; unsere Grenzen (nach Gehrels) reproduzieren die veröffentlichten +0,58 −0,28 pb.',
   },
+  ackermann2025: {
+    ref: 'D. Ackermann, „Decay spectroscopy of heavy and superheavy nuclei“, arXiv:2501.04053v7 (2025), Tabelle 5.1',
+    checked: true,
+    note: 'Übersichtsarbeit, am arXiv-Volltext geprüft (10.11.2026). Tabelle der Zerfallsdaten aller bekannten Isotope von Z = 99 bis 118; die Spalte nennt Q_alpha, daraus E_alpha = Q_alpha · (A − 4) / A.',
+  },
+  oganessian2024Ds: {
+    ref: 'Yu. Ts. Oganessian et al., „Synthesis and decay properties of isotopes of element 110: 273Ds and 275Ds“, Phys. Rev. C 109, 054307 (2024)',
+    checked: false,
+    note: 'Original nicht abrufbar; Werte über Ackermann (2025), Tabelle 5.1, geprüft.',
+  },
+  oganessian2025Lv: {
+    ref: 'Yu. Ts. Oganessian et al., „Investigation of reactions with 50Ti and 54Cr for the synthesis of new elements“, Phys. Rev. C 112, 014603 (2025)',
+    checked: false,
+    note: 'Original nicht abrufbar; Werte über Ackermann (2025), Tabelle 5.1, geprüft.',
+  },
+  saxena2021: {
+    ref: 'G. Saxena, A. Jain, P. K. Sharma, „A new empirical formula for α-decay half-life and decay chains of Z=120 isotopes“, arXiv:2107.12976 (2021), Tabelle 6',
+    checked: true,
+    note: 'Am arXiv-Volltext geprüft (10.11.2026). Vorhersage: Q_alpha aus dem Massenmodell WS4, Halbwertszeit aus der Formel „QF“ der Arbeit. Die dort vorhergesagten Spaltungs-Halbwertszeiten verfehlen die gemessenen Nachbarn 284Fl und 282Cn um viele Größenordnungen und werden nicht verwendet.',
+  },
   bass1977: {
     ref: 'R. Bass, „Nucleus-Nucleus Potential Deduced from Experimental Fusion Cross Sections“, Phys. Rev. Lett. 39, 265 (1977)',
     checked: false,

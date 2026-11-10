@@ -33,22 +33,49 @@ describe('Zerfallsdaten', () => {
   });
 
   it('gemessen und geschätzt sind wie vorgegeben markiert', () => {
-    for (const id of ['290Lv', '286Fl', '282Cn', '288Lv', '284Fl', '275Ds', '271Hs']) {
+    for (const id of ['290Lv', '286Fl', '282Cn', '288Lv', '284Fl', '280Cn', '275Ds', '271Hs']) {
       expect(getDecay(id).kind).toBe('gemessen');
+    }
+    for (const id of ['294-120', '290Og', '286Lv', '282Fl']) {
+      expect(getDecay(id).kind).toBe('vorhersage');
     }
     for (const id of ['295-120', '291Og', '287Lv', '283Fl', '279Cn', '296-120', '292Og']) {
       expect(getDecay(id).kind).toBe('schaetzung');
     }
   });
 
-  it('vorgegebene Zahlenwerte', () => {
+  it('Zahlenwerte wie in den Quellen', () => {
     expect(getDecay('290Lv').halfLife_s).toBeCloseTo(8.2e-3, 12);
     expect(getDecay('286Fl').halfLife_s).toBeCloseTo(0.106, 12);
+    expect(getDecay('282Cn').halfLife_s).toBeCloseTo(0.88e-3, 12);
+    expect(getDecay('288Lv').halfLife_s).toBeCloseTo(2.0e-3, 12);
+    expect(getDecay('284Fl').halfLife_s).toBeCloseTo(2.5e-3, 12);
+    expect(getDecay('275Ds').halfLife_s).toBeCloseTo(0.43e-3, 12);
     expect(getDecay('295-120').halfLife_s).toBeCloseTo(12e-6, 15);
     expect(getDecay('271Hs').halfLife_s).toBe(46);
+    // Gates et al., Tabelle II: 286Fl mit 31/56 + 1/56 Alpha und 24/56 Spaltung
+    expect(getDecay('286Fl').modes.map((m) => m.probability)).toEqual([31 / 56, 1 / 56, 24 / 56]);
+    // Ackermann (2025): 284Fl Alpha / Spaltung = 24 / 76
+    expect(getDecay('284Fl').modes.map((m) => m.probability)).toEqual([0.24, 0.76]);
+    // Saxena et al. (2021): log10 T½ = −5,46 für 294-120
+    expect(getDecay('294-120').halfLife_s).toBeCloseTo(3.47e-6, 8);
   });
 
-  it('Kanäle starten bei Kernen mit Zerfallsdaten; 5n von Element 120 ist offen', () => {
+  it('Alpha-Energien folgen aus Q_alpha: E = Q (A − 4) / A', () => {
+    const alpha = (id: string): number => {
+      const m = getDecay(id).modes[0]!;
+      if (m.type !== 'alpha' || m.energy_MeV === null) throw new Error(id);
+      return m.energy_MeV;
+    };
+    expect(alpha('288Lv')).toBeCloseTo((11.24 * 284) / 288, 2);
+    expect(alpha('284Fl')).toBeCloseTo((10.721 * 280) / 284, 2);
+    expect(alpha('275Ds')).toBeCloseTo((11.37 * 271) / 275, 2);
+    expect(alpha('294-120')).toBeCloseTo((13.24 * 290) / 294, 2);
+    expect(alpha('290Og')).toBeCloseTo((12.6 * 286) / 290, 2);
+    expect(alpha('286Lv')).toBeCloseTo((11.31 * 282) / 286, 2);
+  });
+
+  it('jeder Kanal startet bei einem Kern mit Zerfallsdaten', () => {
     for (const r of Object.values(REACTIONS)) {
       for (const c of r.channels) {
         if (c.residue !== null) {
@@ -58,12 +85,12 @@ describe('Zerfallsdaten', () => {
         }
       }
     }
-    expect(REACTIONS['Ti50+Cf249'].channels.find((c) => c.neutrons === 5)?.residue).toBeNull();
+    expect(REACTIONS['Ti50+Cf249'].channels.map((c) => c.residue)).toEqual(['296-120', '295-120', '294-120']);
   });
 });
 
 describe('Zerfallskette', () => {
-  it('290Lv: Halbwertszeit, Verzweigung 55/45 und 10 % entwischte Alphas', () => {
+  it('290Lv: Halbwertszeit, Verzweigung 57/43 und 10 % entwischte Alphas', () => {
     const rng = mulberry32(2024);
     const n = 200_000;
     let sumLv = 0;
@@ -96,7 +123,7 @@ describe('Zerfallskette', () => {
     expect(wrongShape).toBe(0);
     expect(lvBelowHalfLife / n).toBeCloseTo(0.5, 2); // Median = Halbwertszeit
     expect(sumLv / n).toBeCloseTo(8.2e-3 / Math.LN2, 4); // Mittel = T½ / ln 2
-    expect(flAlpha / n).toBeCloseTo(0.55, 2);
+    expect(flAlpha / n).toBeCloseTo(32 / 56, 2);
     expect(escaped / alphas).toBeCloseTo(0.1, 2);
   });
 
@@ -109,11 +136,28 @@ describe('Zerfallskette', () => {
     expect(c.steps[5]).toMatchObject({ energy_MeV: 11.2, estimated: false });
   });
 
-  it('296-120 endet mit der Spaltung von 284Fl', () => {
-    const c = simulateChain('296-120', mulberry32(5));
-    expect(c.steps.map((s) => s.nuclide)).toEqual(['296-120', '292Og', '288Lv', '284Fl']);
-    expect(c.steps[3]!.type).toBe('sf');
-    expect(c.endsAt).toBeNull();
+  it('296-120 endet mit der Spaltung von 284Fl (76 %) oder 280Cn (24 %)', () => {
+    const rng = mulberry32(5);
+    const n = 100_000;
+    let viaCn = 0;
+    let wrong = 0;
+    for (let i = 0; i < n; i++) {
+      const c = simulateChain('296-120', rng);
+      const ids = c.steps.map((s) => s.nuclide).join(' ');
+      const last = c.steps[c.steps.length - 1]!;
+      if (c.endsAt !== null || last.type !== 'sf') wrong++;
+      if (ids === '296-120 292Og 288Lv 284Fl 280Cn') viaCn++;
+      else if (ids !== '296-120 292Og 288Lv 284Fl') wrong++;
+    }
+    expect(wrong).toBe(0);
+    expect(viaCn / n).toBeCloseTo(0.24, 2);
+  });
+
+  it('294-120 (5n) läuft über drei Alphas bis 282Fl', () => {
+    const c = simulateChain('294-120', mulberry32(5));
+    expect(c.steps.map((s) => s.nuclide)).toEqual(['294-120', '290Og', '286Lv']);
+    expect(c.steps.every((s) => s.type === 'alpha' && s.estimated)).toBe(true);
+    expect(c.endsAt).toBe('282Fl');
   });
 
   it('ist mit gleichem Seed reproduzierbar', () => {
@@ -155,17 +199,22 @@ describe('Ketten-Effizienz (exakt gerechnet)', () => {
     expect(hypoexponentialCdf([1, 1], 1)).toBeCloseTo(1 - 2 * Math.exp(-1), 4);
   });
 
-  it('290Lv ohne Zeitfenster: 0,9 + 0,1 * 0,55 * 0,9 = 0,9495', () => {
-    expect(chainEfficiency('290Lv', { window_s: 1e9 })).toBeCloseTo(0.9495, 12);
+  it('290Lv ohne Zeitfenster: 0,9 + 0,1 * 32/56 * 0,9 = 0,9514', () => {
+    expect(chainEfficiency('290Lv', { window_s: 1e9 })).toBeCloseTo(0.9 + 0.1 * (32 / 56) * 0.9, 12);
   });
 
-  it('290Lv mit 1 s Fenster liegt knapp darunter', () => {
+  it('290Lv mit 1 s Fenster: 95 %, wie von Gates et al. veröffentlicht', () => {
     const e = chainEfficiency('290Lv');
-    expect(e).toBeLessThan(0.9495);
-    expect(e).toBeGreaterThan(0.948);
+    expect(e).toBeLessThan(0.9515);
+    expect(e).toBeGreaterThan(0.9495);
+    expect(e).toBeCloseTo(0.95, 2);
   });
 
-  it.each(['290Lv', '295-120', '296-120'])('%s: Simulation stimmt mit exakter Rechnung überein', (start) => {
+  it('294-120 (5n): mindestens 2 von 3 Alphas voll gemessen = 97,2 %', () => {
+    expect(chainEfficiency('294-120')).toBeCloseTo(0.9 ** 3 + 3 * 0.9 ** 2 * 0.1, 9);
+  });
+
+  it.each(['290Lv', '295-120', '296-120', '294-120'])('%s: Simulation stimmt mit exakter Rechnung überein', (start) => {
     const rng = mulberry32(31337);
     const n = 400_000;
     let identified = 0;

@@ -98,23 +98,23 @@ describe('Messung', () => {
     expect(r.analysis.upperLimit_fb! * r.analysis.sensitivity_perFb * minEff).toBeCloseTo(1.841, 3);
   });
 
-  it('5n-Kanal ohne Zerfallsdaten: erzeugt, aber offen und nicht mitgezählt', () => {
+  it('alle drei Kanäle von Element 120 sind nachweisbar', () => {
     // Sehr lange Messung bei 52 MeV, damit der 5n-Kanal sicher bevölkert ist.
     const r = runExperiment(settings(52, 5, 20_000), published);
     const n5 = r.channels.find((c) => c.neutrons === 5)!;
+    expect(n5.residue).toBe('294-120');
     expect(n5.implanted).toBeGreaterThan(0);
-    expect(n5.identified).toBeNull();
-    expect(n5.sigma_fb).toBeNull();
-    expect(r.analysis.channelsOpen).toEqual([5]);
-    expect(r.analysis.channelsIncluded).toEqual([3, 4]);
-    expect(r.events.every((e) => e.neutrons !== 5)).toBe(true);
+    expect(n5.identified).toBeGreaterThan(0);
+    expect(n5.chainEfficiency).toBeCloseTo(0.972, 3);
+    expect(r.analysis.channelsOpen).toEqual([]);
+    expect(r.analysis.channelsIncluded).toEqual([3, 4, 5]);
+    expect(r.events.some((e) => e.neutrons === 5 && e.endsAt === '282Fl')).toBe(true);
   });
 
-  it('gemessene Trefferquote trifft die wahre Kurve (3n + 4n) im Mittel', () => {
-    for (const eStar of [34, 41, 46]) {
+  it('gemessene Trefferquote trifft die wahre Kurve im Mittel', () => {
+    for (const eStar of [34, 41, 46, 52]) {
       const r = runExperiment(settings(eStar, 2026, 400_000), published);
-      const truth =
-        channelCrossSection_fb(published.channels[0]!, eStar) + channelCrossSection_fb(published.channels[1]!, eStar);
+      const truth = totalCrossSection_fb(published, eStar);
       const a = r.analysis;
       expect(a.chains).toBeGreaterThan(200);
       // innerhalb von 4 Standardfehlern
@@ -125,7 +125,7 @@ describe('Messung', () => {
   });
 
   it('Fehlerbalken überdecken den wahren Wert in etwa 68 % der Messungen', () => {
-    const truth = totalCrossSection_fb({ ...published, channels: published.channels.slice(0, 2) }, 41);
+    const truth = totalCrossSection_fb(published, 41);
     let covered = 0;
     const runs = 4000;
     for (let seed = 1; seed <= runs; seed++) {

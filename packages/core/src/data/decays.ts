@@ -25,11 +25,11 @@ export interface NuclideDecay {
   readonly z: number;
   readonly a: number;
   readonly halfLife_s: number;
-  readonly kind: Extract<Provenance, 'gemessen' | 'schaetzung'>;
+  readonly kind: Extract<Provenance, 'gemessen' | 'schaetzung' | 'vorhersage'>;
   readonly source: SourceId;
   /**
-   * Zerfallszweige. Leer = die Kette wird hier abgeschnitten (langlebiger Kern,
-   * Zerfallsart in der Vorgabe nicht angegeben).
+   * Zerfallszweige. Leer = die Kette wird hier abgeschnitten (Kern lebt viel
+   * länger als das Zeitfenster, oder seine Zerfallsart ist offen).
    */
   readonly modes: readonly DecayMode[];
   readonly note?: string;
@@ -58,10 +58,11 @@ const TABLE: readonly NuclideDecay[] = [
     kind: 'gemessen',
     source: 'gates2024',
     modes: [
-      { type: 'alpha', probability: 0.55, energy_MeV: 10.18, daughter: '282Cn' },
-      { type: 'sf', probability: 0.45 },
+      { type: 'alpha', probability: 31 / 56, energy_MeV: 10.18, daughter: '282Cn' },
+      { type: 'alpha', probability: 1 / 56, energy_MeV: 9.57, daughter: '282Cn' },
+      { type: 'sf', probability: 24 / 56 },
     ],
-    note: 'Gates et al., Tabelle II: T½ = 106 (+17 −13) ms, E_alpha = 10,18(2) MeV. Dort: Alpha 31/56 (10,18 MeV) plus 1/56 (9,57 MeV), Spaltung 24/56 = 43 %; die Projektvorgabe rundet auf 55 / 45.',
+    note: 'Gates et al., Tabelle II (56 Ereignisse aus allen Experimenten): T½ = 106 (+17 −13) ms; Alpha 10,18(2) MeV 31/56, Alpha 9,57(3) MeV 1/56, Spaltung 24/56 = 43 %.',
   },
   {
     id: '282Cn',
@@ -79,9 +80,9 @@ const TABLE: readonly NuclideDecay[] = [
     a: 288,
     halfLife_s: 2.0 * ms,
     kind: 'gemessen',
-    source: 'projectSpec',
-    modes: [{ type: 'alpha', probability: 1, energy_MeV: null, daughter: '284Fl' }],
-    note: 'Alpha-Energie in der Vorgabe nicht angegeben (offen). Alpha-Zerfall nach 284Fl folgt aus der Kette.',
+    source: 'oganessian2025Lv',
+    modes: [{ type: 'alpha', probability: 1, energy_MeV: 11.08, daughter: '284Fl' }],
+    note: 'Ackermann (2025), Tabelle 5.1: T½ = 2,0 (+2,3 −0,7) ms, Q_alpha = 11,240(15) MeV, also E_alpha = 11,08 MeV. Nur wenige Atome gemessen.',
   },
   {
     id: '284Fl',
@@ -89,8 +90,22 @@ const TABLE: readonly NuclideDecay[] = [
     a: 284,
     halfLife_s: 2.5 * ms,
     kind: 'gemessen',
-    source: 'projectSpec',
+    source: 'oganessian2025Lv',
+    modes: [
+      { type: 'alpha', probability: 0.24, energy_MeV: 10.57, daughter: '280Cn' },
+      { type: 'sf', probability: 0.76 },
+    ],
+    note: 'Ackermann (2025), Tabelle 5.1: T½ = 2,5 (+1,2 −0,6) ms, Alpha / Spaltung = 24 / 76, Q_alpha = 10,721(17) MeV, also E_alpha = 10,57 MeV.',
+  },
+  {
+    id: '280Cn',
+    z: 112,
+    a: 280,
+    halfLife_s: 10 * us,
+    kind: 'gemessen',
+    source: 'oganessian2025Lv',
     modes: [{ type: 'sf', probability: 1 }],
+    note: 'Ackermann (2025), Tabelle 5.1: T½ = 10 (+108 −4) µs, Spaltung. Entdeckt 2025.',
   },
   {
     id: '275Ds',
@@ -98,8 +113,9 @@ const TABLE: readonly NuclideDecay[] = [
     a: 275,
     halfLife_s: 0.43 * ms,
     kind: 'gemessen',
-    source: 'projectSpec',
+    source: 'oganessian2024Ds',
     modes: [{ type: 'alpha', probability: 1, energy_MeV: 11.2, daughter: '271Hs' }],
+    note: 'Ackermann (2025), Tabelle 5.1: T½ = 0,43 (+0,29 −0,12) ms, Q_alpha = 11,370(20) MeV, also E_alpha = 11,20 MeV.',
   },
   {
     id: '271Hs',
@@ -107,11 +123,11 @@ const TABLE: readonly NuclideDecay[] = [
     a: 271,
     halfLife_s: 46,
     kind: 'gemessen',
-    source: 'projectSpec',
+    source: 'oganessian2024Ds',
     modes: [],
-    note: 'Langlebig (46 s) und Zerfallsart nicht angegeben: Die Kette wird hier abgeschnitten.',
+    note: 'Ackermann (2025), Tabelle 5.1: zwei Zustände, 7,1 (+8,4 −2,5) s und 46 (+56 −16) s, beide Alpha. Beide leben viel länger als das Zeitfenster von 1 s: Die Kette wird hier abgeschnitten.',
   },
-  // --- geschätzt (Viola-Seaborg), nur Alpha-Zerfall angenommen -------------
+  // --- geschätzt (Viola-Seaborg, Projektvorgabe), nur Alpha-Zerfall angenommen
   {
     id: '295-120',
     z: 120,
@@ -174,6 +190,48 @@ const TABLE: readonly NuclideDecay[] = [
     kind: 'schaetzung',
     source: 'violaSeaborg',
     modes: [{ type: 'alpha', probability: 1, energy_MeV: 11.89, daughter: '288Lv' }],
+  },
+  // --- vorhergesagt (Saxena et al. 2021, Tabelle 6): Kette des 5n-Kanals -----
+  // E_alpha = Q_alpha · (A − 4) / A, T½ = 10^(log10 T½ der Formel QF).
+  {
+    id: '294-120',
+    z: 120,
+    a: 294,
+    halfLife_s: Math.pow(10, -5.46),
+    kind: 'vorhersage',
+    source: 'saxena2021',
+    modes: [{ type: 'alpha', probability: 1, energy_MeV: 13.06, daughter: '290Og' }],
+    note: 'Q_alpha = 13,24 MeV (WS4), log10 T½ = −5,46: T½ = 3,5 µs.',
+  },
+  {
+    id: '290Og',
+    z: 118,
+    a: 290,
+    halfLife_s: Math.pow(10, -4.71),
+    kind: 'vorhersage',
+    source: 'saxena2021',
+    modes: [{ type: 'alpha', probability: 1, energy_MeV: 12.43, daughter: '286Lv' }],
+    note: 'Q_alpha = 12,60 MeV (WS4), log10 T½ = −4,71: T½ = 19 µs.',
+  },
+  {
+    id: '286Lv',
+    z: 116,
+    a: 286,
+    halfLife_s: Math.pow(10, -2.45),
+    kind: 'vorhersage',
+    source: 'saxena2021',
+    modes: [{ type: 'alpha', probability: 1, energy_MeV: 11.15, daughter: '282Fl' }],
+    note: 'Q_alpha = 11,31 MeV (WS4), log10 T½ = −2,45: T½ = 3,5 ms.',
+  },
+  {
+    id: '282Fl',
+    z: 114,
+    a: 282,
+    halfLife_s: Math.pow(10, -3.17),
+    kind: 'vorhersage',
+    source: 'saxena2021',
+    modes: [],
+    note: 'Zerfallsart offen: Saxena et al. sagen Alpha vorher (T½ = 0,7 ms), die gemessenen Nachbarn 284Fl und 282Cn spalten aber überwiegend. Die Kette wird hier abgeschnitten.',
   },
 ];
 

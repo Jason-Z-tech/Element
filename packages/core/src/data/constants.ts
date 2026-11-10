@@ -35,9 +35,9 @@ export const DEFAULTS = {
   alphaFullEnergyFraction: q(
     0.9,
     '',
-    'annahme',
-    'projectSpec',
-    'Projektvorgabe. Gates et al. nennen für ihren Detektor 75–80 %; mit 90 % ergibt sich aber deren Ketten-Nachweis von ≈ 95 %.',
+    'eichung',
+    'gates2024',
+    'Wirksamer Wert: Mit 90 % ergibt die Zählregel den von Gates et al. veröffentlichten Ketten-Nachweis von ≈ 95 % für 290Lv. Für das einzelne Alpha nennen Gates et al. 75–80 %; ihre Ketten-Suche ist feiner als unsere Zählregel.',
   ),
   /** Zeitfenster, in dem die Glieder einer Kette liegen müssen. */
   chainWindow: q(1, 's', 'gemessen', 'gates2024', 'Gates et al.: Spaltung innerhalb 1 s nach dem Einschlag.'),

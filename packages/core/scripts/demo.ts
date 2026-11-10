@@ -68,7 +68,7 @@ for (const r of Object.values(REACTIONS)) {
 }
 
 console.log('\nKetten-Effizienz nach der Zählregel (exakt gerechnet):');
-for (const id of ['290Lv', '295-120', '296-120']) console.log(`  ${id}: ${f(100 * chainEfficiency(id), 3)} %`);
+for (const id of ['290Lv', '296-120', '295-120', '294-120']) console.log(`  ${id}: ${f(100 * chainEfficiency(id), 3)} %`);
 
 const days = BERKELEY_RUN.days.value;
 const base = {

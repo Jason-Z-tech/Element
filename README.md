@@ -85,7 +85,7 @@ werden voll gemessen, der Rest „entwischt“. Eine Kette zählt bei mindestens
 **Auswertung.** `σ = Σ_Kanäle N / (Empfindlichkeit · Ketten-Effizienz)`. Fehler:
 Poisson-Grenzen zu 68 % nach Gehrels (1986); bei 0 Ereignissen Obergrenze aus
 1,84 Ereignissen. Die Ketten-Effizienz wird exakt aus den Zerfallsdaten gerechnet
-(²⁹⁰Lv: 94,8 %).
+(²⁹⁰Lv: 95,0 %, veröffentlicht ≈ 95 %).
 
 **Verdeckte Natur.** Wahres Maximum zufällig zwischen 6 und 80 fb, beste Energie
 um bis zu ±5 MeV verschoben. Nur Messreihen verraten sie.
@@ -97,55 +97,64 @@ um bis zu ±5 MeV verschoben. Nur Messreihen verraten sie.
 | Größe | Wert |
 |---|---|
 | Kerne hinter dem Separator (Formel) | 2,13 |
-| Ketten-Effizienz ²⁹⁰Lv (Zählregel) | 94,8 % |
+| Ketten-Effizienz ²⁹⁰Lv (Zählregel) | 95,0 % (veröffentlicht ≈ 95 %) |
 | erkannte Ketten im Mittel | 2,02 |
-| Auswertung von 2 Ketten | 436 (+575 −281) fb; veröffentlicht 440 (+580 −280) fb |
+| Auswertung von 2 Ketten | 435 (+574 −281) fb; veröffentlicht 440 (+580 −280) fb |
 
 ## Zahlen und ihre Herkunft
 
-| Größe | Wert | Art | Quelle | am Original geprüft |
+| Größe | Wert | Art | Quelle | geprüft |
 |---|---|---|---|---|
-| σ(⁵⁰Ti+²⁴⁴Pu, 4n) | 440 (+580 −280) fb bei E* 41(2) MeV, 2 Ketten, 22,1 Tage | gemessen | Gates et al., arXiv:2407.16079 | ja |
-| Strahl, Target, Separator | ≈ 6·10¹² /s; 0,435(40) mg/cm²; 70(7) % | gemessen / Simulation | Gates et al. | ja |
-| ²⁹⁰Lv, ²⁸⁶Fl, ²⁸²Cn | T½ 8,2 ms / 106 ms / 0,88 ms; α 10,84 / 10,18 MeV | gemessen | Gates et al., Tabelle II | ja |
-| Q(Ti+Pu) | −179,0 MeV | Abschätzung | aus E_cm 220(3) und E* 41(2) MeV bei Gates et al. | ja |
-| σ(⁵⁰Ti+²⁴⁹Cf) 3n / 4n / 5n | 12,87 / 48,20 / 9,90 fb bei E* 34 / 41 / 52 MeV | Vorhersage | Zhang, Zhang, Chen, arXiv:2604.09287, Tabelle II | ja |
+| σ(⁵⁰Ti+²⁴⁴Pu, 4n) | 440 (+580 −280) fb bei E* 41(2) MeV, 2 Ketten, 22,1 Tage | gemessen | Gates et al., arXiv:2407.16079 | am Original |
+| Strahl, Target, Separator | ≈ 6·10¹² /s; 0,435(40) mg/cm²; 70(7) % | gemessen / Simulation | Gates et al. | am Original |
+| ²⁹⁰Lv, ²⁸⁶Fl, ²⁸²Cn | T½ 8,2 ms / 106 ms / 0,88 ms; ²⁸⁶Fl: α 10,18 MeV 31/56, α 9,57 MeV 1/56, Spaltung 24/56 | gemessen | Gates et al., Tabelle II | am Original |
+| Q(Ti+Pu) | −179,0 MeV | Abschätzung | aus E_cm 220(3) und E* 41(2) MeV bei Gates et al. | am Original |
+| σ(⁵⁰Ti+²⁴⁹Cf) 3n / 4n / 5n | 12,87 / 48,20 / 9,90 fb bei E* 34 / 41 / 52 MeV | Vorhersage | Zhang, Zhang, Chen, arXiv:2604.09287, Tabelle II | am Original |
+| ²⁸⁸Lv | T½ 2,0 ms, α 11,08 MeV | gemessen | Oganessian et al., PRC 112, 014603 (2025) | über Ackermann, arXiv:2501.04053, Tab. 5.1 |
+| ²⁸⁴Fl, ²⁸⁰Cn | T½ 2,5 ms, α 10,57 MeV 24 %, Spaltung 76 %; ²⁸⁰Cn Spaltung 10 µs | gemessen | Oganessian et al. (2025) | über Ackermann |
+| ²⁷⁵Ds, ²⁷¹Hs | T½ 0,43 ms, α 11,20 MeV; ²⁷¹Hs 7,1 s und 46 s | gemessen | Oganessian et al., PRC 109, 054307 (2024) | über Ackermann |
+| ²⁹⁴120, ²⁹⁰Og, ²⁸⁶Lv, ²⁸²Fl (5n-Kette) | T½ 3,5 µs / 19 µs / 3,5 ms / 0,7 ms; α 13,06 / 12,43 / 11,15 MeV | Vorhersage | Saxena, Jain, Sharma, arXiv:2107.12976, Tabelle 6 | am Original |
+| ²⁹⁵120, ²⁹¹Og, ²⁸⁷Lv, ²⁸³Fl, ²⁷⁹Cn, ²⁹⁶120, ²⁹²Og | siehe `decays.ts` | Schätzung | Viola-Seaborg-Systematik, Projektvorgabe | nein |
 | Eichfaktor | 0,556 | Eichung | an Gates et al. (2 Ketten in 22,1 Tagen) | nachgerechnet |
+| Anteil voll gemessener Alphas | 90 % | Eichung | an den Ketten-Nachweis ≈ 95 % bei Gates et al. | nachgerechnet |
 | Q(Ti+Cf) | −197,7 MeV (±3 MeV) | Abschätzung | Projektvorgabe | nein |
 | Breite der Kurven | 4 MeV | Annahme | Projektvorgabe | – |
-| Anteil voll gemessener Alphas | 90 % | Annahme | Projektvorgabe | siehe unten |
-| ²⁸⁸Lv, ²⁸⁴Fl, ²⁷⁵Ds, ²⁷¹Hs | siehe `decays.ts` | gemessen | Projektvorgabe, Originalarbeiten noch zu benennen | nein |
-| ²⁹⁵120, ²⁹¹Og, ²⁸⁷Lv, ²⁸³Fl, ²⁷⁹Cn, ²⁹⁶120, ²⁹²Og | siehe `decays.ts` | Schätzung | Viola-Seaborg-Systematik, Projektvorgabe | nein |
 | Bass-Barriere | Formel | berechnet | R. Bass, Phys. Rev. Lett. 39, 265 (1977) | nein (trifft die Vorgabe) |
 | Poisson-Grenzen | 68 %, 1,84 bei 0 Ereignissen | Formel | N. Gehrels, ApJ 303, 336 (1986); Gates et al. zitieren Schmidt et al., Z. Phys. A 316, 19 (1984) | nein (trifft die veröffentlichten Fehler) |
 | N_A, e² | 6,02214076·10²³ /mol; 1,43996448 MeV fm | Konstante | CODATA 2018 / SI 2019 | nein |
 
 Im Code trägt jede Quelle `checked: true/false` (`packages/core/src/data/sources.ts`).
 
-Was die Prüfung am Original ergeben hat:
+Was die Prüfung an den Quellen ergeben hat (Modellversion `stufe1-v2`):
 
-- Die Zeiten bei Gates et al. sind ausdrücklich Halbwertszeiten (T½).
-- Deren Zählregel (mindestens 1 volles Alpha, dann Spaltung, innerhalb 1 s) weist
-  ≈ 95 % der ²⁹⁰Lv-Ketten nach. Unsere exakte Rechnung ergibt 94,8 %.
-- **Abweichung 1:** Für ²⁸⁶Fl stehen dort Alpha 32/56 = 57 % und Spaltung 43 %;
-  die Projektvorgabe nennt 55 / 45. Der Code folgt der Vorgabe (Wirkung auf die
-  Ketten-Effizienz: 0,2 Prozentpunkte).
-- **Abweichung 2:** Der Detektor misst dort 75–80 % der Alphas mit voller
-  Energie; die Projektvorgabe nennt 90 %. Mit 90 % ergibt sich aber gerade der
-  veröffentlichte Ketten-Nachweis von 95 %.
-- Ohne den Eichfaktor ergäben die veröffentlichten Werte 3,6 statt 2 Ketten.
+- Die Zeiten sind Halbwertszeiten (T½), bei Gates et al. ausdrücklich so genannt.
+- **²⁸⁶Fl:** Gemessen sind Alpha 32/56 = 57 % und Spaltung 43 %. Die Projektvorgabe
+  nannte 55 / 45; der Code nimmt jetzt die Messung.
+- **²⁸⁴Fl:** Zerfällt zu 24 % per Alpha nach ²⁸⁰Cn (Spaltung, 10 µs). Die
+  Projektvorgabe nannte nur Spaltung; der Code nimmt jetzt die Messung.
+- **²⁸⁸Lv:** Die fehlende Alpha-Energie ist ergänzt (11,08 MeV aus Q_alpha).
+- **5n-Kanal von Element 120:** Die Kette ²⁹⁴120 → ²⁹⁰Og → ²⁸⁶Lv → ²⁸²Fl stammt
+  jetzt aus einer veröffentlichten Vorhersage und ist nachweisbar.
+- **Voll gemessene Alphas:** Gates et al. nennen 75–80 % für das einzelne Alpha,
+  aber ≈ 95 % Ketten-Nachweis. Unsere einfache Zählregel ergibt die 95 % nur mit
+  90 %; mit 75–80 % wären es 86–89 %. Maßgeblich für die Trefferquote ist der
+  Ketten-Nachweis, deshalb bleibt 90 % als Eichwert.
+- Ohne den Eichfaktor 0,556 ergäben die veröffentlichten Werte 3,6 statt 2 Ketten.
   Die Strahlstärke gilt am Ausgang des Zyklotrons, nicht am Target.
 - Zhang et al. nennen weder Unsicherheiten noch eine Kurvenbreite noch einen Q-Wert.
+- Die Viola-Seaborg-Schätzungen der Projektvorgabe liegen um Faktoren von 1 bis 5
+  neben den Vorhersagen von Saxena et al. für dieselben Kerne (z. B. ²⁹⁵120:
+  12 µs gegen 5 µs). Das ist die übliche Streuung solcher Vorhersagen.
 
 ## Annahmen und offene Punkte
 
 Annahmen (nicht belegt, im Code markiert):
 
-- Die Zeiten der Zerfallsdaten sind **Halbwertszeiten** (für ²⁹⁰Lv, ²⁸⁶Fl, ²⁸²Cn am Original bestätigt; für die übrigen angenommen); mittlere Lebensdauer = T½ / ln 2.
+- Die geschätzten Zeiten der Projektvorgabe werden wie die gemessenen als **Halbwertszeiten** gelesen; mittlere Lebensdauer = T½ / ln 2.
 - „Breite 4 MeV“ ist die **Standardabweichung** der Gauß-Kurve.
 - Für ⁵⁰Ti + ²⁴⁴Pu ist nur ein Punkt gemessen. Dass er das Maximum ist und die
   Kurve ebenfalls 4 MeV breit ist, ist eine Annahme.
-- Geschätzte Kerne zerfallen nur per Alpha (keine Spaltungskonkurrenz).
+- Geschätzte und vorhergesagte Kerne zerfallen nur per Alpha (keine Spaltungskonkurrenz).
 - Eine Spaltung wird immer nachgewiesen. Das 1-s-Fenster zählt ab dem Einschlag.
 - Kein Untergrund, keine Totzeit, kein Energieverlust und keine Energiebreite im Target.
 - Die Zuordnung Kette → Kanal ist bekannt (im Experiment liest man sie aus den
@@ -156,11 +165,12 @@ Annahmen (nicht belegt, im Code markiert):
 
 Offen (keine Daten, deshalb nichts erfunden):
 
-- **5n-Kanal von Element 120** (²⁹⁴120 → ²⁹⁰Og → ²⁸⁶Lv → ²⁸²Fl): keine
-  Zerfallsdaten. Die Kerne werden erzeugt und gezählt, aber nicht als Kette
-  nachgewiesen; die Auswertung nennt den Kanal ausdrücklich als offen.
-- **Alpha-Energie von ²⁸⁸Lv**: nicht angegeben, im Protokoll „E offen“.
-- **Zerfallsart von ²⁷¹Hs**: nicht angegeben; die Kette endet dort.
+- **Zerfallsart von ²⁸²Fl** (Ende der 5n-Kette): Vorhergesagt ist Alpha, die
+  gemessenen Nachbarn spalten aber überwiegend. Die Kette endet dort; der
+  Nachweis über die drei Alphas davor liegt bei 97,2 %.
+- **Q-Wert von ⁵⁰Ti + ²⁴⁹Cf:** Abschätzung der Projektvorgabe, Massentabelle noch
+  nicht benannt. Er verschiebt nur die Umrechnung zwischen Strahlenergie und E*.
+- **Kurvenform:** Nur die Maxima sind belegt; Gauß-Form und Breite sind Annahmen.
 
 ## Mitmachen
 

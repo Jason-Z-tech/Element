@@ -18,7 +18,7 @@ export interface Channel {
   readonly width: Quantity;
   /**
    * Erzeugter Kern (Start der Zerfallskette). `null` = für diese Kette gibt es
-   * in der Vorgabe keine Zerfallsdaten: offen, wird nicht simuliert.
+   * keine Zerfallsdaten: offen, wird nicht simuliert.
    */
   readonly residue: string | null;
   readonly residueLabel: string;
@@ -98,8 +98,7 @@ export const REACTIONS = {
         sigmaMax: q(9.9, 'fb', 'vorhersage', 'prediction120'),
         eStarPeak: q(52, 'MeV', 'vorhersage', 'prediction120'),
         width,
-        // Für 294-120 -> 290Og -> 286Lv -> 282Fl liegen keine Zerfallsdaten vor.
-        residue: null,
+        residue: '294-120',
         residueLabel: '²⁹⁴120',
       },
     ],

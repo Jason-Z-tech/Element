@@ -34,7 +34,7 @@ export type ChainStep =
 export interface SimulatedChain {
   readonly start: string;
   readonly steps: readonly ChainStep[];
-  /** Kern, bei dem die Kette abgeschnitten wurde (langlebig), sonst `null`. */
+  /** Kern, bei dem die Kette abgeschnitten wurde (langlebig oder Zerfallsart offen), sonst `null`. */
   readonly endsAt: string | null;
 }
 
@@ -66,7 +66,7 @@ export function simulateChain(start: string, rng: Rng, options: ChainOptions = {
         break;
       }
     }
-    const estimated = n.kind === 'schaetzung';
+    const estimated = n.kind !== 'gemessen';
     if (mode.type === 'sf') {
       steps.push({ type: 'sf', nuclide: id, dt_s: dt, t_s: t, estimated });
       return { start, steps, endsAt: null };
