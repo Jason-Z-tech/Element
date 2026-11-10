@@ -1,0 +1,133 @@
+id;projectile;target;channel;residue;E_lab_MeV;Estar_MeV;sigma_pb;err_plus_pb;err_minus_pb;upper_limit;other_uncertainty;chains;lab_separator;primary_reference;source_file;source_lines;status;note
+1a;48Ca;249Cf;3n;294Og;251;32.1-36.6;0.5;1.6;0.3;no;;3/3 events (DECAY-DATA note, not split by energy);Dubna U-400;Oganessian PRC 74 044602 (2006);exfor/a0856.txt;49-71;X;
+1b;48Ca;249Cf;3n;294Og;245;26.6-31.7;0.3;1.0;0.27;no;;;Dubna U-400;Oganessian PRC 74 044602 (2006);exfor/a0856.txt;70;X;
+1c;48Ca;249Cf;3n;294Og;;;0.5;1.6;0.3;no;;;;cited as PRC 74 044602;../arxiv/flow_2407.txt;719-721;S;quoted by Gates et al. arXiv:2407.16079
+1d;48Ca;249Cf;3n;294Og;;34.397+-2.328;0.598;0.364;0.364;no;;;Dubna U-400 DGFRS;Voinov J.Phys.Conf.Ser. 966 012057 (2018);exfor/f1498.txt;44-51;X-figure;digitized from Fig. 3 (STATUS CURVE), no author response
+2a;48Ca;244Pu;4n;288Fl;243;38.9-43.0;5.3;3.6;2.1;no;;;Dubna U-400;Oganessian PRC 69 054607 (2004);exfor/a0891.txt;95-118;X;
+2b;48Ca;244Pu;3n;289Fl;243;38.9-43.0;1.7;2.5;1.1;no;;;Dubna U-400;Oganessian PRC 69 054607 (2004);exfor/a0891.txt;45-69;X;
+2c;48Ca;244Pu;5n;287Fl;257;50.4-54.7;1.1;2.6;0.9;no;;;Dubna U-400;Oganessian PRC 69 054607 (2004);exfor/a0891.txt;123-146;X;
+2d;48Ca;244Pu;4n;288Fl;259.4;41.7 (+2.2 -1.9);9.8;3.9;3.1;no;stat only, syst 18%;;GSI TASCA (HTM mode);Gates PRC 83 054618 (2011) Table I (= Duellmann PRL 104 252701);exfor/a0910.txt;149-169;X;SIM mode: 11 +15 -7
+2e;48Ca;244Pu;4n;288Fl;254.6;37.5 (+2.0 -1.4);2.8;4.2;2.1;no;stat only, syst 18%;;GSI TASCA;Gates PRC 83 054618 (2011);exfor/a0910.txt;166-167;X;
+2f;48Ca;244Pu;3n;289Fl;254.6;37.5 (+2.0 -1.4);8.0;7.4;4.5;no;stat only, syst 18%;;GSI TASCA;Gates PRC 83 054618 (2011);exfor/a0910.txt;124-142;X;
+2g;48Ca;244Pu;3n;289Fl;259.4;41.7 (+2.2 -1.9);3.5;3.3;2.0;no;stat only, syst 18%;;GSI TASCA;Gates PRC 83 054618 (2011);exfor/a0910.txt;143-144;X;SIM mode limit < 27
+2h1;48Ca;244Pu;4n;288Fl;240.6;;5.1;2.9;2.1;no;syst 0.6;;GSI TASCA;Samark-Roth PRC 107 024301 (2023) Table 1;exfor/d8105.txt;58-70;X+;
+2h2;48Ca;244Pu;4n;288Fl;237.4;;3.5;2.0;1.4;no;syst 0.4;;GSI TASCA;Samark-Roth PRC 107 024301 (2023) Table 1;exfor/d8105.txt;70;X+;
+2i1;48Ca;244Pu;3n;289Fl;240.6;;6.2;3.2;2.4;no;syst 0.8;;GSI TASCA;Samark-Roth PRC 107 024301 (2023) Table 1;exfor/d8105.txt;73-85;X+;
+2i2;48Ca;244Pu;3n;289Fl;237.4;;4.8;2.3;1.7;no;syst 0.6;;GSI TASCA;Samark-Roth PRC 107 024301 (2023) Table 1;exfor/d8105.txt;85;X+;
+2j;48Ca;244Pu;4n;288Fl;240.7(30) average in target;39(2);6.7;3.6;2.5;no;syst 12%;;LBNL BGS+SHREC;Gates PRC 113 024611 (2026);exfor/c3123.txt;35-37,148-160;X;
+2k;48Ca;244Pu;3n;289Fl;240.7(30) average in target;39(2);1.6;2.2;1.1;no;syst 12%;;LBNL BGS+SHREC;Gates PRC 113 024611 (2026);exfor/c3123.txt;134-145;X;
+3a;48Ca;238U;3n;283Cn;234;32.9-37.2;2.5;1.8;1.1;no;;;Dubna U-400;Oganessian PRC 70 064609 (2004);exfor/a0889.txt;51-77;X;
+3b;48Ca;238U;4n;282Cn;240;37.7-41.9;0.6;1.6;0.5;no;;;Dubna U-400;Oganessian PRC 70 064609 (2004);exfor/a0889.txt;127-147;X;
+3c;48Ca;238U;3n;283Cn;235.2-236.2;34.4-34.8;0.72;0.58;0.35;no;stat only, syst up to factor 2;four events (per 2210.08941.flow.txt 1197-1199);GSI SHIP;Hofmann EPJA 32 251 (2007);exfor/a0895.txt;51-74;X;
+3d;48Ca;238U;3n;283Cn;251.8 (EXFOR EN, not mid-target);34.5 (per 2210.08941.flow.txt 1194-1197);2.0;2.7;1.3;no;;two decay events (per S);RIKEN GARIS-II;Kaji JPSJ 86 085001 (2017);exfor/e2542.txt;29-45;X;E* and events from secondary source
+3e;48Ca;238U;3n;283Cn;231.1;30.7-34.4;1.5;0.7;0.5;no;;;Dubna SHE Factory DGFRS-2;Oganessian PRC 106 024612 (2022) Tbl.1;exfor/f1483.txt;110-127;X+;
+3f;48Ca;238U;3n;283Cn;234.4;33.6-37.1;0.5;0.5;0.3;no;;;Dubna SHE Factory DGFRS-2;Oganessian PRC 106 024612 (2022) Tbl.1;exfor/f1483.txt;126;X+;
+3g;48Ca;238U;3n;283Cn;231;32.5 (per exfor/a0889.txt 58-59);1.6;;;yes;one-event limit (EVR-fission) / 1.8 pb for EVR-alpha;0;LBNL BGS;Loveland PRC 66 044617 (2002) = arXiv:nucl-ex/0206018;nucl-ex_0206018.flow.txt;15-17,308-310;P;
+4a;48Ca;242Pu;3n;287Fl;244;38.0-42.4;3.6;3.4;1.7;no;;;Dubna U-400;Oganessian PRC 70 064609 (2004) / PRC 72 034611 Tbl.II;exfor/a0889.txt;152-166;X;
+4b;48Ca;242Pu;4n;286Fl;244;38.0-42.4;4.5;3.6;1.9;no;;;Dubna U-400;Oganessian PRC 70 064609 (2004) / PRC 72 034611 Tbl.II;exfor/a0889.txt;82-97;X;
+4c;48Ca;242Pu;2n;288Fl;235;30.4-34.7;0.5;1.4;0.4;no;;;Dubna U-400;Oganessian PRC 70 064609 (2004) / PRC 72 034611 Tbl.II;exfor/a0889.txt;171-185;X;
+4d;48Ca;242Pu;3n;287Fl;242.5;37.1-40.7;10.4;3.5;2.1;no;;69 new 287Fl chains in whole experiment;Dubna SHE Factory DGFRS-2;Oganessian PRC 106 024612 (2022) Tbl.1;exfor/f1483.txt;64-82;X+;
+4e;48Ca;242Pu;3n;287Fl;247.5;41.3-44.8;1.2;1.2;0.7;no;;;Dubna SHE Factory DGFRS-2;Oganessian PRC 106 024612 (2022) Tbl.1;exfor/f1483.txt;82;X+;
+4f;48Ca;242Pu;4n;286Fl;242.5;37.1-40.7;1.8;1.0;0.6;no;;25 new 286Fl chains in whole experiment;Dubna SHE Factory DGFRS-2;Oganessian PRC 106 024612 (2022) Tbl.1;exfor/f1483.txt;87-104;X+;
+4g;48Ca;242Pu;4n;286Fl;247.5;41.3-44.8;4.8;2.1;1.6;no;;;Dubna SHE Factory DGFRS-2;Oganessian PRC 106 024612 (2022) Tbl.1;exfor/f1483.txt;105;X+;
+4h;48Ca;242Pu;3n;287Fl;263.0 (cyclotron energy);41 (per 2210.08941.flow.txt 1185);1.4;3.2;1.2;no;68% CL, syst 12%;;LBNL BGS;Stavsetra PRL 103 132502 (2009);exfor/c1776.txt;30-36,47-64;X;
+4i;48Ca;242Pu;4n;286Fl;263.0 (cyclotron energy);41 (per S);1.4;3.2;1.2;no;68% CL, syst 12%;;LBNL BGS;Stavsetra PRL 103 132502 (2009);exfor/c1776.txt;63;X;
+4j;48Ca;242Pu;5n;285Fl;255.9 (+-1%);50 (per 2210.08941.flow.txt 1180-1183);0.6;0.9;0.5;no;total, 68% CL;;LBNL BGS;Ellison PRL 105 182701 (2010);exfor/c1822.txt;46-65;X;
+4k;48Ca;242Pu;4n;286Fl;255.9 (+-1%);50 (per S);0.6;0.9;0.5;no;total, 68% CL;;LBNL BGS;Ellison PRL 105 182701 (2010);exfor/c1822.txt;68-81;X;
+4l1;48Ca;242Pu;3n;287Fl;252;;8.5;3.6;2.7;no;;;Dubna DC-280 GRAND;Yeremin Phys.Part.Nucl.Lett. 21 518 (2024) Table 2;exfor/f1531.txt;33-43;X;energy presumably delivered beam energy
+4l2;48Ca;242Pu;3n;287Fl;256;;5.2;4.8;3.0;no;;;Dubna DC-280 GRAND;Yeremin Phys.Part.Nucl.Lett. 21 518 (2024) Table 2;exfor/f1531.txt;43;X;
+4m1;48Ca;242Pu;4n;286Fl;252;;0.85;1.0;0.6;no;;;Dubna DC-280 GRAND;Yeremin Phys.Part.Nucl.Lett. 21 518 (2024) Table 2;exfor/f1531.txt;48-58;X;
+4m2;48Ca;242Pu;4n;286Fl;256;;1.7;2.1;1.2;no;;;Dubna DC-280 GRAND;Yeremin Phys.Part.Nucl.Lett. 21 518 (2024) Table 2;exfor/f1531.txt;58;X;
+4n;48Ca;242Pu;4n;286Fl;241.2;;22;26;15;no;syst 3;;GSI TASCA;Samark-Roth PRC 107 024301 (2023) Table 1;exfor/d8105.txt;46-55;X+;mixed-isotope target (242Pu 23.4% in run 1)
+4o;48Ca;240Pu;3n;285Fl;245 (+-1);;2.5;2.9;1.4;no;;;Dubna U-400;Utyonkov PRC 92 034609 (2015);exfor/f1273.txt;55-73;X+;
+4p;48Ca;240Pu;4n;284Fl;250;;2.6;3.3;1.7;no;;;Dubna U-400;Utyonkov PRC 92 034609 (2015);exfor/f1273.txt;78-92;X+;
+4q;48Ca;239Pu;3n;284Fl;245;;0.23;0.59;0.20;no;;;Dubna U-400;Utyonkov PRC 92 034609 (2015);exfor/f1273.txt;97-110;X+;
+4r;48Ca;240Pu;3n;285Fl;250 (+-1);;0.58;0.60;0.33;no;;;Dubna U-400;Utyonkov PRC 97 014320 (2018);exfor/f1336.txt;61-72;X+;
+5a1;48Ca;243Am;3n;288Mc;248;38.0-42.3;2.7;4.8;1.6;no;;;Dubna U-400 (physical exp.);Oganessian PRC 69 021601 (2004) / PRC 72 034611 (2005);exfor/a0890.txt;59-89;X;
+5a2;48Ca;243Am;3n;288Mc;248;38.0-42.3;3.7;1.3;1.0;no;;;Dubna (average physical+chemical);Oganessian PRC 72 034611 (2005);exfor/a0890.txt;88-89;X;
+5b;48Ca;243Am;3n;288Mc;247;35.0-43.8;4.2;1.6;1.2;no;;;Dubna (chemical exp.);Oganessian PRC 72 034611 (2005) / Mendeleev Commun. 15 1 (2005);exfor/a0890.txt;86-87;X;
+5c;48Ca;243Am;4n;287Mc;253;42.4-46.5;0.9;3.2;0.8;no;;;Dubna U-400;Oganessian PRC 69 021601 (2004) / PRC 72 034611 (2005);exfor/a0890.txt;94-109;X;
+5d1;48Ca;243Am;3n;288Mc;240.0;33.3;3.33;1.26;0.95;no;;;Dubna U-400 gas-filled recoil separator;Oganessian PRC 87 014302 (2013);exfor/a0920.txt;73-74;X;
+5d2;48Ca;243Am;3n;288Mc;241.0;34.2;3.5;2.7;1.5;no;;;Dubna U-400;Oganessian PRC 87 014302 (2013);exfor/a0920.txt;75-76;X;
+5d3;48Ca;243Am;3n;288Mc;243.4;36.2;8.5;6.4;3.7;no;;;Dubna U-400;Oganessian PRL 108 022502 (2012);exfor/a0920.txt;77-78;X;
+5d4;48Ca;243Am;3n;288Mc;248.1;40.3;3.92;2.34;1.56;no;;;Dubna U-400;Oganessian PRL 108 022502 (2012);exfor/a0920.txt;79-80;X;
+5d5;48Ca;243Am;3n;288Mc;253.8;44.8;1.0;;;yes;;0;Dubna U-400;Oganessian PRC 87 014302 (2013);exfor/a0920.txt;81-82;X;
+5e;48Ca;243Am;4n;287Mc;253.8;44.8;0.98;1.19;0.63;no;;;Dubna U-400;Oganessian PRC 87 014302 (2013);exfor/a0920.txt;87-99;X;
+5f1;48Ca;243Am;2n;289Mc;240.0;33.3;0.39;0.91;0.32;no;;;Dubna U-400;Oganessian PRL 108 022502 (2012);exfor/a0920.txt;121-122;X;
+5f2;48Ca;243Am;2n;289Mc;241.0;34.2;2.5;2.7;1.5;no;;;Dubna U-400;Oganessian PRC 87 014302 (2013);exfor/a0920.txt;123-124;X;
+5f3;48Ca;243Am;2n;289Mc;243.4;36.2;3.73;;;yes;;0;Dubna U-400;Oganessian PRC 87 014302 (2013);exfor/a0920.txt;125-126;X;
+5g;48Ca;243Am;3n;288Mc;242.1;32.4-37.9;10.3;4.0;3.1;no;syst +-1.3 / scenario 1: 7.5+-1.0 +3.6-2.6 (8 chains) / scenario 2: 11.2+-1.4 +4.2-3.2 (12 chains);11;GSI TASCA+TASISpec;Forsberg NPA 953 117 (2016) = arXiv:1502.03030 Table III (Rudolph PRL 111 112502);1502.03030.lay.txt;410-436;P;preferred scenario 3
+5h;48Ca;243Am;3n;288Mc;245.0;34.8-40.3;8.7;2.6;2.1;no;syst +-1.1 / scenario 1: 7.2+-0.9 +2.4-1.9 (14 chains);17;GSI TASCA+TASISpec;Forsberg arXiv:1502.03030 Table III;1502.03030.lay.txt;410-436;P;scenario 3 (= scenario 2)
+5i1;48Ca;243Am;2n;289Mc;242.1;32.4-37.9;0.93;2.14;0.77;no;syst +-0.12 / scenario 1: 3.7+-0.5 +2.8-1.9 (4 chains);1;GSI TASCA+TASISpec;Forsberg arXiv:1502.03030 Table III;1502.03030.lay.txt;410-436;P;scenario 3
+5i2;48Ca;243Am;2n;289Mc;245.0;34.8-40.3;1.1;;;yes;scenario 1: 1.5+-0.2 +1.4-0.9 (3 chains);0;GSI TASCA+TASISpec;Forsberg arXiv:1502.03030 Table III;1502.03030.lay.txt;410-436;P;scenario 3
+5j1;48Ca;243Am;4n;287Mc;242.1;32.4-37.9;1.9;;;yes;;0;GSI TASCA+TASISpec;Forsberg arXiv:1502.03030 Table III;1502.03030.lay.txt;410-436;P;
+5j2;48Ca;243Am;4n;287Mc;245.0;34.8-40.3;0.51;1.17;0.42;no;syst +-0.07;1;GSI TASCA+TASISpec;Forsberg arXiv:1502.03030 Table III;1502.03030.lay.txt;410-436;P;
+5k1;48Ca;243Am;3n;288Mc;239.1;31.5-33.6;9.9;5.1;3.4;no;;55 new 288Mc chains in whole experiment;Dubna SHE Factory DGFRS-2;Oganessian PRC 106 L031301 (2022) Tbl.1;exfor/f1484.txt;78-79;X+;
+5k2;48Ca;243Am;3n;288Mc;240.9;33.1-35.2;17.1;6.3;4.7;no;;;Dubna SHE Factory DGFRS-2;Oganessian PRC 106 L031301 (2022) Tbl.1;exfor/f1484.txt;76-77;X+;
+5k3;48Ca;243Am;3n;288Mc;243.9;35.5-37.8;9.8;2.6;2.1;no;;;Dubna SHE Factory DGFRS-2;Oganessian PRC 106 L031301 (2022) Tbl.1;exfor/f1484.txt;74-75;X+;
+5l1;48Ca;243Am;2n;289Mc;243.9;35.5-37.8;1.6;1.2;0.7;no;;6 chains 289Mc in whole experiment;Dubna SHE Factory DGFRS-2;Oganessian PRC 106 L031301 (2022) Tbl.1;exfor/f1484.txt;100-101;X+;
+5l2;48Ca;243Am;2n;289Mc;240.9;33.1-35.2;1.1;2.5;0.9;no;;;Dubna SHE Factory DGFRS-2;Oganessian PRC 106 L031301 (2022) Tbl.1;exfor/f1484.txt;102-103;X+;
+5l3;48Ca;243Am;2n;289Mc;239.1;31.5-33.6;2.1;;;yes;;0;Dubna SHE Factory DGFRS-2;Oganessian PRC 106 L031301 (2022) Tbl.1;exfor/f1484.txt;104-105;X+;
+5m1;48Ca;243Am;3n;288Mc;242.2;34.0-36.3;15;5;3;no;;;Dubna SHE Factory DGFRS-2;Oganessian PRC 106 064306 (2022) Tbl.1;exfor/f1485.txt;71-80;X+;
+5m2;48Ca;243Am;3n;288Mc;250.8;41.3-43.5;4.1;4.2;2.3;no;;;Dubna SHE Factory DGFRS-2;Oganessian PRC 106 064306 (2022) Tbl.1;exfor/f1485.txt;81;X+;
+5n1;48Ca;243Am;4n;287Mc;242.2;34.0-36.3;0.6;0.7;0.4;no;;;Dubna SHE Factory DGFRS-2;Oganessian PRC 106 064306 (2022) Tbl.1;exfor/f1485.txt;86-95;X+;
+5n2;48Ca;243Am;4n;287Mc;250.8;41.3-43.5;4.1;3.2;1.2;no;;;Dubna SHE Factory DGFRS-2;Oganessian PRC 106 064306 (2022) Tbl.1;exfor/f1485.txt;96;X+;
+5n3;48Ca;243Am;4n;287Mc;259.1;48.2-50.4;0.5;1.3;0.4;no;;;Dubna SHE Factory DGFRS-2;Oganessian PRC 106 064306 (2022) Tbl.1;exfor/f1485.txt;97;X+;
+5o;48Ca;243Am;2n;289Mc;242.2;34.0-36.3;1.2;1.0;0.6;no;;;Dubna SHE Factory DGFRS-2;Oganessian PRC 106 064306 (2022) Tbl.1;exfor/f1485.txt;57-66;X+;
+5p;48Ca;243Am;5n;286Mc;259.1;48.2-50.4;0.5;1.3;0.4;no;;;Dubna SHE Factory DGFRS-2;Oganessian PRC 106 064306 (2022) Tbl.1;exfor/f1485.txt;102-115;X+;
+6a;48Ca;245Cm;2n;291Lv;243;30.9-35.0;0.9;2.0;0.7;no;;;Dubna U-400;Oganessian PRC 69 054607 (2004);exfor/a0891.txt;74-90;X;EXFOR status: table from V.K. Utyonkov 2011
+6b;48Ca;245Cm;3n;290Lv;243;30.9-35.0;1.3;2.5;0.8;no;;;Dubna U-400;Oganessian PRC 69 054607 (2004);exfor/a0891.txt;151-164;X;EXFOR status: table from V.K. Utyonkov 2011
+6c;48Ca;245Cm;2n;291Lv;249;35.9-39.9;0.7;2.0;0.6;no;;;Dubna U-400;Oganessian PRC 74 044602 (2006);exfor/a0856.txt;73-92;X;
+6d1;48Ca;245Cm;3n;290Lv;249;35.9-39.9;3.7;3.6;1.8;no;;;Dubna U-400;Oganessian PRC 74 044602 (2006);exfor/a0856.txt;95-115;X;
+6d2;48Ca;245Cm;3n;290Lv;255;40.7-44.8;1.9;2.1;1.0;no;;;Dubna U-400;Oganessian PRC 74 044602 (2006);exfor/a0856.txt;116;X;
+6e;48Ca;245Cm;4n;289Lv;255;40.7-44.8;1.0;;;yes;;0;Dubna U-400;Oganessian PRC 74 044602 (2006);exfor/a0856.txt;119-131;X;
+6f;48Ca;248Cm;4n;292Lv;247;36.8-41.1;3.3;2.5;1.4;no;;six chains (per 2201.10077.flow.txt 503-506);Dubna U-400;Oganessian PRC 70 064609 (2004);exfor/a0889.txt;102-122;X;
+6g;48Ca;248Cm;3n;293Lv;247;36.8-41.1;1.2;1.8;0.8;no;;two chains (per S);Dubna U-400;Oganessian PRC 70 064609 (2004);exfor/a0889.txt;190-207;X;S (2201.10077.flow.txt 506-509) prints 1.1 +1.7 -0.7 at E*=38.9
+6h;48Ca;248Cm;3n;293Lv;;33.0;0.5;0.5;0.26;no;;three chains;Dubna (2000-2001);cited as Oganessian PRC 63 011301(R) (2000);2201.10077.flow.txt;494-503;S;4n limit 0.3 pb at same E* / limit 0.9 pb at E*=30.5
+6i;48Ca;248Cm;4n;292Lv;249.3;40.9;3.4;2.7;1.6;no;;four events (per S);GSI SHIP;Hofmann EPJA 48 62 (2012);exfor/a0938.txt;89-99;X;
+6j;48Ca;248Cm;3n;293Lv;249.3;40.9;0.9;2.1;0.7;no;;1 event definitely assigned (per S);GSI SHIP;Hofmann EPJA 48 62 (2012);exfor/a0938.txt;73-83;X;
+6k;48Ca;248Cm;3n,4n;293Lv,292Lv;254.3;45.0 (per 2201.10077.flow.txt 520-523);1.6;;;yes;one-event limit;0;GSI SHIP;Hofmann EPJA 48 62 (2012);exfor/a0938.txt;84,100;X;
+6l;48Ca;248Cm;4n;292Lv;261.6;41.3 (per 2201.10077.flow.txt 525-537);3.1;2.8;1.8;no;;3 (of 7 total, per S);RIKEN GARIS;Kaji JPSJ 86 034201 (2017);exfor/e2538.txt;38-61;X;
+6m1;48Ca;248Cm;3n;293Lv;261.6;41.3 (per S);1.0;2.4;0.9;no;;3 chains to 293Lv in total (per S);RIKEN GARIS;Kaji JPSJ 86 034201 (2017);exfor/e2538.txt;64-84;X;
+6m2;48Ca;248Cm;3n;293Lv;258.0;38.2 (per S);1.8;2.3;1.1;no;;;RIKEN GARIS;Kaji JPSJ 86 034201 (2017);exfor/e2538.txt;85;X;
+7a1;48Ca;249Bk;3n;294Ts;247;;0.5;1.1;0.4;no;;;Dubna DGFRS;Oganessian PRC 83 054315 (2011) Table 3;exfor/a0884.txt;57-68;X;
+7a2;48Ca;249Bk;3n;294Ts;252;;0.7;;;yes;;0;Dubna DGFRS;Oganessian PRC 83 054315 (2011) Table 3;exfor/a0884.txt;67;X;
+7b1;48Ca;249Bk;4n;293Ts;252;;1.3;1.5;0.6;no;;;Dubna DGFRS;Oganessian PRC 83 054315 (2011) Table 3;exfor/a0884.txt;73-83;X;
+7b2;48Ca;249Bk;4n;293Ts;247;;0.8;;;yes;;0;Dubna DGFRS;Oganessian PRC 83 054315 (2011) Table 3;exfor/a0884.txt;84;X;
+7c;48Ca;249Bk;3n;294Ts;247;35;3.6;6.1;2.5;no;;;Dubna U-400 DGFRS;Oganessian PRL 109 162501 (2012);exfor/a0939.txt;52-69;X;
+7d;48Ca;249Bk;4n;293Ts;252;39;2.0;2.2;1.0;no;;;Dubna U-400 DGFRS;Oganessian PRL 109 162501 (2012);exfor/a0939.txt;74-92;X;
+7e1;48Ca;249Bk;3n;294Ts;243.7;32.55;0.7276;1.6730;0.6019;no;;;Dubna DGFRS;Oganessian PRC 87 054621 (2013) Fig.4 numbers from Utyonkov;exfor/a0948.txt;59-75;X;
+7e2;48Ca;249Bk;3n;294Ts;246.8;35.13;1.1045;1.0744;0.6011;no;;;Dubna DGFRS;Oganessian PRC 87 054621 (2013);exfor/a0948.txt;76;X;
+7e3;48Ca;249Bk;3n;294Ts;251.7;39.25;0.315;;;yes;;0;Dubna DGFRS;Oganessian PRC 87 054621 (2013);exfor/a0948.txt;77;X;
+7f1;48Ca;249Bk;4n;293Ts;246.8;35.13;0.587;;;yes;;0;Dubna DGFRS;Oganessian PRC 87 054621 (2013);exfor/a0948.txt;99;X;
+7f2;48Ca;249Bk;4n;293Ts;251.7;39.25;1.542;0.658;0.479;no;;;Dubna DGFRS;Oganessian PRC 87 054621 (2013);exfor/a0948.txt;100;X;
+7f3;48Ca;249Bk;4n;293Ts;255.7;42.58;2.370;2.3056;1.290;no;;;Dubna DGFRS;Oganessian PRC 87 054621 (2013);exfor/a0948.txt;101;X;
+7f4;48Ca;249Bk;4n;293Ts;259.8;46.02;1.964;1.9105;1.0689;no;;;Dubna DGFRS;Oganessian PRC 87 054621 (2013);exfor/a0948.txt;102;X;
+7g;48Ca;249Bk;5n;292Ts;259.8;46.02;1.2053;;;yes;;0;Dubna DGFRS;Oganessian PRC 87 054621 (2013);exfor/a0948.txt;107-118;X;
+7h1;48Ca;249Bk;3n;294Ts;243.7-259.8;30.4-48.3;1.1;1.2;0.6;no;average quoted in abstract;;Dubna DGFRS;Oganessian PRC 87 054621 (2013) abstract;exfor/a0948.txt;123-144;X;
+7h2;48Ca;249Bk;4n;293Ts;243.7-259.8;30.4-48.3;2.4;3.3;1.4;no;average quoted in abstract;;Dubna DGFRS;Oganessian PRC 87 054621 (2013) abstract;exfor/a0948.txt;149-171;X;
+7i1;48Ca;249Bk;3n;294Ts;252.0-256.1 (254.0);;0.7;1.6;0.6;no;;1;GSI TASCA;Khuyagbaatar PRL 112 172501 (2014) / PRC 99 054306 (2019);exfor/d0731.txt;58-69;X+;same numbers repeated for 4n in exfor/d0944.txt 71-88
+7i2;48Ca;249Bk;3n;294Ts;255.9-260.0 (258);;0.9;2.0;0.7;no;;1;GSI TASCA;Khuyagbaatar PRL 112 172501 (2014) / PRC 99 054306 (2019);exfor/d0731.txt;69;X+;
+7i3;48Ca;249Bk;3n;294Ts;252.1;;2.9;;;yes;;0;GSI TASCA;Khuyagbaatar PRC 99 054306 (2019) Fig.8;exfor/d0944.txt;49-68;X+;
+8a1;48Ca;232Th;4n;276Ds;231.1;32.3-36.6;0.07;0.17;0.06;no;;;Dubna SHE Factory DGFRS-2;Oganessian PRC 108 024611 (2023) Tbl.1;exfor/f1486.txt;59-72;X+;
+8a2;48Ca;232Th;4n;276Ds;237.8;37.9-42.1;0.7;1.1;0.5;no;;;Dubna SHE Factory DGFRS-2;Oganessian PRC 108 024611 (2023) Tbl.1;exfor/f1486.txt;73;X+;S (2405.12932.flow.txt 1195-1213) gives E*=40.37
+8a3;48Ca;232Th;4n (coded) ;276Ds;250.6;48.9-52.3;0.11;0.46;0.09;no;;;Dubna SHE Factory DGFRS-2;Oganessian PRC 108 024611 (2023) Tbl.1;exfor/f1486.txt;74;X+;CONFLICT: same point coded as 5n in exfor/f1540.txt line 70
+8b1;48Ca;232Th;5n;275Ds;250.6;48.9-52.3;0.11;0.46;0.09;no;;;Dubna SHE Factory DGFRS-2;Oganessian PRC 109 054307 (2024) Tbl.1;exfor/f1540.txt;54-70;X+;see 8a3
+8b2;48Ca;232Th;5n;275Ds;257.0;54.2-57.5;0.34;0.59;0.16;no;;;Dubna SHE Factory DGFRS-2;Oganessian PRC 109 054307 (2024) Tbl.1;exfor/f1540.txt;71;X+;
+8c;48Ca;232Th;4n;276Ds;257.0;54.2-57.5;0.2;;;yes;;0;Dubna SHE Factory DGFRS-2;Oganessian PRC 109 054307 (2024) Tbl.1;exfor/f1540.txt;74-83;X+;
+8e1;40Ar;238U;5n;273Ds;212.2;47.5-50.7;0.18;0.44;0.12;no;;two 273Ds chains;Dubna SHE Factory DGFRS-2;Oganessian PRC 109 054307 (2024);exfor/f1540.txt;100-114;X+;
+8e2;40Ar;238U;4n;274Ds;212.2;47.5-50.7;0.3;;;yes;;0;Dubna SHE Factory DGFRS-2;Oganessian PRC 109 054307 (2024);exfor/f1540.txt;88-95;X+;
+8f;48Ca;237Np;3n;282Nh;244;36.9-41.2;0.9;1.6;0.6;no;;;Dubna U-400;Oganessian PRC 76 011601 (2007);exfor/a0892.txt;42-60;X;
+8g;48Ca;226Ra;4n;270Hs;234;41;16;13;7;no;;;Dubna U-400 DGFRS;Oganessian PRC 87 034605 (2013) Table 2;exfor/a0947.txt;41-51;X;
+9a;50Ti;244Pu;4n;290Lv;E_cm 220(3);41(2);0.44;0.58;0.28;no;68% CL stat, syst 12%;2;LBNL BGS+SHREC;Gates PRL 133 172502 (2024) = arXiv:2407.16079;../arxiv/flow_2407.txt;51-54,683-700,735-738;P;also exfor/c3022.txt 79-87
+9b;50Ti;242Pu;3n;289Lv;;41;0.32;0.34;0.18;no;;;Dubna;Oganessian PRC 112 014603 (2025);2511.18337.flow.txt;1733-1740;S;
+9c;50Ti;242Pu;4n;288Lv;;41 (approx. 40 in 2nd source);0.22;0.27;0.15;no;;;Dubna;Oganessian PRC 112 014603 (2025);2511.18337.flow.txt;1737-1740;S;also 2608.22947.flow.txt 417-421
+9d1;54Cr;238U;4n;288Lv;;42;0.032;0.046;0.024;no;;one registered event (2407.12418.flow.txt 214-216);Dubna SHE Factory DGFRS-2;Oganessian PRC 112 014603 (2025);2511.18337.flow.txt;1740-1743;S;CONFLICT with 9d2
+9d2;54Cr;238U;4n;288Lv;;approx. 40;0.036;0.046;0.024;no;;;Dubna;Oganessian PRC 112 014603 (2025);2608.22947.flow.txt;422-425;S;CONFLICT with 9d1
+10a;50Ti;249Bk;xn;Z=119;281.5;43.2 (per 2312.17567.flow.txt 100-105);0.065;;;yes;one-event limit (Gates 2024), no CL stated;0;GSI TASCA;Khuyagbaatar PRC 102 064602 (2020);exfor/d8036.txt;44-52;X+S;EXFOR prints 65 with unit PB (unit error) / fb in ../arxiv/flow_2407.txt 139-143, 2312.17567.flow.txt, 2405.02839.flow.txt 589-590
+10b;50Ti;249Cf;xn;Z=120;281.5;37.6 (per 2312.17567.flow.txt 100-105);0.2;;;yes;one-event limit (Gates 2024), no CL stated;0;GSI TASCA;Khuyagbaatar PRC 102 064602 (2020);exfor/d8036.txt;55-63;X+S;EXFOR prints 200 with unit PB (unit error)
+10d1;54Cr;248Cm;xn;Z=120;;;0.58;;;yes;CL not stated;0;GSI SHIP;Hofmann EPJA 52 180 (2016);2102.08793.flow.txt;7014-7015;S;
+10d2;54Cr;248Cm;xn;Z=120;;;0.56;;;yes;CL not stated;0;GSI SHIP;GSI report cited by Folden 2012;1209.0498.flow.txt;46-50;S;1609.06467.flow.txt 73-74 prints 560 fb
+10e;58Fe;244Pu;xn;Z=120;;;0.4;;;yes;one-event upper limit;0;Dubna (JINR-LLNL);Oganessian PRC 79 024603 (2009);1209.0498.flow.txt;41-43;S;also ../arxiv/flow_2407.txt 139-143, 1203.4864.flow.txt 604-609, 1609.06467.flow.txt 72-73, 1203.2252.flow.txt 291-292 / 2102.08793.flow.txt 7016 prints <0.5 pb
+10f;64Ni;238U;xn;Z=120;;36.4;0.09;;;yes;one-event limit (Gates 2024);0;GSI SHIP;Hofmann GSI Scientific Report 2008;1609.06467.flow.txt;69-71;S;also 2312.17567.flow.txt 86-90, 2102.08793.flow.txt 7014-7015, ../arxiv/flow_2407.txt 139-143
+10g;50Ti;248Cm;xn;Z=118;227.9 (EXFOR EN, probably c.m.);;0.50;;;yes;1-sigma upper limit;0;RIKEN RILAC GARIS-II;Gall JPSJ 94 094201 (2025);exfor/e2820.txt;19,32-51;X;

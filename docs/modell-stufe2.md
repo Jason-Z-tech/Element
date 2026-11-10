@@ -1,6 +1,7 @@
 # Modell-Vorschlag für Stufe 2: Die Physik selbst rechnen
 
 Stand: Vorschlag, noch nicht umgesetzt. Umsetzung erst nach Freigabe.
+Geprüft an den Quellen am 10.11.2026.
 
 > **Das ist eine Simulation.** Sie kann vorhersagen, wo man suchen sollte.
 > Eine Entdeckung ist erst das im Beschleuniger gemessene Atom.
@@ -235,7 +236,110 @@ Bekannte Unstimmigkeiten in den Quellen, die die Umsetzung berücksichtigt:
 
 ## 8. Eichung und Prüfung
 
-(Tabelle der Messwerte folgt, sobald die Quellenprüfung abgeschlossen ist.)
+### Woher die Messwerte stammen
+
+Die meisten Originalarbeiten (Phys. Rev. C, Dubna) sind nicht frei zugänglich.
+Hauptquelle ist deshalb **EXFOR**, die Datenbank experimenteller Kerndaten der
+IAEA: Jeder Eintrag überträgt die Zahlen einer genannten Arbeit und sagt, wo sie
+dort stehen. Die vollständige Liste (132 Zeilen mit Fundstelle) liegt in
+[`daten/er_wirkungsquerschnitte.csv`](daten/er_wirkungsquerschnitte.csv).
+
+Status in der Tabelle:
+
+- **P** Originalarbeit im Volltext gelesen (arXiv)
+- **X** EXFOR-Eintrag gelesen; **X+** vom Autor der Arbeit bestätigt
+- **S** Zahl steht in einer anderen Arbeit, die das Original zitiert
+
+Deine drei Vorgaben sind bestätigt:
+
+- ⁵⁰Ti + ²⁴⁴Pu (4n): 0,44 (+0,58 −0,28) pb bei E* = 41(2) MeV (P).
+- ⁴⁸Ca + ²⁴⁹Cf (3n): 0,5 (+1,6 −0,3) pb bei E* = 32,1–36,6 MeV, dazu ein zweiter
+  Punkt 0,3 (+1,0 −0,27) pb bei 26,6–31,7 MeV (X).
+- ⁴⁸Ca + ²⁴⁴Pu (4n): 5,3 (+3,6 −2,1) pb (Dubna) und 9,8 (+3,9 −3,1) pb (TASCA,
+  GSI) sind zwei verschiedene Experimente; zwei neuere Messungen liegen mit 5,1
+  und 6,7 pb dazwischen (X, X+).
+
+### Vorgeschlagene Aufteilung
+
+Die Vorhersage für Element 120 verlangt zwei Schritte ins Unbekannte: ein
+schwereres Projektil als ⁴⁸Ca und das schwerste Target. Genau diese Fälle
+sollten deshalb **nicht** in die Eichung, sondern die Prüfung sein.
+
+**Eichung** (nur ⁴⁸Ca, fünf Targets, je die best gemessenen Kanäle):
+
+| Reaktion | Kanal | σ (pb) | E* (MeV) | Experiment | Status |
+|---|---|---|---|---|---|
+| ⁴⁸Ca + ²³⁸U | 3n, ²⁸³Cn | 1,5 +0,7 −0,5 | 30,7–34,4 | Dubna 2022 | X+ |
+| ⁴⁸Ca + ²⁴²Pu | 3n, ²⁸⁷Fl | 10,4 +3,5 −2,1 | 37,1–40,7 | Dubna 2022 | X+ |
+| ⁴⁸Ca + ²⁴²Pu | 4n, ²⁸⁶Fl | 4,8 +2,1 −1,6 | 41,3–44,8 | Dubna 2022 | X+ |
+| ⁴⁸Ca + ²⁴³Am | 3n, ²⁸⁸Mc | 17,1 +6,3 −4,7 | 33,1–35,2 | Dubna 2022 | X+ |
+| ⁴⁸Ca + ²⁴³Am | 3n, ²⁸⁸Mc | 10,3 ±1,3 +4,0 −3,1 | 32,4–37,9 | TASCA, 11 Ketten | P |
+| ⁴⁸Ca + ²⁴³Am | 4n, ²⁸⁷Mc | 4,1 +3,2 −1,2 | 41,3–43,5 | Dubna 2022 | X+ |
+| ⁴⁸Ca + ²⁴⁸Cm | 4n, ²⁹²Lv | 3,3 +2,5 −1,4 | 36,8–41,1 | Dubna | X |
+| ⁴⁸Ca + ²⁴⁸Cm | 3n, ²⁹³Lv | 1,2 +1,8 −0,8 | – | Dubna | X |
+| ⁴⁸Ca + ²⁴⁹Bk | 4n, ²⁹³Ts | 2,37 +2,31 −1,29 | 42,6 | Dubna/ORNL | X |
+| ⁴⁸Ca + ²⁴⁹Bk | 3n, ²⁹⁴Ts | 1,10 +1,07 −0,60 | 35,1 | Dubna/ORNL | X |
+
+**Prüfung** (nach der Eichung eingefroren gerechnet, nichts nachgestellt):
+
+| Reaktion | Kanal | σ (pb) | E* (MeV) | Experiment | Status | prüft |
+|---|---|---|---|---|---|---|
+| ⁴⁸Ca + ²⁴⁴Pu | 4n, ²⁸⁸Fl | 5,3 bis 9,8 (vier Messungen) | 38,9–43,0 | Dubna, TASCA, LBNL | X, X+ | anderes Isotop |
+| ⁴⁸Ca + ²⁴⁴Pu | 3n, ²⁸⁹Fl | 8,0 +7,4 −4,5 | 37,5 | TASCA | X | Kanalverhältnis |
+| ⁴⁸Ca + ²⁴⁴Pu | 5n, ²⁸⁷Fl | 1,1 +2,6 −0,9 | 50,4–54,7 | Dubna | X | hohe Energie |
+| ⁴⁸Ca + ²⁴⁵Cm | 3n, ²⁹⁰Lv | 3,7 +3,6 −1,8 | 35,9–39,9 | Dubna | X | anderes Isotop |
+| ⁴⁸Ca + ²⁴⁹Cf | 3n, ²⁹⁴Og | 0,5 +1,6 −0,3 | 32,1–36,6 | Dubna | X | schwerstes Target |
+| ⁴⁸Ca + ²³²Th | 4n, ²⁷⁶Ds | 0,7 +1,1 −0,5 | 37,9–42,1 | Dubna 2023 | X+ | leichtes Target |
+| ⁴⁸Ca + ²³²Th | 5n, ²⁷⁵Ds | 0,34 +0,59 −0,16 | 54,2–57,5 | Dubna 2024 | X+ | leichtes Target |
+| ⁵⁰Ti + ²⁴⁴Pu | 4n, ²⁹⁰Lv | 0,44 +0,58 −0,28 | 41(2) | LBNL 2024, 2 Ketten | P | **schwereres Projektil** |
+| ⁵⁰Ti + ²⁴²Pu | 3n, ²⁸⁹Lv | 0,32 +0,34 −0,18 | 41 | Dubna 2025 | S | **schwereres Projektil** |
+| ⁵⁰Ti + ²⁴²Pu | 4n, ²⁸⁸Lv | 0,22 +0,27 −0,15 | 41 | Dubna 2025 | S | **schwereres Projektil** |
+| ⁵⁴Cr + ²³⁸U | 4n, ²⁸⁸Lv | 0,032 oder 0,036 (+0,046 −0,024) | 42 | Dubna, 1 Ereignis | S, Quellen uneins | **schwereres Projektil** |
+
+**Obergrenzen** aus erfolglosen Suchen (die Rechnung darf nicht darüber liegen):
+
+| Reaktion | Ziel | Obergrenze | Experiment | Status |
+|---|---|---|---|---|
+| ⁵⁰Ti + ²⁴⁹Cf | 120 | < 200 fb | TASCA, GSI (PRC 102, 064602) | X + S |
+| ⁵⁰Ti + ²⁴⁹Bk | 119 | < 65 fb | TASCA, GSI | X + S |
+| ⁵⁴Cr + ²⁴⁸Cm | 120 | < 0,58 pb | SHIP, GSI | S |
+| ⁵⁸Fe + ²⁴⁴Pu | 120 | < 0,4 pb | Dubna 2009 | S |
+| ⁶⁴Ni + ²³⁸U | 120 | < 90 fb bei E* = 36,4 MeV | SHIP, GSI | S |
+| ⁵⁰Ti + ²⁴⁸Cm | Og | < 0,50 pb | RIKEN 2025 | X |
+
+Die Grenzen sind „Ein-Ereignis-Grenzen“; ein Vertrauensniveau nennt nur RIKEN
+(1 σ). Für ⁵¹V + ²⁴⁸Cm (RIKEN) ist keine veröffentlichte Grenze zu finden.
+
+### Vorgehen
+
+1. Verglichen wird bei der **gemessenen Strahlenergie** (Mitte des Targets),
+   umgerechnet in die Schwerpunktsenergie. Das ist unabhängig von der
+   Massentabelle. Wo EXFOR nur die Energie am Beschleuniger nennt, wird das
+   Maximum des Kanals verglichen.
+2. Angepasst werden `a` und `b` so, dass die Abweichung im Logarithmus des
+   Wirkungsquerschnitts minimal wird, gewichtet mit den (unsymmetrischen)
+   Poisson-Fehlern der Messung.
+3. Danach wird der Parametersatz eingefroren und bekommt eine Versionsnummer.
+4. Die Seite „Wie gut ist das Modell?“ zeigt für **alle** Reaktionen Messwert
+   gegen Rechnung, Eichung und Prüfung getrennt, und nennt die mittlere
+   Abweichung als Faktor.
+5. Erst danach werden Elemente 119 und 120 gerechnet.
+
+Vorab festgelegt: Fällt die Prüfung bei den schwereren Projektilen deutlich
+schlechter aus als bei ⁴⁸Ca (mehr als ein Faktor 10), wird nicht stillschweigend
+nachgeeicht. Ich lege dir das Ergebnis vor, und die Vorhersagen für 119 und 120
+tragen den entsprechenden Vorbehalt.
+
+### Bekannte Unstimmigkeiten in den Daten
+
+- ⁵⁴Cr + ²³⁸U: Eine Quelle nennt 32 fb, eine andere 36 fb; ein einziges Ereignis.
+- ⁴⁸Ca + ²³²Th bei 250,6 MeV: Derselbe Wert steht in EXFOR einmal als 4n und
+  einmal als 5n.
+- Die TASCA-Grenzen für 119 und 120 stehen in EXFOR mit der Einheit pb; alle
+  Textquellen sagen fb. Verwendet wird fb.
+- Messungen derselben Reaktion in verschiedenen Laboren unterscheiden sich um
+  Faktoren von 2 bis 5 (z. B. ⁴⁸Ca + ²⁴³Am, 3n: 3,7 bis 17,1 pb). Das begrenzt,
+  wie genau ein Modell überhaupt geeicht werden kann.
 
 ## 9. Wo die Rechenleistung hingeht
 
@@ -301,7 +405,21 @@ Jedes Ergebnis trägt zwei getrennte Angaben:
 
 ## 13. Entscheidungen, die ich von dir brauche
 
-(folgt mit der Tabelle der Messwerte)
+1. **Rechenleistung:** Bahnen-Rechnung als geprüfte Kontrolle der Formel und
+   die Team-Rechenleistung für Unsicherheits-Ensembles (Empfehlung)? Oder
+   sollen die Bahnen der Hauptteil bleiben? Dann bräuchte ich ein
+   mehrdimensionales Modell mit Parametern, die ich nicht belegen kann.
+2. **Aufteilung:** Eichung nur an ⁴⁸Ca mit fünf Targets, Prüfung an ²⁴⁴Pu,
+   ²⁴⁵Cm, ²⁴⁹Cf, ²³²Th und allen Reaktionen mit ⁵⁰Ti und ⁵⁴Cr (Empfehlung)?
+   Damit sind alle drei von dir genannten Reaktionen Prüf-Reaktionen.
+3. **Einfang:** Bass-Potential mit winkelabhängigem Targetradius (Annahme A1)
+   statt Haginos Woods-Saxon-Potential?
+4. **Zahlen aus zweiter Hand:** Die Koeffizienten von `V_fiss` und der
+   Niveaudichte stehen nur in Haginos Anhang, der sie der nicht zugänglichen
+   Arbeit PRC 83, 054602 zuschreibt. Als „über Hagino belegt“ verwenden?
+5. **Reaktionen für die Vorhersage:** Element 120 über ⁵⁰Ti + ²⁴⁹Cf,
+   ⁵⁴Cr + ²⁴⁸Cm und ⁵¹V + ²⁴⁹Bk; Element 119 über ⁵⁰Ti + ²⁴⁹Bk, ⁵¹V + ²⁴⁸Cm
+   und ⁵⁴Cr + ²⁴³Am?
 
 ## 14. Quellen
 
@@ -325,6 +443,16 @@ Am Volltext geprüft (arXiv):
   109–110, 1 (2016); arXiv:1508.06294.
 - I. Dutt, R. K. Puri, arXiv:1005.5213 (druckt die Bass-Parameter von 1977).
 - W. Loveland, Eur. Phys. J. A 51, 120 (2015); arXiv:1411.4929 (Unsicherheiten).
+
+Messwerte:
+
+- EXFOR, Experimental Nuclear Reaction Data, IAEA Nuclear Data Section
+  (www-nds.iaea.org); verwendete Einträge und Zeilen in
+  `daten/er_wirkungsquerschnitte.csv`.
+- J. M. Gates et al., arXiv:2407.16079 (⁵⁰Ti + ²⁴⁴Pu).
+- U. Forsberg et al., arXiv:1502.03030 (⁴⁸Ca + ²⁴³Am, TASCA).
+- J. Khuyagbaatar et al., Phys. Rev. C 102, 064602 (2020) (Suche nach 119 und
+  120, über EXFOR und Sekundärquellen).
 
 Nur als Zitat, Volltext nicht abrufbar:
 

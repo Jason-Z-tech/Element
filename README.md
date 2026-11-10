@@ -19,7 +19,7 @@ Open-Source-Browserspiel mit echten Monte-Carlo-Simulationen.
 |---|---|---|
 | 1 | `packages/core`: Stufe 1 (Experiment nachspielen) mit Tests | fertig |
 | 2 | `packages/web`: Oberfläche für Einzelspieler, GitHub Pages | fertig |
-| 3 | Stufe 2: Physik selbst rechnen (Einfang, Verschmelzen, Überleben) | offen, erst Modell-Vorschlag |
+| 3 | Stufe 2: Physik selbst rechnen (Einfang, Verschmelzen, Überleben) | Modell-Vorschlag liegt vor: [docs/modell-stufe2.md](docs/modell-stufe2.md); Umsetzung nach Freigabe |
 | 4 | `packages/server`: Team-Funktion | offen |
 | 5 | Ergebnis- und Methoden-Seite | offen |
 
