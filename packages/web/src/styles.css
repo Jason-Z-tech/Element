@@ -757,3 +757,115 @@ tfoot td {
   color: var(--ink-3);
   font-size: 13px;
 }
+
+/* Bereiche */
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--hairline);
+}
+.tabs a {
+  padding: 8px 14px;
+  color: var(--ink-2);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+}
+.tabs a.is-active {
+  color: var(--ink);
+  font-weight: 650;
+  border-bottom-color: var(--ink);
+}
+
+/* Seite „Wie gut ist das Modell?“ */
+.model-page {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+}
+.lead {
+  max-width: 78ch;
+}
+.readout-model {
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  margin-top: 14px;
+}
+.model-page details > summary {
+  cursor: pointer;
+  list-style: none;
+}
+.model-page details > summary h2 {
+  margin: 0;
+}
+.model-page details > summary h2::before {
+  content: '▸ ';
+}
+.model-page details[open] > summary h2::before {
+  content: '▾ ';
+}
+.model-page details[open] > summary {
+  margin-bottom: 12px;
+}
+.diag {
+  stroke: var(--ink-2);
+  stroke-width: 1.25;
+}
+.diag-10 {
+  stroke: var(--axis);
+  stroke-width: 1;
+}
+.key-diag {
+  color: var(--ink-2);
+}
+.key-cal {
+  color: var(--axis);
+}
+.mpoint {
+  outline: none;
+  cursor: pointer;
+}
+.mpoint .hit {
+  fill: transparent;
+}
+.mpoint .dot {
+  stroke: var(--surface);
+  stroke-width: 2;
+}
+.mpoint .mark {
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  opacity: 0.55;
+}
+.pt-cal .dot {
+  fill: var(--axis);
+  stroke-width: 1;
+}
+.pt-test .dot {
+  fill: var(--series-1);
+}
+.pt-test .mark {
+  stroke: var(--series-1);
+}
+.pt-heavy .dot {
+  fill: var(--series-2);
+}
+.pt-heavy .mark {
+  stroke: var(--series-2);
+}
+.mpoint.is-active .dot,
+.mpoint:focus-visible .dot {
+  stroke: var(--ink);
+}
+.mpoint.is-active .mark {
+  opacity: 1;
+}
+.recompute {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--hairline);
+  display: grid;
+  gap: 8px;
+  justify-items: start;
+}

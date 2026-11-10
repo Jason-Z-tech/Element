@@ -12,3 +12,4 @@ export * from './data/decays';
 export * from './data/reactions';
 export * from './assumptions';
 export * from './data/qValues';
+export * as stage2 from './stage2';

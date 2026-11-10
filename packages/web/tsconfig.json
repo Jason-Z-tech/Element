@@ -5,6 +5,7 @@
     "types": ["vite/client"],
     "jsx": "react-jsx",
     "jsxImportSource": "preact",
+    "resolveJsonModule": true,
     "noEmit": true
   },
   "include": ["src", "test", "vite.config.ts"]

@@ -1,10 +1,11 @@
-import { CORE_VERSION, DEFAULT_PARAMETERS, eLabForExcitation, excitationForELab, STAGE1_MODEL_VERSION } from '@elementjaeger/core';
+import { CORE_VERSION, DEFAULT_PARAMETERS, eLabForExcitation, excitationForELab, stage2, STAGE1_MODEL_VERSION } from '@elementjaeger/core';
 import { useEffect, useMemo, useRef, useState } from 'preact/hooks';
 import { Assumptions } from './components/Assumptions';
 import { Chart } from './components/Chart';
 import { ControlPanel } from './components/ControlPanel';
 import { HiddenGame } from './components/HiddenGame';
 import { Protocol } from './components/Protocol';
+import { ModelPage } from './pages/ModelPage';
 import { RunsTable } from './components/RunsTable';
 import { createRunner, type Runner } from './runner';
 import {
@@ -43,7 +44,7 @@ function loadState(): AppState {
   return parseState(stored) ?? initialState(randomSeed(), randomSeed());
 }
 
-export function App() {
+function ExperimentPage() {
   const [state, setState] = useState<AppState>(loadState);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -110,18 +111,7 @@ export function App() {
   };
 
   return (
-    <div class="page">
-      <header class="masthead">
-        <div>
-          <h1>Elementjäger</h1>
-          <p class="tagline">Stufe 1: Das Experiment nachspielen</p>
-        </div>
-        <p class="notice" role="note">
-          <strong>Das ist eine Simulation.</strong> Sie kann vorhersagen, wo man suchen sollte. Eine Entdeckung ist erst das im
-          Beschleuniger gemessene Atom.
-        </p>
-      </header>
-
+    <>
       <main class="layout">
         <div class="col col-controls">
           <ControlPanel
@@ -194,10 +184,48 @@ export function App() {
         </div>
       </main>
 
+    </>
+  );
+}
+
+type Route = 'experiment' | 'modell';
+
+function routeFromHash(): Route {
+  return typeof location !== 'undefined' && location.hash === '#/modell' ? 'modell' : 'experiment';
+}
+
+export function App() {
+  const [route, setRoute] = useState<Route>(routeFromHash);
+  useEffect(() => {
+    const onHash = () => setRoute(routeFromHash());
+    addEventListener('hashchange', onHash);
+    return () => removeEventListener('hashchange', onHash);
+  }, []);
+  return (
+    <div class="page">
+      <header class="masthead">
+        <div>
+          <h1>Elementjäger</h1>
+          <p class="tagline">Gemeinsam nach neuen Elementen rechnen</p>
+        </div>
+        <p class="notice" role="note">
+          <strong>Das ist eine Simulation.</strong> Sie kann vorhersagen, wo man suchen sollte. Eine Entdeckung ist erst das im
+          Beschleuniger gemessene Atom.
+        </p>
+      </header>
+      <nav class="tabs" aria-label="Bereiche">
+        <a href="#/" class={route === 'experiment' ? 'is-active' : ''} aria-current={route === 'experiment' ? 'page' : undefined}>
+          Stufe 1: Experiment nachspielen
+        </a>
+        <a href="#/modell" class={route === 'modell' ? 'is-active' : ''} aria-current={route === 'modell' ? 'page' : undefined}>
+          Stufe 2: Wie gut ist das Modell?
+        </a>
+      </nav>
+      {route === 'modell' ? <ModelPage /> : <ExperimentPage />}
       <footer class="footer">
         <p>
-          Elementjäger, Kern {CORE_VERSION}, Modell {STAGE1_MODEL_VERSION}. Open Source unter MIT-Lizenz. Alle Zahlen mit Quelle
-          stehen in der README des Projekts. {runner.current.usesWorker ? 'Gerechnet wird in einem Web Worker.' : ''}
+          Elementjäger, Kern {CORE_VERSION}, Modelle {STAGE1_MODEL_VERSION} und {stage2.STAGE2_MODEL_VERSION}. Open Source unter MIT-Lizenz.
+          Alle Zahlen mit Quelle stehen in der README und unter docs/ im Projekt. Gerechnet wird in Web Workern.
         </p>
       </footer>
     </div>
