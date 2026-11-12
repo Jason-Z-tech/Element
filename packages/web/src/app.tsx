@@ -5,7 +5,10 @@ import { Chart } from './components/Chart';
 import { ControlPanel } from './components/ControlPanel';
 import { HiddenGame } from './components/HiddenGame';
 import { Protocol } from './components/Protocol';
+import { MethodsPage } from './pages/MethodsPage';
 import { ModelPage } from './pages/ModelPage';
+import { ResultsPage } from './pages/ResultsPage';
+import { TeamPage } from './pages/TeamPage';
 import { RunsTable } from './components/RunsTable';
 import { createRunner, type Runner } from './runner';
 import {
@@ -188,10 +191,11 @@ function ExperimentPage() {
   );
 }
 
-type Route = 'experiment' | 'modell';
+type Route = 'experiment' | 'modell' | 'ergebnisse' | 'methoden' | 'team';
 
 function routeFromHash(): Route {
-  return typeof location !== 'undefined' && location.hash === '#/modell' ? 'modell' : 'experiment';
+  const name = typeof location === 'undefined' ? '' : location.hash.replace(/^#\//, '').split('?')[0];
+  return name === 'modell' || name === 'ergebnisse' || name === 'methoden' || name === 'team' ? name : 'experiment';
 }
 
 export function App() {
@@ -214,14 +218,25 @@ export function App() {
         </p>
       </header>
       <nav class="tabs" aria-label="Bereiche">
-        <a href="#/" class={route === 'experiment' ? 'is-active' : ''} aria-current={route === 'experiment' ? 'page' : undefined}>
-          Stufe 1: Experiment nachspielen
-        </a>
-        <a href="#/modell" class={route === 'modell' ? 'is-active' : ''} aria-current={route === 'modell' ? 'page' : undefined}>
-          Stufe 2: Wie gut ist das Modell?
-        </a>
+        {(
+          [
+            ['experiment', '#/', 'Experiment nachspielen'],
+            ['modell', '#/modell', 'Wie gut ist das Modell?'],
+            ['ergebnisse', '#/ergebnisse', 'Ergebnisse'],
+            ['team', '#/team', 'Zusammen rechnen'],
+            ['methoden', '#/methoden', 'Methoden'],
+          ] as const
+        ).map(([id, href, label]) => (
+          <a key={id} href={href} class={route === id ? 'is-active' : ''} aria-current={route === id ? 'page' : undefined}>
+            {label}
+          </a>
+        ))}
       </nav>
-      {route === 'modell' ? <ModelPage /> : <ExperimentPage />}
+      {route === 'modell' && <ModelPage />}
+      {route === 'ergebnisse' && <ResultsPage />}
+      {route === 'methoden' && <MethodsPage />}
+      {route === 'team' && <TeamPage />}
+      {route === 'experiment' && <ExperimentPage />}
       <footer class="footer">
         <p>
           Elementjäger, Kern {CORE_VERSION}, Modelle {STAGE1_MODEL_VERSION} und {stage2.STAGE2_MODEL_VERSION}. Open Source unter MIT-Lizenz.

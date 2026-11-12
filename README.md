@@ -19,9 +19,26 @@ Open-Source-Browserspiel mit echten Monte-Carlo-Simulationen.
 |---|---|---|
 | 1 | `packages/core`: Stufe 1 (Experiment nachspielen) mit Tests | fertig |
 | 2 | `packages/web`: Oberfläche für Einzelspieler, GitHub Pages | fertig |
-| 3 | Stufe 2: Physik selbst rechnen (Einfang, Verschmelzen, Überleben) | Modell `stufe2-v1` umgesetzt, geeicht und geprüft: [docs/modell-stufe2.md](docs/modell-stufe2.md). **Die Prüfung ist nicht bestanden**; noch keine Vorhersagen für 119 und 120 |
-| 4 | `packages/server`: Team-Funktion | offen |
-| 5 | Ergebnis- und Methoden-Seite | offen |
+| 3 | Stufe 2: Physik selbst rechnen (Einfang, Verschmelzen, Überleben) | fertig als Modell `stufe2-v1`, geeicht und geprüft: [docs/modell-stufe2.md](docs/modell-stufe2.md) |
+| 4 | `packages/server`: Team-Funktion | fertig |
+| 5 | Ergebnis- und Methoden-Seite | fertig |
+
+**Wichtig zu Stufe 2:** Das Modell `stufe2-v1` besteht die Prüfung an gemessenen
+Reaktionen nicht. Es trifft die Eich-Reaktionen auf etwa eine Größenordnung,
+rechnet aber die meisten Prüf-Reaktionen deutlich zu tief (mit schwereren
+Projektilen als ⁴⁸Ca um Faktoren von 3 bis 76). Die Vorhersagen für die Elemente
+119 und 120 sind gerechnet und veröffentlicht, tragen aber diesen Vorbehalt. Im
+Spiel steht das auf den Seiten „Wie gut ist das Modell?“ und „Ergebnisse“.
+
+## Die Seiten des Spiels
+
+| Seite | Inhalt |
+|---|---|
+| Experiment nachspielen | Stufe 1: Steuerpult, Kurve, Detektor-Protokoll, Messreihen, verdeckte Natur |
+| Wie gut ist das Modell? | Stufe 2: Messwert gegen Rechnung für alle Eich- und Prüf-Reaktionen, im Browser nachrechenbar |
+| Ergebnisse | Vorhersagen für 119 und 120 mit Band, Modellversion, Zeitstempel; Export als CSV und JSON; Nachrechnen mit gespeichertem Zwischenstand |
+| Zusammen rechnen | Labor eröffnen, Beitrittslink, Kampagnen, gemeinsame Messreihe (braucht den Team-Server) |
+| Methoden | Formeln, Parameter, Annahmen, Abweichungen vom Auftrag, Quellen |
 
 ## Starten
 
@@ -63,6 +80,54 @@ Stufe 1 auf der Konsole (Berkeley-Experiment, Element 120, verdeckte Natur):
 npm run demo
 ```
 
+### Team-Server (freiwillig)
+
+Alles außer der Team-Funktion läuft ohne Server. Für „Zusammen rechnen“:
+
+```bash
+npm run server
+```
+
+Der Server lauscht auf Port 8787 (anders mit der Umgebungsvariable `PORT`). Im
+Spiel unter „Zusammen rechnen“ die Adresse eintragen, lokal
+`ws://localhost:8787`. Beim Bauen lässt sich eine Standardadresse mitgeben
+(`VITE_TEAM_SERVER=wss://…`). Hinter HTTPS braucht der Browser `wss://`, also
+einen Server mit TLS oder einen vorgeschalteten Proxy.
+
+So arbeitet die Team-Funktion:
+
+- Ein Spieler eröffnet ein Labor und bekommt einen Beitrittslink.
+- Eine Kampagne (alle Reaktionen für Element 120, für Element 119 oder beide,
+  je 30 MeV Energiebereich) wird in Pakete von 10 Ziehungen geteilt.
+- Jedes Paket geht an zwei verschiedene Spieler. Nur wenn beide bitgleich
+  dasselbe liefern, zählt es; bei Widerspruch rechnet ein dritter. Ein Spieler
+  allein kann nichts bestätigen.
+- Angezeigt werden Ziehungen pro Sekunde je Spieler und im Team, der Fortschritt
+  und der statistische Fehler des Medians, der mit jedem Paket schrumpft.
+- Gemeinsame Messreihe für Stufe 1: Jeder misst bei einer anderen Energie, alle
+  Punkte landen in einer Kurve. Der Server rechnet jede Messung selbst und hält
+  die verdeckte Natur geheim, bis das Team auflöst.
+
+Der Server ist bewusst schlank: ein Prozess, Zustand im Arbeitsspeicher, keine
+Anmeldung. Leere Labore verfallen nach sechs Stunden. Für einen öffentlichen
+Betrieb fehlen Begrenzungen gegen Missbrauch.
+
+### Stufe 2 nachrechnen
+
+```bash
+npm run eichung -w @elementjaeger/core
+```
+
+```bash
+npm run pruefung -w @elementjaeger/core
+```
+
+Die Eichung bestimmt die zwei Eichgrößen nur an den Eich-Reaktionen; die Prüfung
+rechnet Messwert gegen Rechnung mit dem eingefrorenen Parametersatz. Die
+Eingangstabellen werden mit `tools/tabellen_auslesen.py` aus den Volltexten der
+Quellen ausgelesen, die Messwerte mit `tools/messwerte_auslesen.py` aus
+`docs/daten/er_wirkungsquerschnitte.csv`.
+
 ### Auf GitHub Pages veröffentlichen
 
 Die Seite braucht keinen Server. Der Workflow `.github/workflows/seite.yml` prüft,
@@ -70,8 +135,10 @@ baut und veröffentlicht sie bei jedem Push auf `main`. Einmalig in den
 Repository-Einstellungen unter „Pages“ als Quelle „GitHub Actions“ wählen.
 Die Seite verwendet nur relative Pfade und läuft unter jeder Adresse.
 
-Zwischenstände (Messreihen, Einstellungen, verdeckte Natur) liegen im
-`localStorage` des Browsers und überstehen das Schließen des Tabs.
+Zwischenstände von Stufe 1 (Messreihen, Einstellungen, verdeckte Natur) liegen im
+`localStorage` des Browsers, die Rechenpakete von Stufe 2 in IndexedDB. Beides
+übersteht das Schließen des Tabs; eine angefangene Rechnung läuft beim nächsten
+Öffnen weiter.
 
 ## Aufbau
 
@@ -89,15 +156,18 @@ packages/core     Physik. Keine DOM-Zugriffe; läuft in Browser, Web Worker und 
   src/stage2/       Stufe 2: Einfang, Verschmelzen, Überleben, Eichung, Ensemble
   scripts/          Demo, Eichung (stage2-eichung.ts), Messwert gegen Rechnung (stage2-pruefung.ts)
 packages/web      Oberfläche (Vite, Preact). Statisch, läuft auf GitHub Pages.
-  src/pages/        Seite „Wie gut ist das Modell?“
-  src/stage2/       Web Worker je CPU-Kern für die Ensembles von Stufe 2
+  src/pages/        Seiten: Modell-Güte, Ergebnisse, Zusammen rechnen, Methoden
+  src/stage2/       Web Worker je CPU-Kern, Zwischenstände in IndexedDB
   src/app.tsx       Seite: Steuerpult, Kurve, Detektor-Protokoll, Messreihen
   src/components/   die einzelnen Teile
   src/state.ts      Zustand, Speichern im Browser, Messpunkte zusammenfassen
   src/worker.ts     Web Worker: rechnet die Messungen
   src/chartMath.ts  Maßstäbe der Kurve
   test/             Vitest
-packages/server   (Schritt 4)
+packages/server   Team-Server (Node, WebSocket)
+  src/lab.ts        Labor: Pakete an zwei Spieler, Vergleich, gemeinsame Messreihe
+  src/protocol.ts   Nachrichten zwischen Browser und Server
+  src/index.ts      HTTP- und WebSocket-Server
 tools/            Auslesen der Eingangstabellen aus den Volltexten
 docs/             Modell-Dokument und Daten (Messwerte, Ergebnisse von Eichung und Prüfung)
 ```

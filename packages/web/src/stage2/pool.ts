@@ -7,6 +7,10 @@ export interface EnsembleJob {
   readonly seed: number;
   readonly members: number;
   readonly cascades: number;
+  /** Schon gerechnete Pakete (erste Ziehung -> Werte); sie werden übernommen statt neu gerechnet. */
+  readonly done?: ReadonlyMap<number, Float64Array>;
+  /** Wird für jedes neu gerechnete Paket aufgerufen (zum Speichern im Browser). */
+  readonly onPacket?: (firstMember: number, values: Float64Array) => void;
 }
 
 export interface EnsembleProgress {
@@ -18,7 +22,7 @@ export interface EnsembleProgress {
 }
 
 /** Zahl der Ziehungen je Paket. */
-const PACKET_SIZE = 10;
+export const PACKET_SIZE = 10;
 
 /**
  * Verteilt ein Ensemble auf einen Worker je CPU-Kern. Jede Ziehung hängt nur von
@@ -26,22 +30,36 @@ const PACKET_SIZE = 10;
  */
 export function runEnsemble(job: EnsembleJob, onProgress: (p: EnsembleProgress) => void): { promise: Promise<Float64Array>; cancel(): void } {
   const workerCount = Math.max(1, Math.min(navigator.hardwareConcurrency || 2, Math.ceil(job.members / PACKET_SIZE)));
+  const startedWith = job.done ? job.done.size * PACKET_SIZE : 0;
   const workers: Worker[] = [];
   let cancelled = false;
   const promise = new Promise<Float64Array>((resolve, reject) => {
     const out = new Float64Array(job.members * stage2.MAX_NEUTRONS);
     let next = 0;
     let done = 0;
+    const todo: number[] = [];
+    for (let first = 0; first < job.members; first += PACKET_SIZE) {
+      const known = job.done?.get(first);
+      if (known) {
+        out.set(known, first * stage2.MAX_NEUTRONS);
+        done += known.length / stage2.MAX_NEUTRONS;
+      } else {
+        todo.push(first);
+      }
+    }
+    if (todo.length === 0) {
+      resolve(out);
+      return;
+    }
     const start = Date.now();
     const fail = (message: string) => {
       workers.forEach((w) => w.terminate());
       reject(new Error(message));
     };
     const assign = (worker: Worker) => {
-      if (cancelled || next >= job.members) return;
-      const firstMember = next;
-      const members = Math.min(PACKET_SIZE, job.members - next);
-      next += members;
+      if (cancelled || next >= todo.length) return;
+      const firstMember = todo[next++]!;
+      const members = Math.min(PACKET_SIZE, job.members - firstMember);
       const request: PacketRequest = {
         id: firstMember,
         reaction: job.reaction,
@@ -58,7 +76,8 @@ export function runEnsemble(job: EnsembleJob, onProgress: (p: EnsembleProgress) 
         if (!r.ok) return fail(r.error);
         out.set(r.values, r.id * stage2.MAX_NEUTRONS);
         done += r.values.length / stage2.MAX_NEUTRONS;
-        onProgress({ done, total: job.members, rate: done / Math.max(0.001, (Date.now() - start) / 1000), workers: workerCount });
+        job.onPacket?.(r.id, r.values);
+        onProgress({ done, total: job.members, rate: (done - startedWith) / Math.max(0.001, (Date.now() - start) / 1000), workers: workerCount });
         if (done >= job.members) {
           workers.forEach((w) => w.terminate());
           resolve(out);

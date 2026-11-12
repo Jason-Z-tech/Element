@@ -8,4 +8,5 @@ export * from './calibration';
 export * from './ensemble';
 export * from './langevin';
 export * from './parameters';
+export * from './predictions';
 export { MEASUREMENTS, type MeasurementRow } from '../data/stage2/measurements';

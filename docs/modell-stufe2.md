@@ -19,7 +19,8 @@ Geprüft an den Quellen am 10.11.2026.
 - **Zu eichen sind genau zwei Zahlen:** Achsenabschnitt und Steigung des
   „Einschuss-Abstands“ `s_inj`. Alles andere kommt aus Tabellen und Formeln.
 - **Ergebnis (Abschnitt 16):** Die Fassung `stufe2-v1` besteht die Prüfung nicht.
-  Es gibt deshalb noch keine Vorhersagen für die Elemente 119 und 120.
+  Die Vorhersagen für die Elemente 119 und 120 sind gerechnet, tragen aber einen
+  großen Vorbehalt: Sie liegen wahrscheinlich zu tief.
 - **Erwartbare Genauigkeit laut Literatur:** etwa eine Größenordnung nach oben
   und unten. Dominant ist die Unsicherheit der Spaltbarrieren (±0,5 MeV
   entsprechen etwa einem Faktor 10). Der statistische Fehler der Rechnung ist
@@ -417,8 +418,8 @@ Jedes Ergebnis trägt zwei getrennte Angaben:
 4. **Zahlen aus zweiter Hand:** als „über Hagino belegt“ verwendet und gegen die
    zugänglichen Arbeiten der Gruppe geprüft (Abschnitt 15).
 5. **Reaktionen für die Vorhersage:** Element 120 über ⁵⁰Ti + ²⁴⁹Cf, ⁵⁴Cr + ²⁴⁸Cm,
-   ⁵¹V + ²⁴⁹Bk; Element 119 über ⁵⁰Ti + ²⁴⁹Bk, ⁵¹V + ²⁴⁸Cm, ⁵⁴Cr + ²⁴³Am. Noch nicht
-   gerechnet (Abschnitt 16).
+   ⁵¹V + ²⁴⁹Bk; Element 119 über ⁵⁰Ti + ²⁴⁹Bk, ⁵¹V + ²⁴⁸Cm, ⁵⁴Cr + ²⁴³Am. Gerechnet
+   mit Vorbehalt (Abschnitt 16).
 
 ## 15. Umsetzung: Abweichungen und eigene Anpassungen
 
@@ -610,7 +611,43 @@ Faktor 20 für ⁵⁰Ti und ⁵⁴Cr); 11 von 24 liegen im 68-%-Band, erwartet w
 die Eich-Reaktionen auf etwa eine Größenordnung und überträgt sich auf ein
 Nachbar-Isotop (²⁴⁴Pu), aber nicht auf andere Targets und nur schlecht auf
 schwerere Projektile. Die Abweichung ist einseitig: fast immer zu tief.
-Vorhersagen für die Elemente 119 und 120 wurden deshalb nicht gerechnet.
+Die Vorhersagen für die Elemente 119 und 120 tragen deshalb einen großen Vorbehalt
+(siehe unten).
+
+### Vorhersagen für die Elemente 119 und 120 (mit Vorbehalt)
+
+Wie vorab festgelegt, wurden die Vorhersagen nach der Prüfung mit dem
+unveränderten Modell gerechnet und tragen den Vorbehalt aus dem Befund oben: Das
+Modell rechnet gemessene Reaktionen mit schwereren Projektilen als ⁴⁸Ca um
+Faktoren von 3 bis 76 zu tief. Datei:
+[`daten/stufe2-vorhersagen.json`](daten/stufe2-vorhersagen.json) mit Zeitstempel,
+Seed, Modellversion und Zahl der Ziehungen; im Spiel auf der Seite „Ergebnisse“
+mit Export als CSV und JSON.
+
+| Reaktion | Element | Maximum (Summe 2n–5n) | 68-%-Band | bei E* | veröffentlichte Vorhersagen | Obergrenze |
+|---|---|---|---|---|---|---|
+| ⁵⁰Ti + ²⁴⁹Cf | 120 | 0,036 fb | 0,0025 … 0,24 fb | 34 MeV | 48,2 fb (Zhang et al. 2026); etwa 6 fb (Siwek-Wilczyńska et al. 2012) | < 200 fb |
+| ⁵⁴Cr + ²⁴⁸Cm | 120 | 0,0078 fb | 0,0007 … 0,054 fb | 40 MeV | 5,25 fb (Zhang et al.); etwa 1 fb (Siwek-Wilczyńska et al.) | < 580 fb |
+| ⁵¹V + ²⁴⁹Bk | 120 | 0,0066 fb | 0,0006 … 0,050 fb | 42 MeV | 12,33 fb (Zhang et al.) | – |
+| ⁵⁰Ti + ²⁴⁹Bk | 119 | 0,71 fb | 0,056 … 5,9 fb | 36 MeV | etwa 30 fb (Siwek-Wilczyńska et al.) | < 65 fb |
+| ⁵¹V + ²⁴⁸Cm | 119 | 0,20 fb | 0,018 … 1,8 fb | 42 MeV | – | – |
+| ⁵⁴Cr + ²⁴³Am | 119 | 0,13 fb | 0,008 … 1,1 fb | 36 MeV | – | – |
+
+Unsere Werte liegen zwei bis drei Größenordnungen unter den veröffentlichten
+Vorhersagen. Nach dem Ergebnis der Prüfung ist das eher ein Zeichen für die
+Schwäche dieser Modellfassung als eine neue Einsicht. Belastbar ist höchstens die
+Reihenfolge: ⁵⁰Ti + ²⁴⁹Bk ist für Element 119 die günstigste der drei Reaktionen,
+⁵⁰Ti + ²⁴⁹Cf für Element 120.
+
+### Team-Funktion: wie groß sie sein muss
+
+Die Rechnung ist klein: Eine volle Vorhersage (96 Ensembles mit je 1000
+Ziehungen) dauert rund 20 Minuten auf einem Kern; im Browser schafft ein Rechner
+mit vier Kernen etwa 480 Ziehungen pro Sekunde, also die ganze Vorhersage in gut
+drei Minuten. Das Team beschleunigt deshalb wenig. Sein Nutzen ist die gegenseitige
+Kontrolle: Jedes Paket wird von zwei verschiedenen Spielern gerechnet und bitgleich
+verglichen. Der Server ist entsprechend schlank gehalten (ein Prozess, Zustand im
+Arbeitsspeicher).
 
 ### Obergrenzen
 

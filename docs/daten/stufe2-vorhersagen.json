@@ -1,0 +1,4710 @@
+{
+ "modelVersion": "stufe2-v1",
+ "createdAt": "2026-11-12T19:47:50.287Z",
+ "parameters": {
+  "sInjA_fm": 4.28,
+  "sInjB_fmPerMeV": 0.011,
+  "orientationDependentInjection": true,
+  "potential": {
+   "kind": "bass"
+  },
+  "nTheta": 24,
+  "barrierCoefficients": "fbd2011"
+ },
+ "uncertainties": {
+  "fissionBarrier_MeV": {
+   "sigma": 0.5,
+   "kind": "belegt",
+   "reason": "Siwek-Wilczyńska et al., Phys. Rev. C 86, 014611 (2012): Genauigkeit einzelner Spaltbarrieren kaum besser als ±0,5 MeV; Kowal et al., arXiv:1607.08462: mittlere Abweichung 0,5 MeV bei gemessenen Barrieren. Annahme: Die Fehler benachbarter Kerne sind unabhängig."
+  },
+  "injectionDistance_fm": {
+   "sigma": 0.6,
+   "kind": "belegt",
+   "reason": "Rest-Streuung aus der eigenen Eichung. An den 48 Eich-Punkten streut Rechnung gegen Messung um einen Faktor 8,9 (0,95 Dekaden). Spaltbarrieren, Q-Wert und Einfang-Barriere erklären zusammen etwa 0,72 Dekaden; der Rest (0,62 Dekaden) entspricht 0,6 fm im Einschuss-Abstand. Die volle Streuung des Einschuss-Abstands (1,02 fm; Cap et al. 2022 nennen ±1 fm) enthält die anderen Beiträge schon und würde sie doppelt zählen."
+  },
+  "qValue_MeV": {
+   "sigma": 2.1,
+   "kind": "belegt",
+   "reason": "Standardabweichung der Q-Werte von 50Ti + 249Cf aus vier Massenmodellen (FRDM 2012, FRLDM 2012, Jachimowicz–Kowal–Skalski 2021, WS4-Kette). Annahme: Dieselbe Breite gilt für alle Reaktionen. Die Festlegung ±3 MeV aus Stufe 1 entspricht 1,4 Standardabweichungen."
+  },
+  "captureBarrier_MeV": {
+   "sigma": 2,
+   "kind": "annahme",
+   "reason": "Annahme. Anhaltspunkte: Cap et al. (2022) finden Unterschiede bis 2 MeV zwischen Systematik und gemessenen Barrierenverteilungen; unser Bass-Potential liegt für 48Ca + 248Cm 2 bis 4 MeV unter Haginos Potential, das an eine gemessene Barrierenverteilung angepasst ist."
+  }
+ },
+ "seed": 119120,
+ "members": 1000,
+ "cascades": 500,
+ "note": "Simulation, keine Messung. Das Modell hat die Prüfung an gemessenen Reaktionen nicht bestanden und rechnet dort meist zu tief (siehe stufe2-pruefung.json).",
+ "reactions": [
+  {
+   "id": "Ti50+Cf249",
+   "element": 120,
+   "label": "⁵⁰Ti + ²⁴⁹Cf",
+   "compound": "299-120",
+   "qValue_MeV": -198.579,
+   "b0_MeV": 223.48,
+   "points": [
+    {
+     "eStar_MeV": 26,
+     "eCm_MeV": 224.579,
+     "eLab_MeV": 269.675,
+     "seed": 3422167147,
+     "sigmaCapture_mb": 57.33449737572605,
+     "fusionProbability": 6.505496789975347e-11,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0.005327872641288918,
+       "statError_fb": 0.00011513297443581126,
+       "low_fb": 0.0002539011889390453,
+       "median_fb": 0.004263384086109857,
+       "high_fb": 0.04640760789964864
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.00004283767032441453,
+       "statError_fb": 3.162507045960241e-7,
+       "low_fb": 1.9810081610740052e-7,
+       "median_fb": 0.00003236050200826053,
+       "high_fb": 0.0008353073429990217
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.005370710311613332,
+      "low_fb": 0.0003340640694486837,
+      "median_fb": 0.004970418965877591,
+      "high_fb": 0.047969770638408446
+     }
+    },
+    {
+     "eStar_MeV": 28,
+     "eCm_MeV": 226.579,
+     "eLab_MeV": 272.077,
+     "seed": 2430940326,
+     "sigmaCapture_mb": 73.54379631032924,
+     "fusionProbability": 1.9059948000944462e-10,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0.003352317706889716,
+       "statError_fb": 0.0001864731909753685,
+       "low_fb": 0.000011804225481705075,
+       "median_fb": 0.002664279666029738,
+       "high_fb": 0.0494950610852804
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.0005297519138524475,
+       "statError_fb": 0.0000023914688738125667,
+       "low_fb": 0.00001610774069680144,
+       "median_fb": 0.0004514208549811824,
+       "high_fb": 0.0073354098164005906
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 4.938661381494931e-13
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.0038820696207421635,
+      "low_fb": 0.00038051150506349275,
+      "median_fb": 0.004861274269813535,
+      "high_fb": 0.06684701669385672
+     }
+    },
+    {
+     "eStar_MeV": 30,
+     "eCm_MeV": 228.579,
+     "eLab_MeV": 274.479,
+     "seed": 556510622,
+     "sigmaCapture_mb": 91.87175700828733,
+     "fusionProbability": 5.829708454055636e-10,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0.0020164511383220394,
+       "statError_fb": 0.00029327367156339564,
+       "low_fb": 0,
+       "median_fb": 0.00048254848071599816,
+       "high_fb": 0.03032074839927708
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.0034853712337311327,
+       "statError_fb": 0.000012763748257602785,
+       "low_fb": 0.0002264297173131252,
+       "median_fb": 0.002835902104197934,
+       "high_fb": 0.0378739061031287
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 2.0330457443148272e-10,
+       "statError_fb": 6.754278861527462e-11,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 9.230521078657614e-7
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.005501822575357747,
+      "low_fb": 0.0006196329410224204,
+      "median_fb": 0.0061878125123005145,
+      "high_fb": 0.08894828231476576
+     }
+    },
+    {
+     "eStar_MeV": 32,
+     "eCm_MeV": 230.579,
+     "eLab_MeV": 276.88,
+     "seed": 4065514248,
+     "sigmaCapture_mb": 115.69978778384103,
+     "fusionProbability": 2.8875440422928077e-9,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0.001912549608785257,
+       "statError_fb": 0.000717403022771529,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0.00363803296833601
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.018180470478397565,
+       "statError_fb": 0.00010491229592734159,
+       "low_fb": 0.0009557890761181711,
+       "median_fb": 0.011556472689029651,
+       "high_fb": 0.13605955947200563
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.0000028916846180745453,
+       "statError_fb": 5.917006952417165e-8,
+       "low_fb": 1.417523067304566e-13,
+       "median_fb": 0.0000013450010848868648,
+       "high_fb": 0.00013671991684110663
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.0200959117718009,
+      "low_fb": 0.0010976738703642208,
+      "median_fb": 0.014014945829772411,
+      "high_fb": 0.15738567717555985
+     }
+    },
+    {
+     "eStar_MeV": 34,
+     "eCm_MeV": 232.579,
+     "eLab_MeV": 279.282,
+     "seed": 3569902402,
+     "sigmaCapture_mb": 151.9440164573522,
+     "fusionProbability": 1.076703746126301e-8,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0.0005126739657453879,
+       "statError_fb": 0.0005126739657453879,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.03571510189639783,
+       "statError_fb": 0.00040925385463305106,
+       "low_fb": 0.0020120566465558726,
+       "median_fb": 0.022135356559281075,
+       "high_fb": 0.20446035855127465
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.000133621719511244,
+       "statError_fb": 0.0000011523073783795708,
+       "low_fb": 0.0000010180930956474062,
+       "median_fb": 0.00007658684653456977,
+       "high_fb": 0.002269603376597657
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.03636139758165446,
+      "low_fb": 0.002459108021446769,
+      "median_fb": 0.024948936941483375,
+      "high_fb": 0.2373411883557809
+     }
+    },
+    {
+     "eStar_MeV": 36,
+     "eCm_MeV": 234.579,
+     "eLab_MeV": 281.683,
+     "seed": 722285037,
+     "sigmaCapture_mb": 193.20503927578645,
+     "fusionProbability": 2.0672520964693588e-8,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0.005100175990808028,
+       "statError_fb": 0.005100175990808028,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.02692425338898796,
+       "statError_fb": 0.0005947616440053939,
+       "low_fb": 0.0017102479691961938,
+       "median_fb": 0.019743981019818883,
+       "high_fb": 0.17721097671028554
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.0008000399020508369,
+       "statError_fb": 0.000004845197984915223,
+       "low_fb": 0.00002697839871490871,
+       "median_fb": 0.0006149612675613712,
+       "high_fb": 0.009219398832352609
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.032824469281846826,
+      "low_fb": 0.0023486980572036825,
+      "median_fb": 0.02293194865513815,
+      "high_fb": 0.20561005729680934
+     }
+    },
+    {
+     "eStar_MeV": 38,
+     "eCm_MeV": 236.579,
+     "eLab_MeV": 284.085,
+     "seed": 284210083,
+     "sigmaCapture_mb": 233.9571552742719,
+     "fusionProbability": 3.1054276533390275e-8,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.012280398979718577,
+       "statError_fb": 0.0005794022330569729,
+       "low_fb": 0.00046868950815636437,
+       "median_fb": 0.008140458085611047,
+       "high_fb": 0.1017976483511602
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.0023255249927377985,
+       "statError_fb": 0.000012209922406573296,
+       "low_fb": 0.0001867579514825506,
+       "median_fb": 0.0018582502667511605,
+       "high_fb": 0.018370037520996918
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 7.319675677942258e-9
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.014605923972456376,
+      "low_fb": 0.0015486219368259528,
+      "median_fb": 0.012559995883392652,
+      "high_fb": 0.13354434250278963
+     }
+    },
+    {
+     "eStar_MeV": 40,
+     "eCm_MeV": 238.579,
+     "eLab_MeV": 286.487,
+     "seed": 99056574,
+     "sigmaCapture_mb": 273.8511021613235,
+     "fusionProbability": 4.301317057278817e-8,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.005354189721199472,
+       "statError_fb": 0.0005056367213101361,
+       "low_fb": 0.000006124590914010154,
+       "median_fb": 0.0023564441005997816,
+       "high_fb": 0.03881556135542956
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.004112304002786909,
+       "statError_fb": 0.00002399410266317024,
+       "low_fb": 0.000290040790072662,
+       "median_fb": 0.002870906955169055,
+       "high_fb": 0.02797131568661258
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 5.372178162128655e-9,
+       "statError_fb": 6.779690399699265e-10,
+       "low_fb": 0,
+       "median_fb": 1.5566755795120896e-9,
+       "high_fb": 5.469606041434416e-7
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.009466499096164543,
+      "low_fb": 0.0007847259669845799,
+      "median_fb": 0.007880997394678287,
+      "high_fb": 0.07992852215648188
+     }
+    },
+    {
+     "eStar_MeV": 42,
+     "eCm_MeV": 240.579,
+     "eLab_MeV": 288.888,
+     "seed": 1252082684,
+     "sigmaCapture_mb": 312.89618741436277,
+     "fusionProbability": 5.745070025788496e-8,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.0019486331474205271,
+       "statError_fb": 0.0003705473334027165,
+       "low_fb": 0,
+       "median_fb": 0.0002669607226866936,
+       "high_fb": 0.016430502707516274
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.004582931853864991,
+       "statError_fb": 0.000038213160032642745,
+       "low_fb": 0.0004583432294674054,
+       "median_fb": 0.0033652638997699424,
+       "high_fb": 0.03198386204313286
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 3.224536835937051e-7,
+       "statError_fb": 9.75457044083349e-9,
+       "low_fb": 5.776008030730487e-10,
+       "median_fb": 2.7950973196940853e-7,
+       "high_fb": 0.000008003571296723824
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.006531887454969112,
+      "low_fb": 0.0006147394627817381,
+      "median_fb": 0.005399066039096453,
+      "high_fb": 0.057733261841822966
+     }
+    },
+    {
+     "eStar_MeV": 44,
+     "eCm_MeV": 242.579,
+     "eLab_MeV": 291.29,
+     "seed": 4117444961,
+     "sigmaCapture_mb": 351.11023732574506,
+     "fusionProbability": 7.512126589556746e-8,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.0005190715305809051,
+       "statError_fb": 0.0002596865826573507,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0.0018675870282055139
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.0036083754850851886,
+       "statError_fb": 0.000048342400367863265,
+       "low_fb": 0.00036714564728282997,
+       "median_fb": 0.003821783476205917,
+       "high_fb": 0.029651334736630564
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.000003994277053777395,
+       "statError_fb": 5.969672340389361e-8,
+       "low_fb": 1.5572875916919203e-7,
+       "median_fb": 0.000003818439221045542,
+       "high_fb": 0.000051861607991325095
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.004131441292719871,
+      "low_fb": 0.0004133058121592024,
+      "median_fb": 0.0044342480384323936,
+      "high_fb": 0.034278978585650995
+     }
+    },
+    {
+     "eStar_MeV": 46,
+     "eCm_MeV": 244.579,
+     "eLab_MeV": 293.691,
+     "seed": 814716918,
+     "sigmaCapture_mb": 388.51028490473817,
+     "fusionProbability": 9.674372914499391e-8,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.00046346226215002867,
+       "statError_fb": 0.0002315033656425488,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0.000012615233105525138
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.002190803183395805,
+       "statError_fb": 0.00005053756846125895,
+       "low_fb": 0.00021993714829317778,
+       "median_fb": 0.001826741536165136,
+       "high_fb": 0.01753346629422897
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.00002015626078799957,
+       "statError_fb": 2.0430745918754117e-7,
+       "low_fb": 0.0000012982206502157154,
+       "median_fb": 0.000019013822001239732,
+       "high_fb": 0.0002088432332813087
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.002674421706333833,
+      "low_fb": 0.00024094225067064612,
+      "median_fb": 0.001967017144382113,
+      "high_fb": 0.01850604668648719
+     }
+    },
+    {
+     "eStar_MeV": 48,
+     "eCm_MeV": 246.579,
+     "eLab_MeV": 296.093,
+     "seed": 2890921396,
+     "sigmaCapture_mb": 425.1123008373985,
+     "fusionProbability": 1.2305137799124414e-7,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.000027309683313646025,
+       "statError_fb": 0.00002032316843216522,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.001210018515105943,
+       "statError_fb": 0.00004803482210558717,
+       "low_fb": 0.00010325518844954449,
+       "median_fb": 0.0010857984250608177,
+       "high_fb": 0.008204666645181706
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.00005465831154813527,
+       "statError_fb": 4.680362403557505e-7,
+       "low_fb": 0.000004867659139275262,
+       "median_fb": 0.00004555021258369617,
+       "high_fb": 0.0003835953395172815
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.0012919865099677243,
+      "low_fb": 0.00014407125200732886,
+      "median_fb": 0.0012237298354238492,
+      "high_fb": 0.009609382194920416
+     }
+    },
+    {
+     "eStar_MeV": 50,
+     "eCm_MeV": 248.579,
+     "eLab_MeV": 298.495,
+     "seed": 4273165517,
+     "sigmaCapture_mb": 460.9304863199626,
+     "fusionProbability": 1.5481553832644265e-7,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 3.2392056509982277e-7,
+       "statError_fb": 3.2392056509982277e-7,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.0006081649902184057,
+       "statError_fb": 0.00004344950669182239,
+       "low_fb": 0.000024636467977652292,
+       "median_fb": 0.0004005677846449533,
+       "high_fb": 0.004562120159972267
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.0000915339137475477,
+       "statError_fb": 8.281307555608238e-7,
+       "low_fb": 0.000009224785456945267,
+       "median_fb": 0.00007255629435815999,
+       "high_fb": 0.0005538060786673897
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.0007000228245310531,
+      "low_fb": 0.00006827180561959062,
+      "median_fb": 0.0005461060841831568,
+      "high_fb": 0.005605814043206632
+     }
+    },
+    {
+     "eStar_MeV": 52,
+     "eCm_MeV": 250.579,
+     "eLab_MeV": 300.896,
+     "seed": 1738032337,
+     "sigmaCapture_mb": 495.9478123270957,
+     "fusionProbability": 1.9286911033005878e-7,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.00026154914903940725,
+       "statError_fb": 0.000036323914897420184,
+       "low_fb": 6.17991199774657e-7,
+       "median_fb": 0.00011905784138824495,
+       "high_fb": 0.002203757435176484
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.00010602374565315336,
+       "statError_fb": 0.0000012365798577811489,
+       "low_fb": 0.00001229835468589646,
+       "median_fb": 0.00009390384085007186,
+       "high_fb": 0.0007190923356254521
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.00036757289469256064,
+      "low_fb": 0.000027527327954196046,
+      "median_fb": 0.0002977708309368048,
+      "high_fb": 0.003133733451055079
+     }
+    },
+    {
+     "eStar_MeV": 54,
+     "eCm_MeV": 252.579,
+     "eLab_MeV": 303.298,
+     "seed": 1537089728,
+     "sigmaCapture_mb": 529.4031194776994,
+     "fusionProbability": 2.384429081731578e-7,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.00016958179007300588,
+       "statError_fb": 0.00004554629429513976,
+       "low_fb": 5.370453458012708e-10,
+       "median_fb": 0.000008570902524099847,
+       "high_fb": 0.00047344246744043155
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.00008903888488102257,
+       "statError_fb": 0.0000015083919911494781,
+       "low_fb": 0.00001043414776266753,
+       "median_fb": 0.00008192095128863656,
+       "high_fb": 0.0005710693161866955
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.0002586206749540284,
+      "low_fb": 0.00001597674375208535,
+      "median_fb": 0.00014814040428536886,
+      "high_fb": 0.0011742619094371007
+     }
+    },
+    {
+     "eStar_MeV": 56,
+     "eCm_MeV": 254.579,
+     "eLab_MeV": 305.699,
+     "seed": 747577848,
+     "sigmaCapture_mb": 559.5801830854562,
+     "fusionProbability": 2.935462583434514e-7,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.00006229324572003069,
+       "statError_fb": 0.00002518873390116353,
+       "low_fb": 0,
+       "median_fb": 3.1455632496473065e-8,
+       "high_fb": 0.00006987635922022394
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.00007089966145627289,
+       "statError_fb": 0.000001794705926025006,
+       "low_fb": 0.000005674920245351028,
+       "median_fb": 0.00005143352045844144,
+       "high_fb": 0.00043050038207133773
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.00013319290717630358,
+      "low_fb": 0.000006725602463301512,
+      "median_fb": 0.00006452377768067056,
+      "high_fb": 0.0006519921806623075
+     }
+    }
+   ]
+  },
+  {
+   "id": "Cr54+Cm248",
+   "element": 120,
+   "label": "⁵⁴Cr + ²⁴⁸Cm",
+   "compound": "302-120",
+   "qValue_MeV": -209.993,
+   "b0_MeV": 238.16,
+   "points": [
+    {
+     "eStar_MeV": 26,
+     "eCm_MeV": 235.993,
+     "eLab_MeV": 287.378,
+     "seed": 646853897,
+     "sigmaCapture_mb": 39.81316653907718,
+     "fusionProbability": 5.242333750380715e-11,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0.0004232306648618135,
+       "statError_fb": 0.00001615354839489978,
+       "low_fb": 0.000007522990807559007,
+       "median_fb": 0.0002549178177033026,
+       "high_fb": 0.004311037052693043
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.00002228802246466128,
+       "statError_fb": 1.4225522166421947e-7,
+       "low_fb": 1.8825620580104265e-7,
+       "median_fb": 0.000015337087139287325,
+       "high_fb": 0.00041150816742219437
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.0004455186873264748,
+      "low_fb": 0.0000376822654778805,
+      "median_fb": 0.00041184821795862227,
+      "high_fb": 0.005411716718257457
+     }
+    },
+    {
+     "eStar_MeV": 28,
+     "eCm_MeV": 237.993,
+     "eLab_MeV": 289.814,
+     "seed": 3544448024,
+     "sigmaCapture_mb": 53.127783645391645,
+     "fusionProbability": 1.4521901539905105e-10,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0.00019134748005051534,
+       "statError_fb": 0.000021367426959244917,
+       "low_fb": 0,
+       "median_fb": 0.00008380277361725186,
+       "high_fb": 0.002688915913291689
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.0002463810752550591,
+       "statError_fb": 0.0000010855434205214917,
+       "low_fb": 0.000007024911729753381,
+       "median_fb": 0.00019211469440414417,
+       "high_fb": 0.002820627731938658
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 2.3706690322889726e-9
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.0004377285553055745,
+      "low_fb": 0.0000601403859537712,
+      "median_fb": 0.0005626039851310017,
+      "high_fb": 0.007657023810441103
+     }
+    },
+    {
+     "eStar_MeV": 30,
+     "eCm_MeV": 239.993,
+     "eLab_MeV": 292.249,
+     "seed": 2233373033,
+     "sigmaCapture_mb": 67.95711488477147,
+     "fusionProbability": 3.6795858930020563e-10,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0.00012259655596276082,
+       "statError_fb": 0.00002891008300846416,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0.0007531050628564605
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.001004631965051078,
+       "statError_fb": 0.0000050065825756121605,
+       "low_fb": 0.00005064207173268136,
+       "median_fb": 0.0006835817558958107,
+       "high_fb": 0.006809419677894918
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 2.6039192642845196e-9,
+       "statError_fb": 2.424562523292373e-10,
+       "low_fb": 0,
+       "median_fb": 1.1878392228857122e-9,
+       "high_fb": 0.0000020084497159663525
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.0011272311249331032,
+      "low_fb": 0.00007535639862158554,
+      "median_fb": 0.0009949541564805515,
+      "high_fb": 0.009937587241433767
+     }
+    },
+    {
+     "eStar_MeV": 32,
+     "eCm_MeV": 241.993,
+     "eLab_MeV": 294.685,
+     "seed": 841286402,
+     "sigmaCapture_mb": 84.50927206783233,
+     "fusionProbability": 9.476218257580104e-10,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0.00004045647708813734,
+       "statError_fb": 0.00002793776167928814,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.0018234427510624657,
+       "statError_fb": 0.00001662651363987722,
+       "low_fb": 0.00011988106121569186,
+       "median_fb": 0.0014515304938109636,
+       "high_fb": 0.015380496252877544
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.0000013179005871607641,
+       "statError_fb": 2.36371223848222e-8,
+       "low_fb": 7.803663247581702e-10,
+       "median_fb": 0.0000010692411619975342,
+       "high_fb": 0.00009289623207274055
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.001865217128737764,
+      "low_fb": 0.00013774499398185744,
+      "median_fb": 0.0015457699595416304,
+      "high_fb": 0.016575028150741796
+     }
+    },
+    {
+     "eStar_MeV": 34,
+     "eCm_MeV": 243.993,
+     "eLab_MeV": 297.12,
+     "seed": 3818094869,
+     "sigmaCapture_mb": 103.68032123655885,
+     "fusionProbability": 3.077148828011749e-9,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0.000009946466168630254,
+       "statError_fb": 0.000009946466168630254,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.0028211966915402645,
+       "statError_fb": 0.00005187540740328861,
+       "low_fb": 0.00022664051430868327,
+       "median_fb": 0.002843837791807654,
+       "high_fb": 0.03168729879042556
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.000054543075908361515,
+       "statError_fb": 4.374353845115921e-7,
+       "low_fb": 0.000001307268970447444,
+       "median_fb": 0.00005536273922766422,
+       "high_fb": 0.0012520577142214563
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.0028856862336172563,
+      "low_fb": 0.0002974094879708115,
+      "median_fb": 0.003243310127254462,
+      "high_fb": 0.03565553056190585
+     }
+    },
+    {
+     "eStar_MeV": 36,
+     "eCm_MeV": 245.993,
+     "eLab_MeV": 299.556,
+     "seed": 1973236215,
+     "sigmaCapture_mb": 131.7445717873853,
+     "fusionProbability": 1.4271254269926647e-8,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.004776639369347318,
+       "statError_fb": 0.00018725419049328156,
+       "low_fb": 0.000136344625913814,
+       "median_fb": 0.002669778301975835,
+       "high_fb": 0.033791075586907034
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.0010616683060964565,
+       "statError_fb": 0.000005414968053732017,
+       "low_fb": 0.00002637862494316264,
+       "median_fb": 0.0006294852812274699,
+       "high_fb": 0.00837310899529498
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 3.34086780220584e-8
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.005838307675443775,
+      "low_fb": 0.00047068545418056787,
+      "median_fb": 0.004705427097385797,
+      "high_fb": 0.047566419229554006
+     }
+    },
+    {
+     "eStar_MeV": 38,
+     "eCm_MeV": 247.993,
+     "eLab_MeV": 301.991,
+     "seed": 2344373552,
+     "sigmaCapture_mb": 169.80805571278412,
+     "fusionProbability": 3.482962264452701e-8,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.0034533677328944363,
+       "statError_fb": 0.00028253010996593183,
+       "low_fb": 5.7907025395100676e-9,
+       "median_fb": 0.0018202080194763403,
+       "high_fb": 0.027708914308161105
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.004300360725036687,
+       "statError_fb": 0.0000233182007229107,
+       "low_fb": 0.00023603506068277632,
+       "median_fb": 0.002513025757567477,
+       "high_fb": 0.026793220302125182
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 3.773570414072172e-8,
+       "statError_fb": 3.3827906136463756e-9,
+       "low_fb": 0,
+       "median_fb": 1.4908424450075456e-8,
+       "high_fb": 0.000004652639710547987
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.007753766193635264,
+      "low_fb": 0.0006933165678709218,
+      "median_fb": 0.006730582950620855,
+      "high_fb": 0.06637448882284688
+     }
+    },
+    {
+     "eStar_MeV": 40,
+     "eCm_MeV": 249.993,
+     "eLab_MeV": 304.427,
+     "seed": 3434463457,
+     "sigmaCapture_mb": 208.97600215131982,
+     "fusionProbability": 5.447350255129576e-8,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.001736348878227668,
+       "statError_fb": 0.0003125521435530389,
+       "low_fb": 0,
+       "median_fb": 0.00014234497006922545,
+       "high_fb": 0.009987632320290225
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.006106816944571906,
+       "statError_fb": 0.000050076317507588167,
+       "low_fb": 0.0004867842390113511,
+       "median_fb": 0.0049765477960108315,
+       "high_fb": 0.04278098050268736
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.000002792952164458772,
+       "statError_fb": 7.216458297824627e-8,
+       "low_fb": 1.3742818970518163e-8,
+       "median_fb": 0.0000021906119384095135,
+       "high_fb": 0.00010404588649555007
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.007845958774964032,
+      "low_fb": 0.0006597053980835482,
+      "median_fb": 0.006797643419879242,
+      "high_fb": 0.05369428230931468
+     }
+    },
+    {
+     "eStar_MeV": 42,
+     "eCm_MeV": 251.993,
+     "eLab_MeV": 306.862,
+     "seed": 772563425,
+     "sigmaCapture_mb": 247.40826403202448,
+     "fusionProbability": 7.436348765992062e-8,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.0003601002395257722,
+       "statError_fb": 0.00010746899211691868,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0.0011642313751838412
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.005282386024648141,
+       "statError_fb": 0.0000725187522107006,
+       "low_fb": 0.0004614051508711983,
+       "median_fb": 0.0036794870247593287,
+       "high_fb": 0.032982965799208896
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.000031249724422339314,
+       "statError_fb": 4.248615102020561e-7,
+       "low_fb": 7.953671198935803e-7,
+       "median_fb": 0.000028738982302458902,
+       "high_fb": 0.0005264051689549985
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.005673735988596253,
+      "low_fb": 0.0005444598175090863,
+      "median_fb": 0.004382034367759258,
+      "high_fb": 0.03710912426270076
+     }
+    },
+    {
+     "eStar_MeV": 44,
+     "eCm_MeV": 253.993,
+     "eLab_MeV": 309.297,
+     "seed": 2303153538,
+     "sigmaCapture_mb": 285.0616863042721,
+     "fusionProbability": 9.666734450509593e-8,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.00007948363974357501,
+       "statError_fb": 0.00006876173423195466,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0.000025355298696853476
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.0034962452633822204,
+       "statError_fb": 0.00008453647115613481,
+       "low_fb": 0.0003357176080854289,
+       "median_fb": 0.002775871481663159,
+       "high_fb": 0.028946817631719995
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.0001496919034967894,
+       "statError_fb": 0.000001427349222800971,
+       "low_fb": 0.00000864851332077702,
+       "median_fb": 0.00012599896234253153,
+       "high_fb": 0.001602685644692963
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.003725420806622585,
+      "low_fb": 0.0004198398579073375,
+      "median_fb": 0.0034888025168581544,
+      "high_fb": 0.03522658206350421
+     }
+    },
+    {
+     "eStar_MeV": 46,
+     "eCm_MeV": 255.993,
+     "eLab_MeV": 311.733,
+     "seed": 3265992196,
+     "sigmaCapture_mb": 321.95015185294284,
+     "fusionProbability": 1.227935095670079e-7,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.000007879949272369768,
+       "statError_fb": 0.0000064740424501331695,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.0019265951128235117,
+       "statError_fb": 0.00008522614847272194,
+       "low_fb": 0.00011159342165244939,
+       "median_fb": 0.0015932233927243398,
+       "high_fb": 0.015311206810137066
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.0004168785478876845,
+       "statError_fb": 0.000003377363762185936,
+       "low_fb": 0.00003296031924441462,
+       "median_fb": 0.0003524165130084038,
+       "high_fb": 0.00331935745409254
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.002351353609983566,
+      "low_fb": 0.0002543124148251425,
+      "median_fb": 0.002426054652378312,
+      "high_fb": 0.01988541857951192
+     }
+    },
+    {
+     "eStar_MeV": 48,
+     "eCm_MeV": 257.993,
+     "eLab_MeV": 314.168,
+     "seed": 1576334102,
+     "sigmaCapture_mb": 358.08786885382597,
+     "fusionProbability": 1.5382573029405153e-7,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.0009984040155937939,
+       "statError_fb": 0.00008100280107585917,
+       "low_fb": 0.000017601513961928795,
+       "median_fb": 0.0005252286907851349,
+       "high_fb": 0.006582516808059238
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.0007204171751564541,
+       "statError_fb": 0.000006244311818721645,
+       "low_fb": 0.0000674381347980256,
+       "median_fb": 0.0005417173168061568,
+       "high_fb": 0.004753803217551461
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.001718821190750248,
+      "low_fb": 0.0001660874689900971,
+      "median_fb": 0.0015902976824888665,
+      "high_fb": 0.013237009745203447
+     }
+    },
+    {
+     "eStar_MeV": 50,
+     "eCm_MeV": 259.993,
+     "eLab_MeV": 316.604,
+     "seed": 3942499842,
+     "sigmaCapture_mb": 393.48485187204534,
+     "fusionProbability": 1.9073425792842593e-7,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.00034197814036587495,
+       "statError_fb": 0.00005167345756890727,
+       "low_fb": 3.07300278643021e-7,
+       "median_fb": 0.00011679907383036096,
+       "high_fb": 0.0029970343436866195
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.0008505428025829926,
+       "statError_fb": 0.000009633832378551237,
+       "low_fb": 0.00010578544812027646,
+       "median_fb": 0.0006929566918557827,
+       "high_fb": 0.006092565142366393
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.0011925209429488675,
+      "low_fb": 0.00016051476877244523,
+      "median_fb": 0.0011499639087012908,
+      "high_fb": 0.00957250918594349
+     }
+    },
+    {
+     "eStar_MeV": 52,
+     "eCm_MeV": 261.993,
+     "eLab_MeV": 319.039,
+     "seed": 1093726466,
+     "sigmaCapture_mb": 428.0075268344512,
+     "fusionProbability": 2.3454465561579955e-7,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.00013636711803949783,
+       "statError_fb": 0.0000410590980672921,
+       "low_fb": 0,
+       "median_fb": 0.0000024967240622232876,
+       "high_fb": 0.0005137937471087385
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.0007598304793930769,
+       "statError_fb": 0.000012289099753333486,
+       "low_fb": 0.00007306689769354138,
+       "median_fb": 0.0006381372728833005,
+       "high_fb": 0.004781383660587616
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.0008961975974325747,
+      "low_fb": 0.00008835190378868316,
+      "median_fb": 0.0007258259310587139,
+      "high_fb": 0.006295222646090206
+     }
+    },
+    {
+     "eStar_MeV": 54,
+     "eCm_MeV": 263.993,
+     "eLab_MeV": 321.475,
+     "seed": 476364937,
+     "sigmaCapture_mb": 460.0996619956819,
+     "fusionProbability": 2.872284848696846e-7,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.0000836446295015472,
+       "statError_fb": 0.00003830721421176844,
+       "low_fb": 0,
+       "median_fb": 1.7176973013663375e-9,
+       "high_fb": 0.00004903193520537819
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.000574282165772252,
+       "statError_fb": 0.000014400745624792174,
+       "low_fb": 0.00005445712410658228,
+       "median_fb": 0.0004654055283394625,
+       "high_fb": 0.004089488223257074
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.0006579267952737992,
+      "low_fb": 0.00005584247271993733,
+      "median_fb": 0.0005325781727376739,
+      "high_fb": 0.004419942845110029
+     }
+    },
+    {
+     "eStar_MeV": 56,
+     "eCm_MeV": 265.993,
+     "eLab_MeV": 323.91,
+     "seed": 942463614,
+     "sigmaCapture_mb": 489.21001731958336,
+     "fusionProbability": 3.506379522584934e-7,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.00007507122642931462,
+       "statError_fb": 0.00005159399975350813,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 6.276062598667251e-7
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.0003520767435136276,
+       "statError_fb": 0.000014416810440023167,
+       "low_fb": 0.00004022039208072124,
+       "median_fb": 0.00035123072282466797,
+       "high_fb": 0.0027483330577330566
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.0004271479699429422,
+      "low_fb": 0.000040445180315226126,
+      "median_fb": 0.00036288880349731275,
+      "high_fb": 0.002843870122571183
+     }
+    }
+   ]
+  },
+  {
+   "id": "V51+Bk249",
+   "element": 120,
+   "label": "⁵¹V + ²⁴⁹Bk",
+   "compound": "300-120",
+   "qValue_MeV": -199.977,
+   "b0_MeV": 231.45,
+   "points": [
+    {
+     "eStar_MeV": 26,
+     "eCm_MeV": 225.977,
+     "eLab_MeV": 272.261,
+     "seed": 3697230705,
+     "sigmaCapture_mb": 18.352838422747237,
+     "fusionProbability": 3.448327359822644e-11,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0.0005876085314887702,
+       "statError_fb": 0.000013849621312698644,
+       "low_fb": 0.000024994116180227248,
+       "median_fb": 0.00038577192309330414,
+       "high_fb": 0.005943266521320105
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.00001640679045873597,
+       "statError_fb": 1.0820032956231855e-7,
+       "low_fb": 1.3836219979025915e-7,
+       "median_fb": 0.000012700652522415836,
+       "high_fb": 0.00032539538266866376
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.0006040153219475062,
+      "low_fb": 0.000047132430864389227,
+      "median_fb": 0.0005217054073974765,
+      "high_fb": 0.007983982105643826
+     }
+    },
+    {
+     "eStar_MeV": 28,
+     "eCm_MeV": 227.977,
+     "eLab_MeV": 274.671,
+     "seed": 4164272256,
+     "sigmaCapture_mb": 28.902173365031423,
+     "fusionProbability": 8.437306578745031e-11,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0.00037346109812159007,
+       "statError_fb": 0.000022576368634597808,
+       "low_fb": 0,
+       "median_fb": 0.0002498236354431513,
+       "high_fb": 0.004607332400624029
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.0001720922438578201,
+       "statError_fb": 7.531080600678731e-7,
+       "low_fb": 0.000006537640865972568,
+       "median_fb": 0.000151366964835798,
+       "high_fb": 0.0022644309337990698
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.0005455533419794101,
+      "low_fb": 0.00006720259693985933,
+      "median_fb": 0.0007963879444023832,
+      "high_fb": 0.009059481158549855
+     }
+    },
+    {
+     "eStar_MeV": 30,
+     "eCm_MeV": 229.977,
+     "eLab_MeV": 277.08,
+     "seed": 2340532020,
+     "sigmaCapture_mb": 41.1643086797504,
+     "fusionProbability": 2.0420032265906264e-10,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0.0001995844742492742,
+       "statError_fb": 0.000032717583112749396,
+       "low_fb": 0,
+       "median_fb": 0.000017264972686887848,
+       "high_fb": 0.0020766155935901245
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.0009010285587064771,
+       "statError_fb": 0.0000034725512538441527,
+       "low_fb": 0.000055923147589785086,
+       "median_fb": 0.0006299154917932418,
+       "high_fb": 0.008515587408978453
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 5.129365022040636e-13,
+       "statError_fb": 4.616632461210141e-13,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 4.8948093131177533e-8
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.0011006130334686877,
+      "low_fb": 0.00010563211589375201,
+      "median_fb": 0.0011083332696918493,
+      "high_fb": 0.011867253580556713
+     }
+    },
+    {
+     "eStar_MeV": 32,
+     "eCm_MeV": 231.977,
+     "eLab_MeV": 279.49,
+     "seed": 570969057,
+     "sigmaCapture_mb": 54.9550000093613,
+     "fusionProbability": 4.870139844138275e-10,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0.00014857208413682804,
+       "statError_fb": 0.000057279907419348346,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0.00033634720727759686
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.0021646317746549875,
+       "statError_fb": 0.000013294275974345276,
+       "low_fb": 0.00019414028415971508,
+       "median_fb": 0.0017387038670580919,
+       "high_fb": 0.0204594194589872
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 5.339212512406077e-8,
+       "statError_fb": 1.9323662117719663e-9,
+       "low_fb": 0,
+       "median_fb": 6.145969777284298e-8,
+       "high_fb": 0.0000069142285075542365
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.0023132572509169396,
+      "low_fb": 0.00022686667477370134,
+      "median_fb": 0.002023280541881677,
+      "high_fb": 0.021922741268091846
+     }
+    },
+    {
+     "eStar_MeV": 34,
+     "eCm_MeV": 233.977,
+     "eLab_MeV": 281.9,
+     "seed": 2391205281,
+     "sigmaCapture_mb": 70.28340348902717,
+     "fusionProbability": 1.0960783694795123e-9,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0.000009619248079773869,
+       "statError_fb": 0.000006783028686622241,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.0026955413046255913,
+       "statError_fb": 0.00003199495644512372,
+       "low_fb": 0.00024080571428026384,
+       "median_fb": 0.002360591837940769,
+       "high_fb": 0.024663462964767343
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.0000036572384499545857,
+       "statError_fb": 4.408880520521759e-8,
+       "low_fb": 3.168923887689005e-8,
+       "median_fb": 0.000003112035422767668,
+       "high_fb": 0.00009547364125023528
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.0027088177911553197,
+      "low_fb": 0.0002583358972363203,
+      "median_fb": 0.002561068552750827,
+      "high_fb": 0.02573853594990164
+     }
+    },
+    {
+     "eStar_MeV": 36,
+     "eCm_MeV": 235.977,
+     "eLab_MeV": 284.309,
+     "seed": 405974631,
+     "sigmaCapture_mb": 87.46837500762678,
+     "fusionProbability": 2.5494128141967204e-9,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.0024471519762198,
+       "statError_fb": 0.00005946706104947221,
+       "low_fb": 0.0002168767316774686,
+       "median_fb": 0.002661814789020657,
+       "high_fb": 0.03048151152735607
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.0000482972260934528,
+       "statError_fb": 3.328925686323096e-7,
+       "low_fb": 0.000002086383240622896,
+       "median_fb": 0.00005121841514884446,
+       "high_fb": 0.0010051986252865165
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.002495449202313253,
+      "low_fb": 0.00027486490985798403,
+      "median_fb": 0.0031185055105430143,
+      "high_fb": 0.03292052029016338
+     }
+    },
+    {
+     "eStar_MeV": 38,
+     "eCm_MeV": 237.977,
+     "eLab_MeV": 286.719,
+     "seed": 1574841449,
+     "sigmaCapture_mb": 108.2797088233603,
+     "fusionProbability": 8.441866680211078e-9,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.002939901037197604,
+       "statError_fb": 0.00015420269890240872,
+       "low_fb": 0.00005294867783868116,
+       "median_fb": 0.0020142073717572583,
+       "high_fb": 0.026036582505139474
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.0005393889442989796,
+       "statError_fb": 0.0000024264126379567125,
+       "low_fb": 0.00003114361363325652,
+       "median_fb": 0.00044476204320407717,
+       "high_fb": 0.00553200659015382
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 5.941389870326855e-11,
+       "statError_fb": 2.1498325095210578e-11,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 1.5760261142314894e-7
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.0034792900409104824,
+      "low_fb": 0.0002770609945993615,
+      "median_fb": 0.003433787192549769,
+      "high_fb": 0.032878317412868334
+     }
+    },
+    {
+     "eStar_MeV": 40,
+     "eCm_MeV": 239.977,
+     "eLab_MeV": 289.129,
+     "seed": 2814760727,
+     "sigmaCapture_mb": 139.9273741586652,
+     "fusionProbability": 3.220882873531638e-8,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.003334084967598034,
+       "statError_fb": 0.0003765652763739319,
+       "low_fb": 0,
+       "median_fb": 0.0008983894396086281,
+       "high_fb": 0.023203894510197876
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.0031427320434197392,
+       "statError_fb": 0.000015530253388935192,
+       "low_fb": 0.00016363042915676062,
+       "median_fb": 0.0018573860450590062,
+       "high_fb": 0.015542470130122719
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 1.6385474513074817e-7,
+       "statError_fb": 6.170388948508162e-9,
+       "low_fb": 0,
+       "median_fb": 6.098694924475711e-8,
+       "high_fb": 0.000006611090296125137
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.0064769808657629034,
+      "low_fb": 0.0004375024654161642,
+      "median_fb": 0.0052737602481255095,
+      "high_fb": 0.04670254389675137
+     }
+    },
+    {
+     "eStar_MeV": 42,
+     "eCm_MeV": 241.977,
+     "eLab_MeV": 291.538,
+     "seed": 791379477,
+     "sigmaCapture_mb": 179.4127904255657,
+     "fusionProbability": 6.496174621109479e-8,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.001640454445594689,
+       "statError_fb": 0.0004096112017588829,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0.009602212977968158
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.004972274760701085,
+       "statError_fb": 0.000040581718125284746,
+       "low_fb": 0.00041114292788968395,
+       "median_fb": 0.0033651698973092246,
+       "high_fb": 0.029259666392118203
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.000004684371811493056,
+       "statError_fb": 7.230873195786884e-8,
+       "low_fb": 7.736534745888847e-8,
+       "median_fb": 0.0000038094804975470245,
+       "high_fb": 0.00009564984014378931
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.006617413578107267,
+      "low_fb": 0.0005874102222762428,
+      "median_fb": 0.005528052049901943,
+      "high_fb": 0.0498551431952709
+     }
+    },
+    {
+     "eStar_MeV": 44,
+     "eCm_MeV": 243.977,
+     "eLab_MeV": 293.948,
+     "seed": 3932705725,
+     "sigmaCapture_mb": 218.9998953294164,
+     "fusionProbability": 9.455622204021497e-8,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.0020004238754105174,
+       "statError_fb": 0.0007433719676775258,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0.001408369729513098
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.004088301780406443,
+       "statError_fb": 0.00005770065194025958,
+       "low_fb": 0.00041397946708767727,
+       "median_fb": 0.003155850730116846,
+       "high_fb": 0.029667052929718732
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.000030515972759492506,
+       "statError_fb": 2.9917553969634375e-7,
+       "low_fb": 0.000001039644612828292,
+       "median_fb": 0.00002491716223171312,
+       "high_fb": 0.00044305903294161654
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.006119241628576454,
+      "low_fb": 0.00045238706727356503,
+      "median_fb": 0.003878232114772316,
+      "high_fb": 0.03963786551913411
+     }
+    },
+    {
+     "eStar_MeV": 46,
+     "eCm_MeV": 245.977,
+     "eLab_MeV": 296.358,
+     "seed": 93498797,
+     "sigmaCapture_mb": 257.78866501422044,
+     "fusionProbability": 1.242130920424885e-7,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.00016588849394588118,
+       "statError_fb": 0.00015476937008637533,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.002607022266252263,
+       "statError_fb": 0.00006510805213632432,
+       "low_fb": 0.00023048179809078963,
+       "median_fb": 0.0019989633326378807,
+       "high_fb": 0.017386938604905013
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.00010274772931290104,
+       "statError_fb": 7.796021827668944e-7,
+       "low_fb": 0.000006304248971466855,
+       "median_fb": 0.00008495476874825796,
+       "high_fb": 0.0007879927851866307
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.002875658489511045,
+      "low_fb": 0.0002906347359728723,
+      "median_fb": 0.0024231329895487504,
+      "high_fb": 0.020436175407097426
+     }
+    },
+    {
+     "eStar_MeV": 48,
+     "eCm_MeV": 247.977,
+     "eLab_MeV": 298.767,
+     "seed": 4118929445,
+     "sigmaCapture_mb": 295.77030756983277,
+     "fusionProbability": 1.5673752196998708e-7,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.0006709562371983582,
+       "statError_fb": 0.0006709562371983582,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.0013869471121067244,
+       "statError_fb": 0.00006335946642893164,
+       "low_fb": 0.00010113095896475738,
+       "median_fb": 0.0011029063819124863,
+       "high_fb": 0.009272889683268585
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.00022701515715450646,
+       "statError_fb": 0.0000015944350722811865,
+       "low_fb": 0.000019024498127849556,
+       "median_fb": 0.00018284393429786712,
+       "high_fb": 0.0018648485488894887
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.002284918506459589,
+      "low_fb": 0.0001908529287094844,
+      "median_fb": 0.001612046837364941,
+      "high_fb": 0.013127707069731766
+     }
+    },
+    {
+     "eStar_MeV": 50,
+     "eCm_MeV": 249.977,
+     "eLab_MeV": 301.177,
+     "seed": 42030057,
+     "sigmaCapture_mb": 332.96031894577663,
+     "fusionProbability": 1.9390506260093756e-7,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.0006643345744257959,
+       "statError_fb": 0.00005848175217988225,
+       "low_fb": 0.00001875109665951382,
+       "median_fb": 0.0004137427646131515,
+       "high_fb": 0.004641689310323245
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.0003351617674817226,
+       "statError_fb": 0.0000027004177852477542,
+       "low_fb": 0.000035576557930784885,
+       "median_fb": 0.00027944757731199356,
+       "high_fb": 0.0022271870143699365
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.0009994963419075185,
+      "low_fb": 0.00010513137746731547,
+      "median_fb": 0.0008674846872134569,
+      "high_fb": 0.007830071991114042
+     }
+    },
+    {
+     "eStar_MeV": 52,
+     "eCm_MeV": 251.977,
+     "eLab_MeV": 303.586,
+     "seed": 822934547,
+     "sigmaCapture_mb": 369.3738024183521,
+     "fusionProbability": 2.37047343341847e-7,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.0002918256828380655,
+       "statError_fb": 0.0000537668361913833,
+       "low_fb": 3.3737486294937047e-8,
+       "median_fb": 0.00007852411441700602,
+       "high_fb": 0.0022454649397650995
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.00035834223748747635,
+       "statError_fb": 0.0000038641658314514224,
+       "low_fb": 0.00003687479879581853,
+       "median_fb": 0.00029812241048564656,
+       "high_fb": 0.0026433120420576908
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.0006501679203255418,
+      "low_fb": 0.0000639013069492753,
+      "median_fb": 0.0006206203150937455,
+      "high_fb": 0.00557302608451047
+     }
+    },
+    {
+     "eStar_MeV": 54,
+     "eCm_MeV": 253.977,
+     "eLab_MeV": 305.996,
+     "seed": 2059276801,
+     "sigmaCapture_mb": 405.0247916957205,
+     "fusionProbability": 2.8731583223831667e-7,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.00009621990838415256,
+       "statError_fb": 0.000037783788097533265,
+       "low_fb": 0,
+       "median_fb": 0.000004019017045171265,
+       "high_fb": 0.0006084310810472142
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.00030959724260686705,
+       "statError_fb": 0.000004912261829200209,
+       "low_fb": 0.000037677164276065046,
+       "median_fb": 0.00030109000876394167,
+       "high_fb": 0.00211783935999966
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.0004058171509910196,
+      "low_fb": 0.00004445770765559766,
+      "median_fb": 0.00038789832849959696,
+      "high_fb": 0.00318524547975601
+     }
+    },
+    {
+     "eStar_MeV": 56,
+     "eCm_MeV": 255.977,
+     "eLab_MeV": 308.406,
+     "seed": 1370700881,
+     "sigmaCapture_mb": 439.92386957765723,
+     "fusionProbability": 3.458027244741625e-7,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.0000487233978299232,
+       "statError_fb": 0.00002717075284453084,
+       "low_fb": 0,
+       "median_fb": 1.5650011551885483e-9,
+       "high_fb": 0.0000426247150272424
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.00021670043249502483,
+       "statError_fb": 0.000005279932128218355,
+       "low_fb": 0.000024089386550322786,
+       "median_fb": 0.00019008594109294082,
+       "high_fb": 0.001380687946075034
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.00026542383032494805,
+      "low_fb": 0.00002503042632684111,
+      "median_fb": 0.0002100788396651007,
+      "high_fb": 0.001509411132034536
+     }
+    }
+   ]
+  },
+  {
+   "id": "Ti50+Bk249",
+   "element": 119,
+   "label": "⁵⁰Ti + ²⁴⁹Bk",
+   "compound": "299-119",
+   "qValue_MeV": -193.576,
+   "b0_MeV": 220.96,
+   "points": [
+    {
+     "eStar_MeV": 26,
+     "eCm_MeV": 219.576,
+     "eLab_MeV": 263.667,
+     "seed": 1681457972,
+     "sigmaCapture_mb": 39.02865389884651,
+     "fusionProbability": 1.812114413639966e-10,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0.03194095753098305,
+       "statError_fb": 0.0007481189825976646,
+       "low_fb": 0.001364662259884782,
+       "median_fb": 0.01877026960461868,
+       "high_fb": 0.25682831428403063
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.01863728318937611,
+       "statError_fb": 0.00006936659482374789,
+       "low_fb": 0.000801460347683288,
+       "median_fb": 0.014640108402405327,
+       "high_fb": 0.20575659738450816
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.05057824072035916,
+      "low_fb": 0.00550431784626539,
+      "median_fb": 0.05415631978341197,
+      "high_fb": 0.4955505463418974
+     }
+    },
+    {
+     "eStar_MeV": 28,
+     "eCm_MeV": 221.576,
+     "eLab_MeV": 266.069,
+     "seed": 4160484062,
+     "sigmaCapture_mb": 53.23594961838065,
+     "fusionProbability": 4.781537108308e-10,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0.015040976578118719,
+       "statError_fb": 0.0009589593561051578,
+       "low_fb": 0,
+       "median_fb": 0.012076374476085745,
+       "high_fb": 0.23154570562768623
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.06595413711161965,
+       "statError_fb": 0.00020228741218544864,
+       "low_fb": 0.005284705542708809,
+       "median_fb": 0.06931063585634492,
+       "high_fb": 0.8317946485283092
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0.00004298572147387685
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.08099511368973837,
+      "low_fb": 0.010069541932343962,
+      "median_fb": 0.10431389160536922,
+      "high_fb": 1.169655777998812
+     }
+    },
+    {
+     "eStar_MeV": 30,
+     "eCm_MeV": 223.576,
+     "eLab_MeV": 268.47,
+     "seed": 770866525,
+     "sigmaCapture_mb": 69.18875749123595,
+     "fusionProbability": 1.1834830498082522e-9,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0.009579009597743915,
+       "statError_fb": 0.0015031312227338444,
+       "low_fb": 0,
+       "median_fb": 0.0007198606557224046,
+       "high_fb": 0.08624337463732597
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.1627203046965169,
+       "statError_fb": 0.0006097278209917684,
+       "low_fb": 0.011444645901795924,
+       "median_fb": 0.1254519149679565,
+       "high_fb": 1.2941000125940432
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.000025004003163675095,
+       "statError_fb": 9.518775232181296e-7,
+       "low_fb": 0,
+       "median_fb": 0.00001149942465866907,
+       "high_fb": 0.003044713161010835
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.1723243182974245,
+      "low_fb": 0.01347339288181535,
+      "median_fb": 0.15181092017527326,
+      "high_fb": 1.4748290450915797
+     }
+    },
+    {
+     "eStar_MeV": 32,
+     "eCm_MeV": 225.576,
+     "eLab_MeV": 270.872,
+     "seed": 1336465579,
+     "sigmaCapture_mb": 87.1672103755477,
+     "fusionProbability": 3.005638795724274e-9,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0.003957695425744516,
+       "statError_fb": 0.0018536831747460606,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0.01600156704240878
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.2583327016369305,
+       "statError_fb": 0.0018258969633529944,
+       "low_fb": 0.020374191910010036,
+       "median_fb": 0.24636666932037074,
+       "high_fb": 2.092091756732561
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.0014125106949055923,
+       "statError_fb": 0.000014598539393816188,
+       "low_fb": 0.000009013256572908305,
+       "median_fb": 0.0012642503648292495,
+       "high_fb": 0.04928848028108177
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.26370290775758065,
+      "low_fb": 0.02355821360909031,
+      "median_fb": 0.2751839839015821,
+      "high_fb": 2.316153130704826
+     }
+    },
+    {
+     "eStar_MeV": 34,
+     "eCm_MeV": 227.576,
+     "eLab_MeV": 273.273,
+     "seed": 2620805442,
+     "sigmaCapture_mb": 109.25035058466358,
+     "fusionProbability": 1.0985643323504425e-8,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.4087691310864886,
+       "statError_fb": 0.00596549383906936,
+       "low_fb": 0.028183185051205123,
+       "median_fb": 0.35540366397704526,
+       "high_fb": 4.313883973008487
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.02103717674356244,
+       "statError_fb": 0.0001023056036637375,
+       "low_fb": 0.0007589967579965235,
+       "median_fb": 0.016624186843321235,
+       "high_fb": 0.3319923930921949
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.429806307830051,
+      "low_fb": 0.03738750410679051,
+      "median_fb": 0.4363894188311748,
+      "high_fb": 4.980923530684031
+     }
+    },
+    {
+     "eStar_MeV": 36,
+     "eCm_MeV": 229.576,
+     "eLab_MeV": 275.675,
+     "seed": 3842197607,
+     "sigmaCapture_mb": 143.1653477772778,
+     "fusionProbability": 4.285692091942993e-8,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.5692424144382443,
+       "statError_fb": 0.016482152802902515,
+       "low_fb": 0.027373410546544314,
+       "median_fb": 0.367385032622431,
+       "high_fb": 4.396395322286236
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.13955847914823094,
+       "statError_fb": 0.0004837573083272029,
+       "low_fb": 0.005514863595316478,
+       "median_fb": 0.07589544864411953,
+       "high_fb": 0.9982099503929168
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 4.4517687928427974e-7,
+       "statError_fb": 1.541722830229306e-7,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0.00021828998739966532
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.7088013387633545,
+      "low_fb": 0.056309729371738275,
+      "median_fb": 0.6083815432036005,
+      "high_fb": 5.867598536015782
+     }
+    },
+    {
+     "eStar_MeV": 38,
+     "eCm_MeV": 231.576,
+     "eLab_MeV": 278.077,
+     "seed": 3122201767,
+     "sigmaCapture_mb": 184.74058318700244,
+     "fusionProbability": 8.578483595673059e-8,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.3552179543146661,
+       "statError_fb": 0.02065758133931649,
+       "low_fb": 0.004288294638913147,
+       "median_fb": 0.2031734969788498,
+       "high_fb": 2.515438554676849
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.2892654612437391,
+       "statError_fb": 0.0012189906461535938,
+       "low_fb": 0.018453357913583022,
+       "median_fb": 0.20231746277815502,
+       "high_fb": 2.113848492396039
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.00020205819166250124,
+       "statError_fb": 0.000006968484518166684,
+       "low_fb": 0,
+       "median_fb": 0.0001140603654096167,
+       "high_fb": 0.01013919386934712
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.6446854737500677,
+      "low_fb": 0.0601112059275772,
+      "median_fb": 0.5854638830737057,
+      "high_fb": 4.916020926916856
+     }
+    },
+    {
+     "eStar_MeV": 40,
+     "eCm_MeV": 233.576,
+     "eLab_MeV": 280.478,
+     "seed": 716784367,
+     "sigmaCapture_mb": 226.23809279368973,
+     "fusionProbability": 1.2594715498452983e-7,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.13254129510032606,
+       "statError_fb": 0.01662021944881477,
+       "low_fb": 0,
+       "median_fb": 0.05548429329108069,
+       "high_fb": 1.0390302412288088
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.3181909072841874,
+       "statError_fb": 0.0021001350278330006,
+       "low_fb": 0.028487810509705752,
+       "median_fb": 0.2825291494478673,
+       "high_fb": 2.261456925229442
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.002372741244230851,
+       "statError_fb": 0.00003244192488491096,
+       "low_fb": 0.000036328330627183667,
+       "median_fb": 0.0017962868855318295,
+       "high_fb": 0.03686759443260519
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.45310494362874437,
+      "low_fb": 0.04826479863885691,
+      "median_fb": 0.46864461180248235,
+      "high_fb": 3.8628080710841037
+     }
+    },
+    {
+     "eStar_MeV": 42,
+     "eCm_MeV": 235.576,
+     "eLab_MeV": 282.88,
+     "seed": 4219613039,
+     "sigmaCapture_mb": 266.86898814159105,
+     "fusionProbability": 1.677816514816579e-7,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.0580260178757131,
+       "statError_fb": 0.014813658681739932,
+       "low_fb": 0,
+       "median_fb": 0.0000044621069505649405,
+       "high_fb": 0.2790079955427868
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.24146364809677637,
+       "statError_fb": 0.0026740310852305616,
+       "low_fb": 0.025743388098942093,
+       "median_fb": 0.23041801468335452,
+       "high_fb": 1.9483558289820246
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.008136840860943273,
+       "statError_fb": 0.00007039977112558973,
+       "low_fb": 0.0003588994053453175,
+       "median_fb": 0.006253876936249847,
+       "high_fb": 0.13791545397056867
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.3076265068334328,
+      "low_fb": 0.031241538457383724,
+      "median_fb": 0.2969375005379125,
+      "high_fb": 2.8550058022275433
+     }
+    },
+    {
+     "eStar_MeV": 44,
+     "eCm_MeV": 237.576,
+     "eLab_MeV": 285.281,
+     "seed": 1884532680,
+     "sigmaCapture_mb": 306.63022327010736,
+     "fusionProbability": 2.1490737928739426e-7,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.02601000689694836,
+       "statError_fb": 0.009971435579789965,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0.024674663077878644
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.15387661943332323,
+       "statError_fb": 0.0028313525994386386,
+       "low_fb": 0.012558908724951042,
+       "median_fb": 0.12477892525821616,
+       "high_fb": 1.0015889340822182
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.01613832155742009,
+       "statError_fb": 0.0001132847196442396,
+       "low_fb": 0.0011078246542983912,
+       "median_fb": 0.015316277329546372,
+       "high_fb": 0.17684642933056777
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.19602494788769168,
+      "low_fb": 0.021850212326254902,
+      "median_fb": 0.18022328601685575,
+      "high_fb": 1.462480345605333
+     }
+    },
+    {
+     "eStar_MeV": 46,
+     "eCm_MeV": 239.576,
+     "eLab_MeV": 287.683,
+     "seed": 1578800396,
+     "sigmaCapture_mb": 345.5403681127338,
+     "fusionProbability": 2.6971502320965046e-7,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.0007879683921661213,
+       "statError_fb": 0.000623422825951255,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.07658825691884207,
+       "statError_fb": 0.0025020182766133693,
+       "low_fb": 0.006917723106219485,
+       "median_fb": 0.06579237171261759,
+       "high_fb": 0.6416960392878488
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.024565466954046097,
+       "statError_fb": 0.00016088999476948662,
+       "low_fb": 0.0021905390911048117,
+       "median_fb": 0.02191270404543943,
+       "high_fb": 0.2654900770634805
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.10194169226505428,
+      "low_fb": 0.012637473228137021,
+      "median_fb": 0.11430405461746175,
+      "high_fb": 1.100115919333842
+     }
+    },
+    {
+     "eStar_MeV": 48,
+     "eCm_MeV": 241.576,
+     "eLab_MeV": 290.085,
+     "seed": 140583263,
+     "sigmaCapture_mb": 383.61752789269013,
+     "fusionProbability": 3.3408143119683366e-7,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.00007820627974208901,
+       "statError_fb": 0.0000768873530399685,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.033826019363573746,
+       "statError_fb": 0.002061552012637165,
+       "low_fb": 0.0013635167771935495,
+       "median_fb": 0.022227402654892117,
+       "high_fb": 0.22528361517873122
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.029133939972225412,
+       "statError_fb": 0.0002101755310162246,
+       "low_fb": 0.003008113437686314,
+       "median_fb": 0.022171691317814813,
+       "high_fb": 0.19494941318029316
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.06303816561554125,
+      "low_fb": 0.007920942451416044,
+      "median_fb": 0.06316815016212395,
+      "high_fb": 0.4873919188471497
+     }
+    },
+    {
+     "eStar_MeV": 50,
+     "eCm_MeV": 243.576,
+     "eLab_MeV": 292.486,
+     "seed": 4268184002,
+     "sigmaCapture_mb": 420.87876978311914,
+     "fusionProbability": 4.096839294949073e-7,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.000002481743996376143,
+       "statError_fb": 0.000002481743996376142,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.015478073718099337,
+       "statError_fb": 0.0017414759955830038,
+       "low_fb": 0.000043284416132669265,
+       "median_fb": 0.006719506974237911,
+       "high_fb": 0.10280140506672707
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.027913574617349612,
+       "statError_fb": 0.00026230732365726145,
+       "low_fb": 0.00326093820737728,
+       "median_fb": 0.027306789359025686,
+       "high_fb": 0.24283212199389595
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.04339413007944533,
+      "low_fb": 0.005561392764233385,
+      "median_fb": 0.04353853787048863,
+      "high_fb": 0.3932228155602079
+     }
+    },
+    {
+     "eStar_MeV": 52,
+     "eCm_MeV": 245.576,
+     "eLab_MeV": 294.888,
+     "seed": 2258205161,
+     "sigmaCapture_mb": 457.33985222581634,
+     "fusionProbability": 4.981400188537143e-7,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.006578675207112219,
+       "statError_fb": 0.0013152860886079883,
+       "low_fb": 1.019928363167349e-8,
+       "median_fb": 0.0006810670195812656,
+       "high_fb": 0.025773425945193034
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.022587232457784562,
+       "statError_fb": 0.00029957353569906716,
+       "low_fb": 0.0025282754870889993,
+       "median_fb": 0.01857015946476248,
+       "high_fb": 0.14540945697953428
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.02916590766489678,
+      "low_fb": 0.003103990227877103,
+      "median_fb": 0.02570322281106691,
+      "high_fb": 0.18818419693987382
+     }
+    },
+    {
+     "eStar_MeV": 54,
+     "eCm_MeV": 247.576,
+     "eLab_MeV": 297.289,
+     "seed": 4247151378,
+     "sigmaCapture_mb": 493.00508242459233,
+     "fusionProbability": 6.010861971279224e-7,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.0031401705921653192,
+       "statError_fb": 0.0012546296490382246,
+       "low_fb": 0,
+       "median_fb": 0.000005384085688419079,
+       "high_fb": 0.006160693578038305
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.014496587288690813,
+       "statError_fb": 0.0002927263137299663,
+       "low_fb": 0.0016435007320670678,
+       "median_fb": 0.014225505549601813,
+       "high_fb": 0.12232915510809017
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.01763675788085613,
+      "low_fb": 0.00177870616585131,
+      "median_fb": 0.01687976564084977,
+      "high_fb": 0.14523568864692332
+     }
+    },
+    {
+     "eStar_MeV": 56,
+     "eCm_MeV": 249.576,
+     "eLab_MeV": 299.691,
+     "seed": 973706069,
+     "sigmaCapture_mb": 527.523879390006,
+     "fusionProbability": 7.20687778406204e-7,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.0005223959893381627,
+       "statError_fb": 0.000387366198162935,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0.00032613041664449527
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.008687403318444559,
+       "statError_fb": 0.0002809478602274866,
+       "low_fb": 0.0010244054467364106,
+       "median_fb": 0.008996590802447827,
+       "high_fb": 0.071967026028535
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.00920979930778272,
+      "low_fb": 0.0010528269136392873,
+      "median_fb": 0.009445003291970233,
+      "high_fb": 0.07421535440625329
+     }
+    }
+   ]
+  },
+  {
+   "id": "V51+Cm248",
+   "element": 119,
+   "label": "⁵¹V + ²⁴⁸Cm",
+   "compound": "299-119",
+   "qValue_MeV": -196.8,
+   "b0_MeV": 229.03,
+   "points": [
+    {
+     "eStar_MeV": 26,
+     "eCm_MeV": 222.8,
+     "eLab_MeV": 268.618,
+     "seed": 1603497746,
+     "sigmaCapture_mb": 14.191593577053158,
+     "fusionProbability": 1.0925347355489804e-10,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0.006485929665904218,
+       "statError_fb": 0.00015981601899795812,
+       "low_fb": 0.0001996279798705766,
+       "median_fb": 0.004442341118491201,
+       "high_fb": 0.05530416481688247
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.004275655894918594,
+       "statError_fb": 0.000015202756595896607,
+       "low_fb": 0.00015529550479604644,
+       "median_fb": 0.003949322582498896,
+       "high_fb": 0.05865754707392435
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.010761585560822812,
+      "low_fb": 0.0010868891839132264,
+      "median_fb": 0.012036157225196069,
+      "high_fb": 0.14926782970919866
+     }
+    },
+    {
+     "eStar_MeV": 28,
+     "eCm_MeV": 224.8,
+     "eLab_MeV": 271.029,
+     "seed": 3871403196,
+     "sigmaCapture_mb": 24.13889469549029,
+     "fusionProbability": 2.4893315744154805e-10,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0.004063305136843038,
+       "statError_fb": 0.00024991280187570844,
+       "low_fb": 0,
+       "median_fb": 0.002402111885516592,
+       "high_fb": 0.048616568686587466
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.015447149772092016,
+       "statError_fb": 0.000047086009610251827,
+       "low_fb": 0.0009259796258243397,
+       "median_fb": 0.014426874896952291,
+       "high_fb": 0.1707858307118324
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0.00000461751885535949
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.019510454908935056,
+      "low_fb": 0.0019524487308205285,
+      "median_fb": 0.023431611994308998,
+      "high_fb": 0.25609607396726825
+     }
+    },
+    {
+     "eStar_MeV": 30,
+     "eCm_MeV": 226.8,
+     "eLab_MeV": 273.441,
+     "seed": 2329181694,
+     "sigmaCapture_mb": 35.81834965287801,
+     "fusionProbability": 5.694075302848557e-10,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0.0014016195456975815,
+       "statError_fb": 0.00026535768994455264,
+       "low_fb": 0,
+       "median_fb": 0.00029117776921492065,
+       "high_fb": 0.018191430985181223
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.04060962286629459,
+       "statError_fb": 0.0001507085502537038,
+       "low_fb": 0.003553612330562529,
+       "median_fb": 0.032160703072682637,
+       "high_fb": 0.3479690693357448
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.000006090952595014441,
+       "statError_fb": 2.319898895612954e-7,
+       "low_fb": 0,
+       "median_fb": 0.000002729702822722152,
+       "high_fb": 0.0007133126044421127
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.04201733336458719,
+      "low_fb": 0.004215267904131613,
+      "median_fb": 0.03590720863292792,
+      "high_fb": 0.38991545168465386
+     }
+    },
+    {
+     "eStar_MeV": 32,
+     "eCm_MeV": 228.8,
+     "eLab_MeV": 275.852,
+     "seed": 3006806287,
+     "sigmaCapture_mb": 49.035421934256604,
+     "fusionProbability": 1.2337907460814303e-9,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0.0006018899654792882,
+       "statError_fb": 0.00035416311628340755,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0.004141893449192028
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.05848183121704484,
+       "statError_fb": 0.00041418251539645053,
+       "low_fb": 0.005210597136485874,
+       "median_fb": 0.045119021847851895,
+       "high_fb": 0.4352115008509569
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.0003124962165697949,
+       "statError_fb": 0.0000033146312438404447,
+       "low_fb": 0.0000014372650454872806,
+       "median_fb": 0.00022026007861235668,
+       "high_fb": 0.009375519606734533
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.05939621739909392,
+      "low_fb": 0.005571420883794879,
+      "median_fb": 0.0503153386105005,
+      "high_fb": 0.47860967189973797
+     }
+    },
+    {
+     "eStar_MeV": 34,
+     "eCm_MeV": 230.8,
+     "eLab_MeV": 278.263,
+     "seed": 3652428673,
+     "sigmaCapture_mb": 63.940956564752824,
+     "fusionProbability": 2.648436143604087e-9,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0.0005073091269871906,
+       "statError_fb": 0.0004941065506627545,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.05440175359227857,
+       "statError_fb": 0.0007624345685450435,
+       "low_fb": 0.0049067674790939375,
+       "median_fb": 0.05028632392328608,
+       "high_fb": 0.47113522306411665
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.0022422611082432513,
+       "statError_fb": 0.000013229824553328197,
+       "low_fb": 0.00009388524126131336,
+       "median_fb": 0.0018975619804385844,
+       "high_fb": 0.03518885885257085
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.05715132382750901,
+      "low_fb": 0.006146650393351159,
+      "median_fb": 0.057980513373434496,
+      "high_fb": 0.5459934583505666
+     }
+    },
+    {
+     "eStar_MeV": 36,
+     "eCm_MeV": 232.8,
+     "eLab_MeV": 280.675,
+     "seed": 1000612862,
+     "sigmaCapture_mb": 80.56008302041397,
+     "fusionProbability": 5.735163455486136e-9,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.04047088557127635,
+       "statError_fb": 0.0011583345708764444,
+       "low_fb": 0.0028985303774277022,
+       "median_fb": 0.03953543850179376,
+       "high_fb": 0.3744586583027685
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.00875063152464028,
+       "statError_fb": 0.000037518908450133094,
+       "low_fb": 0.0008194200793540816,
+       "median_fb": 0.00928550658940263,
+       "high_fb": 0.10602674168727942
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 1.3453635214406203e-8,
+       "statError_fb": 5.728424210518991e-9,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0.00003474689973759479
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.04922153054955184,
+      "low_fb": 0.006200018752166512,
+      "median_fb": 0.06849647723290861,
+      "high_fb": 0.5383894707461955
+     }
+    },
+    {
+     "eStar_MeV": 38,
+     "eCm_MeV": 234.8,
+     "eLab_MeV": 283.086,
+     "seed": 2485576511,
+     "sigmaCapture_mb": 99.6345450944788,
+     "fusionProbability": 1.4377278634130294e-8,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.03060211561722815,
+       "statError_fb": 0.0019183038092955684,
+       "low_fb": 0.00020793528511044558,
+       "median_fb": 0.0232727795726533,
+       "high_fb": 0.37508401977901706
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.029966688269592923,
+       "statError_fb": 0.00012177550107001234,
+       "low_fb": 0.0023240039109299984,
+       "median_fb": 0.03245059265121447,
+       "high_fb": 0.3534818965162097
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.000025208896820505977,
+       "statError_fb": 7.504734295710046e-7,
+       "low_fb": 0,
+       "median_fb": 0.000017704737669823376,
+       "high_fb": 0.001474334795830496
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.06059401278364158,
+      "low_fb": 0.006536945537539869,
+      "median_fb": 0.08499536080219545,
+      "high_fb": 0.8701602841380917
+     }
+    },
+    {
+     "eStar_MeV": 40,
+     "eCm_MeV": 236.8,
+     "eLab_MeV": 285.497,
+     "seed": 3518102333,
+     "sigmaCapture_mb": 126.888421668984,
+     "fusionProbability": 5.559988467091802e-8,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.03517179256885089,
+       "statError_fb": 0.005107308087263489,
+       "low_fb": 0,
+       "median_fb": 0.005385913580166272,
+       "high_fb": 0.3343879752857507
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.11341459063032389,
+       "statError_fb": 0.000640766384453413,
+       "low_fb": 0.007087052337395898,
+       "median_fb": 0.07403162549277705,
+       "high_fb": 0.8008389342113291
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.0010546833240930938,
+       "statError_fb": 0.000010635264791620238,
+       "low_fb": 0.000012156723408197659,
+       "median_fb": 0.0007019042683641425,
+       "high_fb": 0.020161832385971724
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.14964106652326786,
+      "low_fb": 0.010814448557638651,
+      "median_fb": 0.11663195510388792,
+      "high_fb": 1.4036803881482953
+     }
+    },
+    {
+     "eStar_MeV": 42,
+     "eCm_MeV": 238.8,
+     "eLab_MeV": 287.908,
+     "seed": 3582381483,
+     "sigmaCapture_mb": 165.2863748654502,
+     "fusionProbability": 1.3460393264392418e-7,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.037914379545545086,
+       "statError_fb": 0.00929419145614898,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0.11803083033526494
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.15994322667765773,
+       "statError_fb": 0.0015708504290589008,
+       "low_fb": 0.013150311643333083,
+       "median_fb": 0.12311418030338699,
+       "high_fb": 1.1563643688421947
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.006014617528201849,
+       "statError_fb": 0.000040117968163550255,
+       "low_fb": 0.00023332875104733285,
+       "median_fb": 0.0047956016212230175,
+       "high_fb": 0.07772099487463832
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.20387222375140465,
+      "low_fb": 0.017615321316566342,
+      "median_fb": 0.18318185464170483,
+      "high_fb": 1.8242592048938004
+     }
+    },
+    {
+     "eStar_MeV": 44,
+     "eCm_MeV": 240.8,
+     "eLab_MeV": 290.32,
+     "seed": 2583610907,
+     "sigmaCapture_mb": 205.5324266275939,
+     "fusionProbability": 2.0561989232290615e-7,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.0031387947318949217,
+       "statError_fb": 0.0019160528940778692,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0.0015642043435417682
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.11175888420406649,
+       "statError_fb": 0.0019480337574509564,
+       "low_fb": 0.00834443493408576,
+       "median_fb": 0.08769587113172964,
+       "high_fb": 0.6799870918922654
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.012598410326899848,
+       "statError_fb": 0.00007533606966112832,
+       "low_fb": 0.0008046504493424123,
+       "median_fb": 0.011708069843651345,
+       "high_fb": 0.13836383424816695
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.12749608926286127,
+      "low_fb": 0.012585421881230073,
+      "median_fb": 0.12481558791808262,
+      "high_fb": 1.020000738661925
+     }
+    },
+    {
+     "eStar_MeV": 46,
+     "eCm_MeV": 242.8,
+     "eLab_MeV": 292.731,
+     "seed": 2578965542,
+     "sigmaCapture_mb": 245.03562327690366,
+     "fusionProbability": 2.703931108732126e-7,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.00099920682754873,
+       "statError_fb": 0.00099920682754873,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.05716693419914958,
+       "statError_fb": 0.001843006364025132,
+       "low_fb": 0.0053351820281136875,
+       "median_fb": 0.04787923394475122,
+       "high_fb": 0.4755838355162939
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.019302261380867356,
+       "statError_fb": 0.00011595046823940124,
+       "low_fb": 0.0017456384763230302,
+       "median_fb": 0.016569256590554797,
+       "high_fb": 0.17097470978851498
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.07746840240756567,
+      "low_fb": 0.010274832674651044,
+      "median_fb": 0.08896840468803231,
+      "high_fb": 0.7654630441337947
+     }
+    },
+    {
+     "eStar_MeV": 48,
+     "eCm_MeV": 244.8,
+     "eLab_MeV": 295.142,
+     "seed": 2077899481,
+     "sigmaCapture_mb": 283.71363548257557,
+     "fusionProbability": 3.372159928470398e-7,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.0004831239975604212,
+       "statError_fb": 0.00034749228362677265,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.02661626429252837,
+       "statError_fb": 0.001565185232160475,
+       "low_fb": 0.0015140527912334452,
+       "median_fb": 0.02296833151429183,
+       "high_fb": 0.2286251346124246
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.023258710564949187,
+       "statError_fb": 0.00016039668874044032,
+       "low_fb": 0.0024368441643851414,
+       "median_fb": 0.021651636247606208,
+       "high_fb": 0.1877407728264828
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.050358098855037975,
+      "low_fb": 0.00743460074291242,
+      "median_fb": 0.05796555731119293,
+      "high_fb": 0.42980109435733366
+     }
+    },
+    {
+     "eStar_MeV": 50,
+     "eCm_MeV": 246.8,
+     "eLab_MeV": 297.554,
+     "seed": 160186543,
+     "sigmaCapture_mb": 321.58117518117257,
+     "fusionProbability": 4.1077470370496607e-7,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.012084634688497378,
+       "statError_fb": 0.0014363101444538834,
+       "low_fb": 0.00005201823892378709,
+       "median_fb": 0.00492451758695859,
+       "high_fb": 0.07237883780706025
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.022463282435939563,
+       "statError_fb": 0.00020575549498236048,
+       "low_fb": 0.002166534426225892,
+       "median_fb": 0.01715289665538592,
+       "high_fb": 0.16024769119586327
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.034547917124436944,
+      "low_fb": 0.003542557930066079,
+      "median_fb": 0.030010987426479546,
+      "high_fb": 0.2421439523372456
+     }
+    },
+    {
+     "eStar_MeV": 52,
+     "eCm_MeV": 248.8,
+     "eLab_MeV": 299.965,
+     "seed": 2430226443,
+     "sigmaCapture_mb": 358.65436224649847,
+     "fusionProbability": 4.940481237356737e-7,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.004981719705162248,
+       "statError_fb": 0.0011889236817684784,
+       "low_fb": 0,
+       "median_fb": 0.0005256430337151662,
+       "high_fb": 0.02113159411876786
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.01768969543416303,
+       "statError_fb": 0.00023098660937640193,
+       "low_fb": 0.002221437223763376,
+       "median_fb": 0.01640530426075481,
+       "high_fb": 0.1325171982487836
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.022671415139325277,
+      "low_fb": 0.0028304661055106963,
+      "median_fb": 0.020069484046403904,
+      "high_fb": 0.1764955726472073
+     }
+    },
+    {
+     "eStar_MeV": 54,
+     "eCm_MeV": 250.8,
+     "eLab_MeV": 302.376,
+     "seed": 2317691049,
+     "sigmaCapture_mb": 394.948349812611,
+     "fusionProbability": 5.892675425744317e-7,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.0007705552306161007,
+       "statError_fb": 0.00036918722567103035,
+       "low_fb": 0,
+       "median_fb": 0.000002570096532822173,
+       "high_fb": 0.0037345406704078128
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.011690084451439507,
+       "statError_fb": 0.00023426020179230107,
+       "low_fb": 0.0014681626471349763,
+       "median_fb": 0.01161716124371133,
+       "high_fb": 0.09655877282256482
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.012460639682055607,
+      "low_fb": 0.0015752779812408778,
+      "median_fb": 0.013502688367232394,
+      "high_fb": 0.10734201795389714
+     }
+    },
+    {
+     "eStar_MeV": 56,
+     "eCm_MeV": 252.8,
+     "eLab_MeV": 304.788,
+     "seed": 3645816410,
+     "sigmaCapture_mb": 430.47684552083757,
+     "fusionProbability": 6.983339961237286e-7,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.001234622656477951,
+       "statError_fb": 0.0007773573141680519,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0.00014522639495983581
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.007189592372288302,
+       "statError_fb": 0.00022529317576519203,
+       "low_fb": 0.0006660477470602453,
+       "median_fb": 0.006256132291940636,
+       "high_fb": 0.06600728004722947
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.008424215028766252,
+      "low_fb": 0.0006709325799027803,
+      "median_fb": 0.00669246567357946,
+      "high_fb": 0.06777835850174034
+     }
+    }
+   ]
+  },
+  {
+   "id": "Cr54+Am243",
+   "element": 119,
+   "label": "⁵⁴Cr + ²⁴³Am",
+   "compound": "297-119",
+   "qValue_MeV": -208.88,
+   "b0_MeV": 236.53,
+   "points": [
+    {
+     "eStar_MeV": 26,
+     "eCm_MeV": 234.88,
+     "eLab_MeV": 287.076,
+     "seed": 3963120046,
+     "sigmaCapture_mb": 42.685296092566276,
+     "fusionProbability": 2.586483008135042e-11,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0.008172102368876912,
+       "statError_fb": 0.00014001143742414305,
+       "low_fb": 0.0003971539848003302,
+       "median_fb": 0.007085185735922286,
+       "high_fb": 0.08460407254858465
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.0015552935005905485,
+       "statError_fb": 0.000006130021164207522,
+       "low_fb": 0.00003505850315741879,
+       "median_fb": 0.0011536489372181563,
+       "high_fb": 0.023548509932742476
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.009727395869467461,
+      "low_fb": 0.0008645958692001292,
+      "median_fb": 0.011828590854025914,
+      "high_fb": 0.13776947849866472
+     }
+    },
+    {
+     "eStar_MeV": 28,
+     "eCm_MeV": 236.88,
+     "eLab_MeV": 289.52,
+     "seed": 2021746326,
+     "sigmaCapture_mb": 54.69873227047697,
+     "fusionProbability": 7.740395345700547e-11,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0.004565530723060134,
+       "statError_fb": 0.00020080706737765215,
+       "low_fb": 0.00012168336148493698,
+       "median_fb": 0.0036816006610532422,
+       "high_fb": 0.06715510000633619
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.005354272759339907,
+       "statError_fb": 0.000016751048815929424,
+       "low_fb": 0.00036127542746363994,
+       "median_fb": 0.004988010043967094,
+       "high_fb": 0.08747285221800483
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.009919803482400041,
+      "low_fb": 0.0012626475559909703,
+      "median_fb": 0.013638273449811816,
+      "high_fb": 0.16040346253773782
+     }
+    },
+    {
+     "eStar_MeV": 30,
+     "eCm_MeV": 238.88,
+     "eLab_MeV": 291.965,
+     "seed": 1552173698,
+     "sigmaCapture_mb": 68.1693795117365,
+     "fusionProbability": 2.299050736957738e-10,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0.0031997024148040835,
+       "statError_fb": 0.0003437200050769692,
+       "low_fb": 0,
+       "median_fb": 0.0009011162782583425,
+       "high_fb": 0.03559346131049986
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.01596353374260315,
+       "statError_fb": 0.00004784498200782554,
+       "low_fb": 0.0012930787735446554,
+       "median_fb": 0.014900463423590558,
+       "high_fb": 0.20477905778884684
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 6.022436536403462e-10,
+       "statError_fb": 2.40116279548525e-10,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0.000006030783234526967
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.019163236759650887,
+      "low_fb": 0.0019489133178617899,
+      "median_fb": 0.021223796961410944,
+      "high_fb": 0.2569568542169391
+     }
+    },
+    {
+     "eStar_MeV": 32,
+     "eCm_MeV": 240.88,
+     "eLab_MeV": 294.409,
+     "seed": 496250142,
+     "sigmaCapture_mb": 83.81990419015497,
+     "fusionProbability": 8.484547319928307e-10,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0.0017611871008888563,
+       "statError_fb": 0.0005342047215380718,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0.012742562877030008
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.04533320225361468,
+       "statError_fb": 0.00022314533191727145,
+       "low_fb": 0.003350180584452769,
+       "median_fb": 0.04479816225648035,
+       "high_fb": 0.4483978637298407
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.000006503243338426485,
+       "statError_fb": 1.4980383967252958e-7,
+       "low_fb": 0,
+       "median_fb": 0.000004028619063467764,
+       "high_fb": 0.0006078072156306285
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.04710089259784196,
+      "low_fb": 0.004080740039596375,
+      "median_fb": 0.049317884891785825,
+      "high_fb": 0.5156559774395898
+     }
+    },
+    {
+     "eStar_MeV": 34,
+     "eCm_MeV": 242.88,
+     "eLab_MeV": 296.854,
+     "seed": 3265263438,
+     "sigmaCapture_mb": 106.59243599128229,
+     "fusionProbability": 4.377279852480465e-9,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0.0023486591430649587,
+       "statError_fb": 0.0018164944703686337,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.11483609900781556,
+       "statError_fb": 0.001111428310462784,
+       "low_fb": 0.007405896154296674,
+       "median_fb": 0.07273190276333664,
+       "high_fb": 0.6801647788901566
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.00042513147449983567,
+       "statError_fb": 0.000003546776944205832,
+       "low_fb": 0.000003891467553328608,
+       "median_fb": 0.0002447702142633522,
+       "high_fb": 0.0052302470596170565
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.11760988962538037,
+      "low_fb": 0.00802864738075343,
+      "median_fb": 0.07538092889900692,
+      "high_fb": 0.7323667187002589
+     }
+    },
+    {
+     "eStar_MeV": 36,
+     "eCm_MeV": 244.88,
+     "eLab_MeV": 299.298,
+     "seed": 3478909017,
+     "sigmaCapture_mb": 139.7725815748741,
+     "fusionProbability": 1.3058361649212396e-8,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.12944191612425346,
+       "statError_fb": 0.0024318646395843978,
+       "low_fb": 0.005433857793417052,
+       "median_fb": 0.08411703210250583,
+       "high_fb": 0.952709535987207
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.003752268375744036,
+       "statError_fb": 0.000019990325155275484,
+       "low_fb": 0.00014712075285280287,
+       "median_fb": 0.002525395587737425,
+       "high_fb": 0.03768168191743946
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 7.051750851865401e-11
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.13319418449999748,
+      "low_fb": 0.007594241555827932,
+      "median_fb": 0.09753138651566164,
+      "high_fb": 1.0962351913603374
+     }
+    },
+    {
+     "eStar_MeV": 38,
+     "eCm_MeV": 246.88,
+     "eLab_MeV": 301.743,
+     "seed": 3497936385,
+     "sigmaCapture_mb": 178.85778423974565,
+     "fusionProbability": 2.43726331530032e-8,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.06948558210901583,
+       "statError_fb": 0.002664176464531938,
+       "low_fb": 0.0041043965900782855,
+       "median_fb": 0.05365290629473149,
+       "high_fb": 0.5647224823448281
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.011614247563666948,
+       "statError_fb": 0.00005354271890809875,
+       "low_fb": 0.0008167147156243051,
+       "median_fb": 0.009135745854721568,
+       "high_fb": 0.0900906784136206
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 4.286229752288763e-9,
+       "statError_fb": 1.5749153661099853e-9,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0.0000020889253107521218
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.08109983395891253,
+      "low_fb": 0.008018225625153705,
+      "median_fb": 0.08081331921951394,
+      "high_fb": 0.747050549124041
+     }
+    },
+    {
+     "eStar_MeV": 40,
+     "eCm_MeV": 248.88,
+     "eLab_MeV": 304.187,
+     "seed": 517585773,
+     "sigmaCapture_mb": 217.78848872639432,
+     "fusionProbability": 3.570557238087718e-8,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.034147554779160066,
+       "statError_fb": 0.0025397499293805578,
+       "low_fb": 0.00022109924909274122,
+       "median_fb": 0.02196262645849661,
+       "high_fb": 0.30774859721969566
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.019012655044302114,
+       "statError_fb": 0.0001036035665958609,
+       "low_fb": 0.001929690022778521,
+       "median_fb": 0.015134135332903444,
+       "high_fb": 0.1443224104843031
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.0000017473162539292773,
+       "statError_fb": 7.91581967634992e-8,
+       "low_fb": 0,
+       "median_fb": 8.013023060762365e-7,
+       "high_fb": 0.00009145205881962994
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.05316195713971611,
+      "low_fb": 0.005807576465899154,
+      "median_fb": 0.05439377939358702,
+      "high_fb": 0.5099637889851686
+     }
+    },
+    {
+     "eStar_MeV": 42,
+     "eCm_MeV": 250.88,
+     "eLab_MeV": 306.632,
+     "seed": 2837465535,
+     "sigmaCapture_mb": 255.9392608625905,
+     "fusionProbability": 4.8301612507046694e-8,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.007288962967539606,
+       "statError_fb": 0.0012614771406556091,
+       "low_fb": 0,
+       "median_fb": 0.0026314168490934697,
+       "high_fb": 0.07638353006194955
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.019429757858740467,
+       "statError_fb": 0.00015759110937560176,
+       "low_fb": 0.0016989864384918498,
+       "median_fb": 0.014720315942075702,
+       "high_fb": 0.1161047236284012
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.000031706192258333614,
+       "statError_fb": 5.379663989691667e-7,
+       "low_fb": 3.4366796727426756e-7,
+       "median_fb": 0.000022352618256867464,
+       "high_fb": 0.0005526323955004712
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.026750427018538407,
+      "low_fb": 0.0031303899565571103,
+      "median_fb": 0.027845952358904802,
+      "high_fb": 0.22293548381556344
+     }
+    },
+    {
+     "eStar_MeV": 44,
+     "eCm_MeV": 252.88,
+     "eLab_MeV": 309.076,
+     "seed": 1088773593,
+     "sigmaCapture_mb": 293.3093850471496,
+     "fusionProbability": 6.322338929562712e-8,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.004026460319456771,
+       "statError_fb": 0.0013508463833108186,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0.015718206364442846
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.014471477417447504,
+       "statError_fb": 0.0001915863546270051,
+       "low_fb": 0.0017110866978196607,
+       "median_fb": 0.012997966640433503,
+       "high_fb": 0.11216535986968842
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.0001622549639128006,
+       "statError_fb": 0.0000016387975004524381,
+       "low_fb": 0.000008980147165668383,
+       "median_fb": 0.00015722530136462134,
+       "high_fb": 0.0023552613583912034
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.018660192700817074,
+      "low_fb": 0.002157925244948583,
+      "median_fb": 0.01773309745246049,
+      "high_fb": 0.16087747229663005
+     }
+    },
+    {
+     "eStar_MeV": 46,
+     "eCm_MeV": 254.88,
+     "eLab_MeV": 311.52,
+     "seed": 4094519485,
+     "sigmaCapture_mb": 329.9070344021128,
+     "fusionProbability": 8.12718984208381e-8,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.0024771418322681203,
+       "statError_fb": 0.001052784811061882,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0.0013195184114286145
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.008634839580103216,
+       "statError_fb": 0.00019289837920506033,
+       "low_fb": 0.0009940983371645722,
+       "median_fb": 0.008482265668569657,
+       "high_fb": 0.08446928262543849
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.00046828306539868126,
+       "statError_fb": 0.0000035483548822500456,
+       "low_fb": 0.00003758247781168857,
+       "median_fb": 0.000482194812174483,
+       "high_fb": 0.0050347239029792865
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.011580264477770016,
+      "low_fb": 0.0014020698629359746,
+      "median_fb": 0.011686831568629942,
+      "high_fb": 0.10439248588836696
+     }
+    },
+    {
+     "eStar_MeV": 48,
+     "eCm_MeV": 256.88,
+     "eLab_MeV": 313.965,
+     "seed": 1867568589,
+     "sigmaCapture_mb": 365.565535326281,
+     "fusionProbability": 1.0321025244890676e-7,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0.000001154197199850049,
+       "statError_fb": 0.0000010150124998338471,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.004501462092453098,
+       "statError_fb": 0.00017948645919608385,
+       "low_fb": 0.0003870694287762073,
+       "median_fb": 0.004202169292611706,
+       "high_fb": 0.03899857709054977
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.000928457980583791,
+       "statError_fb": 0.000006351448214567327,
+       "low_fb": 0.00009218874671622423,
+       "median_fb": 0.0008821063754091556,
+       "high_fb": 0.008687380676561732
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.0054310742702367385,
+      "low_fb": 0.0007613773794077264,
+      "median_fb": 0.006224497760529119,
+      "high_fb": 0.053102390476215296
+     }
+    },
+    {
+     "eStar_MeV": 50,
+     "eCm_MeV": 258.88,
+     "eLab_MeV": 316.409,
+     "seed": 823040497,
+     "sigmaCapture_mb": 399.54311623837947,
+     "fusionProbability": 1.3000730885135728e-7,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 6.260018365949601e-8,
+       "statError_fb": 6.260018365949601e-8,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.0020425922700029998,
+       "statError_fb": 0.0001518077126968797,
+       "low_fb": 0.00007018309701019017,
+       "median_fb": 0.001567445926300695,
+       "high_fb": 0.01444727044794364
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.0012971030956225379,
+       "statError_fb": 0.000009951377360429981,
+       "low_fb": 0.00012953930166589053,
+       "median_fb": 0.0011094868332893622,
+       "high_fb": 0.007768107948202085
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.003339757965809197,
+      "low_fb": 0.00042433788432537004,
+      "median_fb": 0.00345329976215082,
+      "high_fb": 0.026937131735423607
+     }
+    },
+    {
+     "eStar_MeV": 52,
+     "eCm_MeV": 260.88,
+     "eLab_MeV": 318.854,
+     "seed": 1137124479,
+     "sigmaCapture_mb": 431.63309756589314,
+     "fusionProbability": 1.6261158527375923e-7,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.0009327293562570279,
+       "statError_fb": 0.00011889739955210704,
+       "low_fb": 0.000004758175503139321,
+       "median_fb": 0.00042167118471613034,
+       "high_fb": 0.009071745396171636
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.0013293209037553366,
+       "statError_fb": 0.000013563285490403149,
+       "low_fb": 0.00016028117642637364,
+       "median_fb": 0.00125644942748652,
+       "high_fb": 0.010969689958404964
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.0022620502600123643,
+      "low_fb": 0.00027215292474942884,
+      "median_fb": 0.0023750695945560464,
+      "high_fb": 0.023145873559190754
+     }
+    },
+    {
+     "eStar_MeV": 54,
+     "eCm_MeV": 262.88,
+     "eLab_MeV": 321.298,
+     "seed": 1108180823,
+     "sigmaCapture_mb": 462.03613098011823,
+     "fusionProbability": 2.019293491480379e-7,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.00038080918462975893,
+       "statError_fb": 0.00009576903757617466,
+       "low_fb": 0,
+       "median_fb": 0.00002304463408643142,
+       "high_fb": 0.0019741964121702655
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.001102164680956057,
+       "statError_fb": 0.000016238658963937913,
+       "low_fb": 0.00012267528138358778,
+       "median_fb": 0.001114330347617833,
+       "high_fb": 0.008717084432429597
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.001482973865585816,
+      "low_fb": 0.00015301138175901518,
+      "median_fb": 0.0013748788734833193,
+      "high_fb": 0.011823256392259118
+     }
+    },
+    {
+     "eStar_MeV": 56,
+     "eCm_MeV": 264.88,
+     "eLab_MeV": 323.743,
+     "seed": 2668146946,
+     "sigmaCapture_mb": 490.6879900474539,
+     "fusionProbability": 2.4906003117094876e-7,
+     "channels": [
+      {
+       "neutrons": 2,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 3,
+       "sigma_fb": 0,
+       "statError_fb": 0,
+       "low_fb": 0,
+       "median_fb": 0,
+       "high_fb": 0
+      },
+      {
+       "neutrons": 4,
+       "sigma_fb": 0.00013605461977182865,
+       "statError_fb": 0.00006583273769584857,
+       "low_fb": 0,
+       "median_fb": 2.288799603952654e-8,
+       "high_fb": 0.00022412250899240895
+      },
+      {
+       "neutrons": 5,
+       "sigma_fb": 0.0007605544115190361,
+       "statError_fb": 0.00001733537259246215,
+       "low_fb": 0.00010012482224785928,
+       "median_fb": 0.0007390350822573071,
+       "high_fb": 0.005875529542399045
+      }
+     ],
+     "total": {
+      "sigma_fb": 0.0008966090312908647,
+      "low_fb": 0.00011564547680438216,
+      "median_fb": 0.0008372848001517157,
+      "high_fb": 0.007052845207490646
+     }
+    }
+   ]
+  }
+ ]
+}

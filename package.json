@@ -14,6 +14,7 @@
     "build": "npm run build --workspaces --if-present",
     "dev": "npm run dev -w @elementjaeger/web",
     "preview": "npm run preview -w @elementjaeger/web",
+    "server": "npm run start -w @elementjaeger/server",
     "demo": "npm run demo -w @elementjaeger/core"
   },
   "engines": {

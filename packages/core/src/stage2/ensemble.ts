@@ -86,3 +86,16 @@ export function band(values: ArrayLike<number>, members: number, neutrons: numbe
   };
   return { low: q(0.1587), median: q(0.5), high: q(0.8413), members };
 }
+
+/** Band der Summe der Kanäle 2n bis 5n in pb aus den gesammelten Ziehungen. */
+export function totalBand(values: ArrayLike<number>, members: number): Band {
+  const sums: number[] = [];
+  for (let m = 0; m < members; m++) {
+    let s = 0;
+    for (let x = 2; x <= 5; x++) s += values[m * MAX_NEUTRONS + x - 1]!;
+    sums.push(s);
+  }
+  sums.sort((a, b) => a - b);
+  const q = (p: number): number => sums[Math.min(members - 1, Math.round(p * (members - 1)))]!;
+  return { low: q(0.1587), median: q(0.5), high: q(0.8413), members };
+}

@@ -338,7 +338,7 @@ export function ModelPage() {
         <p class="lead">
           <strong>Das Modell besteht die Prüfung in dieser Fassung nicht.</strong> Es trifft die Eich-Reaktionen auf etwa eine Größenordnung
           und von den Prüf-Reaktionen nur ⁴⁸Ca + ²⁴⁴Pu. Die übrigen rechnet es um Faktoren von 3 bis über 100 000 zu tief. Für Vorhersagen
-          für die Elemente 119 und 120 ist es so nicht gut genug; es gibt deshalb noch keine.
+          für die Elemente 119 und 120 ist es so nicht gut genug; die Zahlen auf der Seite „Ergebnisse“ tragen deshalb einen großen Vorbehalt.
         </p>
         <div class="table-wrap">
           <table>

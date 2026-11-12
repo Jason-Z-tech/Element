@@ -7,7 +7,6 @@
  *
  * Schreibt docs/daten/stufe2-<Teil>.json.
  */
-// @ts-expect-error Node-Typen sind im Kern absichtlich nicht eingebunden (keine DOM- und Node-Zugriffe in src/).
 import { writeFileSync } from 'node:fs';
 import { stage2 } from '../src';
 

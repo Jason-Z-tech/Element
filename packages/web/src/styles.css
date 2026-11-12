@@ -872,3 +872,176 @@ tfoot td {
 .verdict {
   border-left: 4px solid var(--series-2);
 }
+
+/* Ergebnisse, Methoden, Team */
+.minis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+}
+.mini {
+  margin: 0;
+}
+.mini figcaption {
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+.mini svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.band-fill {
+  fill: var(--series-1);
+  opacity: 0.16;
+}
+.limit-line {
+  stroke: var(--ink-2);
+  stroke-width: 1.25;
+}
+.published {
+  fill: var(--surface);
+  stroke: var(--ink-2);
+  stroke-width: 2;
+}
+.key-area {
+  width: 14px;
+  height: 10px;
+  background: var(--series-1);
+  opacity: 0.3;
+  border-radius: 2px;
+}
+.export {
+  margin-top: 14px;
+}
+.local-list {
+  display: grid;
+  gap: 10px;
+  margin: 12px 0;
+}
+.local-list li {
+  display: grid;
+  grid-template-columns: minmax(120px, 160px) minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+}
+.local-run {
+  display: grid;
+  grid-template-columns: minmax(80px, 200px) minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  font-size: 14px;
+}
+.local-text {
+  color: var(--ink-2);
+}
+.progress {
+  position: relative;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+.progress span {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: var(--ink);
+  border-radius: 4px;
+}
+.progress .progress-single {
+  background: var(--axis);
+}
+.progress-big {
+  height: 12px;
+  margin: 12px 0 4px;
+}
+@media (max-width: 640px) {
+  .local-list li,
+  .local-run {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+  }
+}
+.methods h3 {
+  font-size: 15px;
+  margin: 18px 0 6px;
+}
+.methods p,
+.methods ul,
+.methods ol,
+.methods dl {
+  max-width: 90ch;
+}
+.methods p + p {
+  margin-top: 8px;
+}
+.formulas,
+.bullets,
+.sources {
+  display: grid;
+  gap: 8px;
+  margin-top: 8px;
+}
+.bullets,
+.sources {
+  list-style: disc;
+  padding-left: 20px;
+}
+ol.bullets {
+  list-style: decimal;
+}
+.formula {
+  padding: 10px 12px;
+  margin: 10px 0;
+  border-radius: 8px;
+  background: var(--surface-2);
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.assume {
+  display: grid;
+  gap: 10px;
+  margin: 8px 0 12px;
+}
+.assume dt {
+  font-weight: 650;
+}
+td.wrap {
+  white-space: normal;
+  min-width: 220px;
+}
+.team-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin: 12px 0;
+  max-width: 760px;
+}
+.team-form label {
+  display: grid;
+  gap: 4px;
+  font-weight: 600;
+}
+.team-form input {
+  padding: 7px 10px;
+  border: 1px solid var(--axis);
+  border-radius: 6px;
+  background: var(--surface);
+  font-weight: 400;
+}
+.team-actions {
+  margin: 10px 0;
+}
+button.primary-inline {
+  border: 0;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-weight: 650;
+  cursor: pointer;
+  background: var(--ink);
+  color: var(--surface);
+}
+.join-link {
+  word-break: break-all;
+  color: var(--ink);
+}
